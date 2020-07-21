@@ -70,7 +70,7 @@
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="dd84cbf6083e94cd46fc6b3c859bef22">l
+            android:value="a6597aebedd5717eb440ff84869c2555">
         </meta-data>
         <provider
             android:authorities="com.example.gdmap.fileprovider"

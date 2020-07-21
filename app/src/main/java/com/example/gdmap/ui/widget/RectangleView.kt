@@ -7,11 +7,6 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.graphics.drawable.toBitmap
 
-/**
- * @author 徐国林
- * @data 2020/5/3
- * @decription
- */
 class RectangleView @JvmOverloads constructor(
     context: Context?,
     attrs: AttributeSet? = null,
@@ -39,9 +34,9 @@ class RectangleView @JvmOverloads constructor(
     }
 
     /**
-     * 获取圆角矩形图片方法
+     * 获取圆角矩形图片
      * @param bitmap
-     * @param roundPx 这个属性是设置弧度，一般设置为14.
+     * @param roundPx 设置弧度.
      */
     private fun getRoundBitmap(bitmap: Bitmap, roundPx: Int): Bitmap {
         val output = Bitmap.createBitmap(

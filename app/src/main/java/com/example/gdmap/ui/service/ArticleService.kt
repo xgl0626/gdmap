@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import rx.Observable
 
 interface ArticleService {
-    @GET("index?type=top&key=2822a0ad1785599278667f3ca61b1290")
+//    &key=2822a0ad1785599278667f3ca61b1290
+    @GET("index?type=top")
     fun getArticleData():Observable<ArticleDataBase>
 }
