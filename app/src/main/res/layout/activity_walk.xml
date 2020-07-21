@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/blueDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="步行导航"
+        app:titleTextColor="@color/white"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/tv_activity_walk_my_place"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="24dp"
+        android:hint="我的位置"
+        android:textSize="15dp"
+        android:background="@drawable/activity_login_edit_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_activity_walk_idea_place"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:hint="目的位置"
+        android:textSize="15dp"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/activity_login_edit_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+
+    <Button
+        android:id="@+id/bt_activity_walk_glide"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:text="开始导航"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_activity_walk_idea_place" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

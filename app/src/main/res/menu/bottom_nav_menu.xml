@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/bt_nav_map"
+            android:title="@string/bt_nav_map"
+            android:icon="@drawable/main_fragment"/>
+        <item
+            android:id="@+id/bt_nav_surrounding"
+            android:title="@string/bt_nav_surrounding"
+            android:icon="@drawable/surrounding_fragment"/>
+        <item
+            android:id="@+id/bt_nav_me"
+            android:title="@string/bt_nav_me"
+            android:icon="@drawable/my_framgent"/>
+    </group>
+</menu>

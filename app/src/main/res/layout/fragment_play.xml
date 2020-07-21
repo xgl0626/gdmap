@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bt_play_joke"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:text="每日一笑"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.131" />
+
+    <Button
+        android:id="@+id/bt_play_history"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:src="@mipmap/activity_play_history"
+        android:text="历史上的今天"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <Button
+        android:id="@+id/bt_play_constellation"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:text="星座配对"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429" />
+
+    <Button
+        android:id="@+id/bt_play_comments"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:text="网易云热评"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429" />
+
+    <Button
+        android:id="@+id/bt_play_more"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:text="更多"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <Button
+        android:id="@+id/bt_play_note"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@drawable/fragment_me_bt_shape"
+        android:gravity="bottom|center"
+        android:padding="25dp"
+        android:text="心情便签"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
+</androidx.constraintlayout.widget.ConstraintLayout>
