@@ -6,16 +6,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/blueDark"
-        app:title="智能问答"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/bg_grey"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/white"
-        tools:layout_editor_absoluteX="0dp" />
+        app:title="智能问答"
+        app:navigationIcon="@drawable/ic_common_toolbar"
+        app:titleTextColor="@color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_question"

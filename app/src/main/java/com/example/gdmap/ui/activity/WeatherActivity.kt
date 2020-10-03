@@ -1,7 +1,9 @@
 package com.example.gdmap.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import com.amap.api.services.weather.LocalWeatherForecastResult
 import com.amap.api.services.weather.LocalWeatherLiveResult
 import com.amap.api.services.weather.WeatherSearch
@@ -11,13 +13,13 @@ import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.utils.ImmersedStatusbarUtils
 import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
-import com.example.gdmap.utils.ToastUtils.showToast
-import kotlinx.android.synthetic.main.activity_login.*
+import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_weather.*
 
 class WeatherActivity :BaseActivity(),WeatherSearch.OnWeatherSearchListener
 {
     private var city:String?=null
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
@@ -59,7 +61,7 @@ class WeatherActivity :BaseActivity(),WeatherSearch.OnWeatherSearchListener
                 tv_activity_weather.text=weatherlive.weather
                 tv_activity_weather_wind.text=weatherlive.windDirection+"风"
             }else{
-                "没有查询到天气情况".showToast()
+                Toast.toast("没有查询到天气情况")
             }
         }
     }
@@ -78,7 +80,7 @@ class WeatherActivity :BaseActivity(),WeatherSearch.OnWeatherSearchListener
                 tv_activity_weather_predicttime3.text=weatherPrediction.weatherForecast[2].date
                 tv_activity_weather_predicttmp3.text=weatherPrediction.weatherForecast[2].dayTemp+" 度"
             }else{
-                "没有查询到天气情况".showToast()
+                Toast.toast("没有查询到天气情况")
             }
         }
     }

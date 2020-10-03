@@ -7,8 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetWorkUtils {
     var BASEURL="https://api.apiopen.top/"
-    var BASEURL2="http://v.juhe.cn/toutiao/"
-    val BASEURL3="http://api.tianapi.com/txapi/"
     private val retrofit = Retrofit.Builder()
         .baseUrl("http://v.juhe.cn/toutiao/")
         .addConverterFactory(GsonConverterFactory.create())

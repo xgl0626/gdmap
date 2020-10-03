@@ -14,7 +14,7 @@
         android:layout_marginTop="19dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/et_search"
         tools:layout_editor_absoluteX="-30dp">
 
         <RadioButton
@@ -24,15 +24,6 @@
             android:button="@null"
             android:gravity="center|bottom"
             android:hint="驾车"
-            android:textSize="10dp" />
-
-        <RadioButton
-            android:id="@+id/bs_rb_time_bus"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="实时公交"
             android:textSize="10dp" />
         <RadioButton
             android:id="@+id/bs_rb_walk"
@@ -50,73 +41,7 @@
             android:button="@null"
             android:gravity="center|bottom"
             android:hint="离线地图"
-            android:layout_marginRight="50dp"
             android:textSize="10dp" />
-    </RadioGroup>
-
-    <AutoCompleteTextView
-        android:id="@+id/et_search"
-        android:layout_width="310dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/fragment_map_bs_tv_item_shape"
-        android:hint="  搜索"
-        android:layout_margin="8dp"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/bottom_sheet_rg3"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search"
-        app:layout_constraintVertical_bias="0.015">
-
-        <RadioButton
-            android:id="@+id/bs_rb_food"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="美食"
-            android:textSize="10dp" />
-
-        <RadioButton
-            android:id="@+id/bs_rb_home"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="酒店"
-            android:textSize="10dp" />
-
-        <RadioButton
-            android:id="@+id/bs_rb_travel"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="景点"
-            android:textSize="10dp" />
-
-        <RadioButton
-            android:id="@+id/bs_rb_ilo"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="加油站"
-            android:textSize="10dp" />
-
         <RadioButton
             android:id="@+id/bs_rb_more2"
             android:layout_width="70dp"
@@ -126,14 +51,19 @@
             android:hint="更多"
             android:textSize="10dp" />
 
-
     </RadioGroup>
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="16dp"
-        android:hint="  行驶规划"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_rg3"
-        tools:layout_editor_absoluteX="0dp" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_search"
+        android:layout_width="310dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/fragment_map_bs_tv_item_shape"
+        android:hint="  搜索"
+        android:layout_margin="8dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

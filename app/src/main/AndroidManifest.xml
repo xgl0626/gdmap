@@ -44,14 +44,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".ui.activity.GudieActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.ArticleContentActivity" />
         <activity android:name=".ui.activity.SystemActivity" />
         <activity android:name=".ui.activity.SetDataActivity" />
         <activity android:name=".ui.activity.SignActivity" />
-        <activity android:name=".ui.activity.QuestionActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden">
-        </activity>
-
         <activity android:name=".ui.activity.WeatherActivity" />
         <activity android:name=".ui.activity.WelcomeActivity" >
             <intent-filter>
@@ -59,18 +54,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
     </activity>
-        <activity android:name=".ui.activity.NoteMainActivity" />
-        <activity android:name=".ui.activity.NoteContentActivity" />
-        <activity android:name=".ui.activity.PlayItemActivity" />
-        <activity android:name=".ui.activity.ContentllationActivity" />
-        <activity android:name=".ui.activity.HistoryActivity" />
         <activity android:name=".ui.activity.WalkActivity" />
-        <activity android:name=".ui.activity.TimeBusActivity" />
+        <activity android:name=".ui.activity.ArticleActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
 
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="a6597aebedd5717eb440ff84869c2555">
+            android:value="3d6f7a6aae7ec80972d0e5fd2f0b3d9b">
         </meta-data>
         <provider
             android:authorities="com.example.gdmap.fileprovider"

@@ -6,19 +6,16 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/blueDark"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/bg_grey"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="每日签到"
-        app:titleTextColor="@color/white"
-        tools:layout_editor_absoluteX="-16dp" />
-
+        app:title="@string/bt_activity_sign"
+        app:navigationIcon="@drawable/ic_common_toolbar"
+        app:titleTextColor="@color/black" />
     <TextView
         android:id="@+id/textView4"
         android:layout_width="150dp"

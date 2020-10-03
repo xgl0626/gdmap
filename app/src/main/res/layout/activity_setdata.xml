@@ -6,16 +6,16 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/blueDark"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/bg_grey"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/fragment_me_setdata"
-        app:titleTextColor="@color/white"
-        tools:layout_editor_absoluteX="0dp" />
+        app:navigationIcon="@drawable/ic_common_toolbar"
+        app:titleTextColor="@color/black" />
 
     <EditText
         android:id="@+id/et_activity_setdata_name"
@@ -25,6 +25,8 @@
         android:background="@color/white"
         android:hint="  姓名"
         android:padding="10dp"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="15dp"
         app:layout_constraintBottom_toTopOf="@+id/et_activity_setdata_data"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -35,6 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:padding="10dp"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="15dp"
         android:layout_marginBottom="8dp"
         android:background="@color/white"
         android:hint="  简介"
@@ -46,6 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:padding="10dp"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="15dp"
         android:layout_marginBottom="12dp"
         android:background="@color/white"
         android:hint="  qq"
@@ -62,6 +68,8 @@
         android:layout_marginBottom="440dp"
         android:background="@color/white"
         android:hint="  tel"
+        android:maxLines="1"
+        android:autoSizeMaxTextSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

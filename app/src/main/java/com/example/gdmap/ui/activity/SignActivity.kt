@@ -3,17 +3,19 @@ package com.example.gdmap.ui.activity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.KeyEvent
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.utils.ImmersedStatusbarUtils
-import com.example.gdmap.utils.ToastUtils.showToast
-import kotlinx.android.synthetic.main.activity_article_content.toolBar
+import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_sign.*
+import kotlinx.android.synthetic.main.activity_walk.*
 
 class SignActivity() : BaseActivity() {
     private var currentDay: String? = null
@@ -28,6 +30,7 @@ class SignActivity() : BaseActivity() {
         getDay = parcel.readString()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign)
@@ -67,7 +70,7 @@ class SignActivity() : BaseActivity() {
         bt_activity_sign.setOnClickListener { view ->
             getDay = saveDay?.getString("today", "")
             if (getDay == currentDay) {
-                "明天再来吧".showToast()
+                Toast.toast("明天再来吧")
             } else {
                 runOnUiThread {
                     sk_activity_sign.progress = count
@@ -77,17 +80,17 @@ class SignActivity() : BaseActivity() {
                 tv_activity_sign_daycounts.text = count.toString()
                 bt_activity_sign.setBackgroundColor(R.color.blue)
                 editor2?.putString("today", currentDay)
-                editor2?.commit()
-                "签到成功".showToast()
+                editor2?.apply()
+                Toast.toast("签到成功")
 
             }
         }
     }
 
     override fun onDestroy() {
-        var editor: SharedPreferences.Editor? = saveCounts?.edit()
+        val editor: SharedPreferences.Editor? = saveCounts?.edit()
         editor?.putInt("daycount", count)
-        editor?.commit()
+        editor?.apply()
         super.onDestroy()
     }
 

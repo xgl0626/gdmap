@@ -1,22 +1,18 @@
 package com.example.gdmap.ui.activity
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.ui.fragment.MyFragment
+import com.example.gdmap.utils.AddIconImage
 import com.example.gdmap.utils.ImmersedStatusbarUtils
-import kotlinx.android.synthetic.main.activity_article_content.*
-import kotlinx.android.synthetic.main.activity_article_content.toolBar
 import kotlinx.android.synthetic.main.activity_setdata.*
 import kotlinx.android.synthetic.main.activity_weather.*
 
@@ -43,10 +39,10 @@ class SetDataActivity :BaseActivity(){
     }
     private fun initView() {
         saveData=getSharedPreferences("userdata", Context.MODE_PRIVATE)
-        setImageViewAndButton(R.mipmap.fragment_setdata_go,et_activity_setdata_qq)
-        setImageViewAndButton(R.mipmap.fragment_setdata_go,et_activity_setdata_phone)
-        setImageViewAndButton(R.mipmap.fragment_setdata_go,et_activity_setdata_name)
-        setImageViewAndButton(R.mipmap.fragment_setdata_go,et_activity_setdata_data)
+        AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_qq,1)
+        AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_phone,1)
+        AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_name,1)
+        AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_data,1)
         setCanNotEditNoClick(et_activity_setdata_data)
         setCanNotEditNoClick(et_activity_setdata_qq)
         setCanNotEditNoClick(et_activity_setdata_name)
@@ -89,17 +85,6 @@ class SetDataActivity :BaseActivity(){
         editText.isFocusableInTouchMode = true
     }
 
-
-    private fun setImageViewAndButton(drawable: Int, view: TextView) {
-        val drawable: Drawable =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                resources.getDrawable(drawable, null)
-            } else {
-                TODO("VERSION.SDK_INT < LOLLIPOP")
-            }
-        drawable.setBounds(0, 0, 80, 80)
-        view.setCompoundDrawables(null, null,drawable ,null)
-    }
 
     override fun onDestroy() {
         super.onDestroy()

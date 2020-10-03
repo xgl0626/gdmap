@@ -1,33 +1,21 @@
 package com.example.gdmap.ui.activity
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.amap.api.maps.CameraUpdateFactory
-import com.amap.api.maps.model.LatLng
-import com.amap.api.services.geocoder.GeocodeResult
-import com.amap.api.services.geocoder.GeocodeSearch
-import com.amap.api.services.geocoder.RegeocodeResult
-import com.amap.api.services.route.*
+
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.utils.ImmersedStatusbarUtils
 import com.example.gdmap.utils.InputTipUtils
-import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
-import com.example.gdmap.utils.ToastUtils.showToast
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_article_content.*
-import kotlinx.android.synthetic.main.activity_article_content.toolBar
-import kotlinx.android.synthetic.main.activity_timebus.*
 import kotlinx.android.synthetic.main.activity_walk.*
-import kotlinx.android.synthetic.main.fragment_map_bottom_sheet.*
 
 class WalkActivity :BaseActivity(),TextWatcher
 {
@@ -48,7 +36,7 @@ class WalkActivity :BaseActivity(),TextWatcher
         mylat=intent.getDoubleExtra("lat",0.0)
         mylng=intent.getDoubleExtra("lng",0.0)
         cityName=intent.getStringExtra("city")
-        cityName?.showToast()
+        com.example.gdmap.utils.Toast.toast(cityName.toString())
         initView()
     }
 

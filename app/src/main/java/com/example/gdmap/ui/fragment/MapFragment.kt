@@ -1,10 +1,8 @@
 package com.example.gdmap.ui.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -16,8 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
-import android.widget.RadioButton
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
@@ -34,20 +30,14 @@ import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.model.MyLocationStyle
 import com.amap.api.maps.model.animation.RotateAnimation
 import com.amap.api.maps.offlinemap.OfflineMapActivity
-import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.example.gdmap.R
-import com.example.gdmap.ui.activity.TimeBusActivity
 import com.example.gdmap.ui.activity.WalkActivity
 import com.example.gdmap.ui.activity.WeatherActivity
-import com.example.gdmap.ui.adapter.ServiceAdapter
-import com.example.gdmap.utils.GudieUtils
-import com.example.gdmap.utils.ImmersedStatusbarUtils
-import com.example.gdmap.utils.InputTipUtils
-import com.example.gdmap.utils.LogUtils
-import com.example.gdmap.utils.ToastUtils.showToast
+import com.example.gdmap.ui.adapter.SurroundingServiceAdapter
+import com.example.gdmap.utils.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
@@ -123,7 +113,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> behavior1.state = STATE_COLLAPSED
+                    STATE_HIDDEN -> behavior1.state = STATE_COLLAPSED
                 }
             }
 
@@ -135,7 +125,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
             override fun onStateChanged(p0: View, p1: Int) {
                 when (p1) {
-                    STATE_COLLAPSED -> behavior2.state = BottomSheetBehavior.STATE_HIDDEN
+                    STATE_COLLAPSED -> behavior2.state = STATE_HIDDEN
                 }
             }
 
@@ -145,83 +135,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             behavior2.state = STATE_HIDDEN
 
         }
-        bs_rb_food.setOnClickListener { view ->
-            poiList.clear()
-            ns_search_dialog.visibility = View.VISIBLE
-            behavior2.state = BottomSheetBehavior.STATE_EXPANDED
-            context?.let {
-                surrlat?.let { it1 ->
-                    surlng?.let { it2 ->
-                        cityString?.let { it3 ->
-                            searchPlace(
-                                it, "050000",
-                                it1, it2, it3
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        bs_rb_travel.setOnClickListener { view ->
-            poiList.clear()
-            tv_fragment_service_title.text="景点"
-            ns_search_dialog.visibility = View.VISIBLE
-            behavior2.state = BottomSheetBehavior.STATE_EXPANDED
-            context?.let {
-                surrlat?.let { it1 ->
-                    surlng?.let { it2 ->
-                        cityString?.let { it3 ->
-                            searchPlace(
-                                it, "110000",
-                                it1, it2, it3
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        bs_rb_home.setOnClickListener { view ->
-            poiList.clear()
-            tv_fragment_service_title.text="酒店"
-            ns_search_dialog.visibility = View.VISIBLE
-            behavior2.state = BottomSheetBehavior.STATE_EXPANDED
-            context?.let {
-                surrlat?.let { it1 ->
-                    surlng?.let { it2 ->
-                        cityString?.let { it3 ->
-                            searchPlace(
-                                it, "100000",
-                                it1, it2, it3
-                            )
-                        }
-                    }
-                }
-            }
-        }
-        bs_rb_ilo.setOnClickListener { view ->
-            poiList.clear()
-            tv_fragment_service_title.text="加油站"
-            ns_search_dialog.visibility = View.VISIBLE
-            behavior2.state = BottomSheetBehavior.STATE_EXPANDED
-            context?.let {
-                surrlat?.let { it1 ->
-                    surlng?.let { it2 ->
-                        cityString?.let { it3 ->
-                            searchPlace(
-                                it, "010000", 
-                                it1, it2, it3
-                            )
-                        }
-                    }
-                }
-            }
-        }
 
-        bs_rb_time_bus.setOnClickListener {
-            val intent = Intent(this.context, TimeBusActivity::class.java)
-            intent.putExtra("city",cityString)
-            startActivity(intent)
-        }
         bs_rb_walk.setOnClickListener {
             val intent = Intent(this.context, WalkActivity::class.java)
             intent.putExtra("lat",surrlat)
@@ -230,7 +144,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             startActivity(intent)
         }
         bs_rb_more2.setOnClickListener {
-            "目前未开放此功能".showToast()
+            Toast.toast("目前未开放此功能")
         }
         et_search.addTextChangedListener(this)
         et_search.onItemClickListener =
@@ -275,17 +189,12 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
     //手动调整button中的图片
     private fun initImageView() {
-        setImageViewAndButton(R.drawable.bt_rb_timebus, bs_rb_time_bus, 1)
-        setImageViewAndButton(R.drawable.bt_rb_car, bs_rb_drive_car, 1)
-        setImageViewAndButton(R.drawable.bt_rb_gobackwork, bs_rb_walk, 1)
-        setImageViewAndButton(R.drawable.bt_rb_loadmap, bs_rb_leave_map, 1)
-        setImageViewAndButton(R.drawable.bt_rb_collect, bs_rb_more2, 1)
-        setImageViewAndButton(R.mipmap.fragment_bs_search, et_search, 2)
-        setImageViewAndButton(R.drawable.bt_rb_trip, bs_rb_travel, 1)
-        setImageViewAndButton(R.drawable.bt_search_food, bs_rb_food, 1)
-        setImageViewAndButton(R.drawable.bt_search_home, bs_rb_home, 1)
-        setImageViewAndButton(R.drawable.bt_search_more2, bs_rb_more2, 1)
-        setImageViewAndButton(R.drawable.bt_search_oil, bs_rb_ilo, 1)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_car, bs_rb_drive_car, 2)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_gobackwork, bs_rb_walk, 2)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_loadmap, bs_rb_leave_map, 2)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_collect, bs_rb_more2, 2)
+        AddIconImage.setImageViewToEditText(R.mipmap.fragment_bs_search, et_search, 0)
+        AddIconImage.setImageViewToButton(R.drawable.bt_search_more2, bs_rb_more2, 2)
     }
 
 
@@ -373,36 +282,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         mv_map.onSaveInstanceState(outState)
     }
 
-
-    private fun setImageViewAndButton(drawable: Int, view: RadioButton, id: Int) {
-        val drawable: Drawable =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                resources.getDrawable(drawable, null)
-            } else {
-                TODO("VERSION.SDK_INT < LOLLIPOP")
-            }
-        drawable.setBounds(0, 0, 80, 80)
-        when (id) {
-            1 -> view.setCompoundDrawables(null, drawable, null, null)
-            2 -> view.setCompoundDrawables(null, null, drawable, null)
-        }
-    }
-
-
-    private fun setImageViewAndButton(drawable: Int, view: TextView, id: Int) {
-        val drawable: Drawable =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                resources.getDrawable(drawable, null)
-            } else {
-                TODO("VERSION.SDK_INT < LOLLIPOP")
-            }
-        drawable.setBounds(0, 0, 80, 80)
-        when (id) {
-            1 -> view.setCompoundDrawables(null, drawable, null, null)
-            2 -> view.setCompoundDrawables(null, null, drawable, null)
-        }
-    }
-
     override fun deactivate() {
         mListener = null
     }
@@ -462,8 +341,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                                 + aMapLocation.district + ""
                                 + aMapLocation.street + ""
 //                                + aMapLocation.streetNum
-                    );
-                    buffer.toString().showToast()
+                    )
+                    Toast.toast(buffer.toString())
                     contentPlace = buffer.toString()
                     isFirst = false
                 }
@@ -483,26 +362,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             isFirst = false
     }
 
-    fun searchPlace(
-        context: Context,
-        serviceAparts: String,
-        lat: Double,
-        lng: Double,
-        city: String
-    ) {
-        val query = PoiSearch.Query("", serviceAparts, city)
-        query.pageSize = 50
-        query.pageNum
-        val poiSearch = PoiSearch(context, query)
-        poiSearch.bound = PoiSearch.SearchBound(
-            LatLonPoint(
-                lat, lng
-            ), 5000
-        ) //设置周边搜索的中心点以及半径
-        poiSearch.setOnPoiSearchListener(this)
-        poiSearch.searchPOIAsyn()
-    }
-
     override fun onPoiItemSearched(p0: PoiItem?, p1: Int) {
 
     }
@@ -515,7 +374,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             }
             sendMsg(0)
         } else {
-            "未查询到结果".showToast()
+            Toast.toast("未查询到结果")
         }
     }
 
@@ -525,7 +384,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             if(msg.what==0){
                 val layoutManager = LinearLayoutManager(context)
                 rv_fragment_food_down.layoutManager = layoutManager
-                val serviceAdapter =  ServiceAdapter(surrlat,surlng,context,poiList)
+                val serviceAdapter =  SurroundingServiceAdapter(surrlat,surlng,context,poiList)
                 rv_fragment_food_down.adapter = serviceAdapter
                 serviceAdapter?.notifyDataSetChanged()
                 for (poitem in poiList){

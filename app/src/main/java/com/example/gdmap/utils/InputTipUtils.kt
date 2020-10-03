@@ -18,8 +18,8 @@ object InputTipUtils:Inputtips.InputtipsListener  {
     {
         return tiplist
     }
-    fun setTipList(tiplist: MutableList<Tip>?) {
-        this.tiplist=tiplist
+    private fun setTipList(tipList: MutableList<Tip>?) {
+        this.tiplist=tipList
     }
     override fun onGetInputtips(tiplist: MutableList<Tip>?, code: Int) {
         if (code == 1000) {
@@ -45,10 +45,10 @@ object InputTipUtils:Inputtips.InputtipsListener  {
     }
 
      fun initInputTip(newText: String, city: String) {
-        val inputtipsQuery = InputtipsQuery(newText, city)
-        inputtipsQuery.cityLimit = true
-        val inputtips = Inputtips(context, inputtipsQuery)
-        inputtips.setInputtipsListener(this)
-        inputtips.requestInputtipsAsyn()
+        val inputTipsQuery = InputtipsQuery(newText, city)
+        inputTipsQuery.cityLimit = true
+        val inputTips = Inputtips(context, inputTipsQuery)
+        inputTips.setInputtipsListener(this)
+        inputTips.requestInputtipsAsyn()
     }
 }

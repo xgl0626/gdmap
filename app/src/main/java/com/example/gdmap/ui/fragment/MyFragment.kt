@@ -1,7 +1,6 @@
 package com.example.gdmap.ui.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,14 +13,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.gdmap.R
-import com.example.gdmap.ui.activity.QuestionActivity
 import com.example.gdmap.ui.activity.SetDataActivity
 import com.example.gdmap.ui.activity.SignActivity
-import com.example.gdmap.ui.activity.SystemActivity
 import com.example.gdmap.utils.AvatarUtils
 import com.example.gdmap.utils.ImmersedStatusbarUtils
 import kotlinx.android.synthetic.main.fragment_me.*
-import kotlinx.android.synthetic.main.fragment_see.*
 
 class MyFragment : Fragment(),View.OnClickListener{
     private var saveData: SharedPreferences?=null
@@ -72,9 +68,7 @@ class MyFragment : Fragment(),View.OnClickListener{
         when(view?.id)
         {
             R.id.bt_fragment_me_data->changeToActivity2(SetDataActivity())
-            R.id.bt_fragment_me_set->changeToActivity(SystemActivity())
             R.id.bt_fragment_me_day->changeToActivity(SignActivity())
-            R.id.bt_fragment_me_question->changeToActivity(QuestionActivity())
             R.id.iv_fragment_me_user_avator->{
                 AvatarUtils.choicePhoto(context as Activity)
         }

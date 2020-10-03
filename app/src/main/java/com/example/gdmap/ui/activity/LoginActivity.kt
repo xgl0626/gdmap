@@ -21,7 +21,7 @@ import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.utils.ImmersedStatusbarUtils
-import com.example.gdmap.utils.ToastUtils.showToast
+import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
@@ -78,11 +78,11 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         if (result != PackageManager.PERMISSION_GRANTED) {
                             //弹出对话框引导用户去设置
                             showDialog();
-                            "请求权限被拒绝".showToast()
+                            Toast.toast("请求权限被拒绝")
                         }
                     }
                 } else {
-                    "已授权".showToast()
+                    Toast.toast("已授权")
                 }
             }
         }
@@ -131,7 +131,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 if (name != "" && psw1 != "")
                     checkUser(name!!, psw1!!)
                 else
-                    "用户名或者密码不能为空".showToast()
+                    Toast.toast("用户名或者密码不能为空")
             }
             R.id.tv_activity_login_register -> {
                 changeToActivity(RegisterActivity())
@@ -147,7 +147,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             changeToActivity(MainActivity())
         }
         else
-            "输入用户名或者是密码有误，请重新输入".showToast()
+            Toast.toast("输入用户名或者是密码有误，请重新输入")
     }
 
     private fun setImageViewAndButton(drawable: Int, view: TextView, id: Int) {
