@@ -18,15 +18,12 @@ class MainActivity : BaseActivity(), OnPageChangeListener{
     private lateinit var fragmentsAdapter: FragmentsAdapter
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M) {
             super.onCreate(savedInstanceState)
         }
-        setContentView(R.layout.activity_main)
-        initView()
-
     }
 
-    private fun initView() {
+    override fun initView() {
         val fragmentList = ArrayList<Fragment>()
         fragmentList.add(MapFragment())
         fragmentList.add(ServiceFragment())
@@ -43,6 +40,17 @@ class MainActivity : BaseActivity(), OnPageChangeListener{
             }
             return@setOnNavigationItemSelectedListener true
         }
+    }
+
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_main
     }
 
     override fun onPageScrollStateChanged(state: Int) {

@@ -11,33 +11,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
+import com.example.gdmap.database.AnswerTestData
 import com.example.gdmap.database.MessagesTestData
-import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.widget.CircleImageView
 
-
 /**
- * @Author: 徐国林
- * @ClassName: ImageItemAdapter
+ * @Author: xgl
+ * @ClassName: CommentContentAdapter
  * @Description:
- * @Date: 2020/8/31 22:30
+ * @Date: 2020/10/4 14:40
  */
-class ServiceItemAdapter(val context: Context) :
+class CommentContentAdapter(val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val HEADER = 0
-        const val LOAD = 1
+        const val ANSWER = 1
+        const val QUESTION = 2
     }
 
-    private var data = ArrayList<MessagesTestData>()
+    private var questionData: MessagesTestData? = null
+    private var data = ArrayList<AnswerTestData>()
 
-    class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class AnswerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val avatar = view.findViewById<CircleImageView>(R.id.iv_avatar)
         val author = view.findViewById<TextView>(R.id.tv_authorName)
-        val title = view.findViewById<TextView>(R.id.tv_questionTitle)
-        val content = view.findViewById<TextView>(R.id.tv_questionDetail)
+        val content = view.findViewById<TextView>(R.id.tv_answerContent)
         val time = view.findViewById<TextView>(R.id.tv_date)
-
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -45,21 +44,28 @@ class ServiceItemAdapter(val context: Context) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == itemCount - 1)
-            HEADER
-        else
-            LOAD
+        return when (position) {
+            itemCount - 1 -> HEADER
+            0 -> QUESTION
+            else -> ANSWER
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            LOAD -> {
+            QUESTION -> {
                 val view = LayoutInflater.from(parent.context).inflate(
                     R.layout.item_person_comment,
                     parent,
                     false
                 )
-                return CommentViewHolder(view)
+                return ServiceItemAdapter.CommentViewHolder(view)
+            }
+
+            ANSWER -> {
+                val view = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_person_answer, parent, false)
+                return AnswerViewHolder(view)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(
@@ -82,21 +88,30 @@ class ServiceItemAdapter(val context: Context) :
                 }
             }
 
-            LOAD -> {
-                val viewHolder = holder as CommentViewHolder
+            QUESTION -> {
+                val viewHolder = holder as ServiceItemAdapter.CommentViewHolder
                 viewHolder.apply {
                     Glide.with(avatar)
                         .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
                         .load(R.drawable.ic_image).into(avatar)
-                    time.text = data[position].time
-                    title.text = data[position].title
-                    author.text = data[position].author
-                    content.text = data[position].content
+                    time.text = questionData?.time
+                    title.text = questionData?.title
+                    author.text = questionData?.author
+                    content.text = questionData?.content
                 }
             }
-        }
-        holder.itemView.setOnClickListener {
-            changeToActivity(CommentActivity())
+
+            ANSWER -> {
+                val viewHolder = holder as AnswerViewHolder
+                viewHolder.apply {
+                    Glide.with(avatar)
+                        .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
+                        .load(R.drawable.ic_image).into(avatar)
+                    time.text = data[position-1].time
+                    author.text = data[position-1].author
+                    content.text = data[position-1].content
+                }
+            }
         }
     }
 
@@ -106,17 +121,20 @@ class ServiceItemAdapter(val context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return data.size + 1
+        return data.size + 2
     }
 
-    fun addData(newDataLists: List<MessagesTestData>) {
+    fun addCommentItem(newQuestionData: MessagesTestData) {
+        this.questionData = newQuestionData
+    }
+
+    fun addData(newDataLists: List<AnswerTestData>) {
         data.clear()
         initRefreshImages(newDataLists)
     }
 
-    fun initRefreshImages(dataLists: List<MessagesTestData>) {
+    fun initRefreshImages(dataLists: List<AnswerTestData>) {
         data.addAll(dataLists)
         notifyDataSetChanged()
     }
-
 }

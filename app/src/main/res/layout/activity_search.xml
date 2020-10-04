@@ -6,12 +6,12 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/bg_grey"
+        android:layout_height="80dp"
+        android:background="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="文章题目"
+        app:title="搜索"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:titleTextColor="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,11 @@
 package com.example.gdmap.ui.activity
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gdmap.R
+import com.example.gdmap.base.BaseActivity
 
 /**
  * @Author: 徐国林
@@ -10,19 +13,27 @@ import com.example.gdmap.R
  * @Description:
  * @Date: 2020/9/12 13:57
  */
-class SearchActivity :AppCompatActivity(){
+class SearchActivity :BaseActivity(){
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
         initView()
         initData()
     }
 
-    private fun initView() {
+    override fun getViewLayout(): Int {
+       return R.layout.activity_search
+    }
+
+    override fun initView() {
 
     }
 
-    private fun initData() {
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
 
     }
 }

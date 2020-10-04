@@ -22,17 +22,31 @@ class WeatherActivity :BaseActivity(),WeatherSearch.OnWeatherSearchListener
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_weather)
-        setSupportActionBar(toolBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
-        ImmersedStatusbarUtils.initSetContentView(this,toolBar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true) //设置返回键可用
         val intent = intent
         city = intent.getStringExtra("cityname")
         LogUtils.log_d<String>(city.toString())
         city?.let { weatherNowTimeSearch(it) }
         city?.let { weatherPredictSearch(it) }
     }
+
+    override fun initView() {
+    }
+
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
+
+    }
+
+    override fun getViewLayout(): Int {
+       return R.layout.activity_weather
+    }
+
     fun weatherNowTimeSearch(city:String)
     {
         val mquery= WeatherSearchQuery(city, WeatherSearchQuery.WEATHER_TYPE_LIVE)

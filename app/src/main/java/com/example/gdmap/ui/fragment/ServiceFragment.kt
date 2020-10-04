@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gdmap.ui.activity.SearchActivity
 import com.example.gdmap.R
+import com.example.gdmap.base.BaseFragment
 import com.example.gdmap.ui.adapter.ServiceItemAdapter
 import com.example.gdmap.ui.viewmodel.ServiceViewModel
 import com.example.gdmap.utils.AddIconImage
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_service.*
  * @Description:
  * @Date: 2020/10/3 10:05
  */
-class ServiceFragment :Fragment(){
+class ServiceFragment : BaseFragment(){
     private var dialog: ProgressDialog? = null
     private var messageItemAdapter: ServiceItemAdapter? = null
     private val viewModel by lazy {  ViewModelProviders.of(this).get(ServiceViewModel::class.java)}
@@ -33,24 +33,16 @@ class ServiceFragment :Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_service, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_service, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initView()
-        initClick()
-        initData()
-    }
-
-    private fun initClick() {
+    override fun initClick() {
         et_fragment_home_search.setOnClickListener {
             changeToActivity(SearchActivity())
         }
     }
 
-    private fun initView() {
+    override fun initView() {
         AddIconImage.setImageViewToEditText(R.drawable.ic_search, et_fragment_home_search, 1)
         dialog = ProgressDialog(context)
         dialog?.setMessage("加载数据中...")
@@ -62,12 +54,12 @@ class ServiceFragment :Fragment(){
 
     }
 
-    private fun initData() {
+    override fun initData() {
         srl_main.setOnRefreshListener {
             viewModel.getHomeData()
         }
         viewModel.getHomeData()
-        viewModel.homeMessageData.observe(viewLifecycleOwner, Observer {
+        viewModel.commentData.observe(viewLifecycleOwner, Observer {
             messageItemAdapter?.addData(it)
             srl_main.isRefreshing = false
         })

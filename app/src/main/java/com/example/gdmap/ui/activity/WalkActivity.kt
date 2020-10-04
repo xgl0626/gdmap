@@ -7,7 +7,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 
 import com.example.gdmap.R
@@ -27,20 +26,17 @@ class WalkActivity :BaseActivity(),TextWatcher
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_walk)
-        setSupportActionBar(toolBar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
         supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
-        ImmersedStatusbarUtils.initSetContentView(this,toolBar)
         val intent=intent
         mylat=intent.getDoubleExtra("lat",0.0)
         mylng=intent.getDoubleExtra("lng",0.0)
         cityName=intent.getStringExtra("city")
         com.example.gdmap.utils.Toast.toast(cityName.toString())
-        initView()
     }
 
-    private fun initView() {
+    override fun initView() {
         tv_activity_walk_my_place.text = cityName
         et_activity_walk_idea_place.addTextChangedListener(this)
         et_activity_walk_idea_place.onItemClickListener =
@@ -58,6 +54,18 @@ class WalkActivity :BaseActivity(),TextWatcher
                 startActivity(intent)
             }
     }
+
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_walk
+    }
+
     override fun afterTextChanged(p0: Editable?) {
     }
 

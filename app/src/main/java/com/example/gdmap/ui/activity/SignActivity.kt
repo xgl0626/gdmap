@@ -6,16 +6,13 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcel
-import android.os.Parcelable
 import android.view.KeyEvent
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_sign.*
-import kotlinx.android.synthetic.main.activity_walk.*
 
 class SignActivity() : BaseActivity() {
     private var currentDay: String? = null
@@ -33,12 +30,6 @@ class SignActivity() : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign)
-        setSupportActionBar(toolBar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true) //设置返回键可用
-        ImmersedStatusbarUtils.initSetContentView(this, toolBar)
-        initView()
     }
 
     override fun onStart() {
@@ -60,7 +51,10 @@ class SignActivity() : BaseActivity() {
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun initView() {
+    override fun initView() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true) //设置返回键可用
         val time = android.text.format.Time()
         time.setToNow()
         currentDay = time.monthDay.toString()
@@ -87,6 +81,16 @@ class SignActivity() : BaseActivity() {
         }
     }
 
+    override fun initClick() {
+    }
+
+    override fun initData() {
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_sign
+    }
+
     override fun onDestroy() {
         val editor: SharedPreferences.Editor? = saveCounts?.edit()
         editor?.putInt("daycount", count)
@@ -100,15 +104,5 @@ class SignActivity() : BaseActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    companion object CREATOR : Parcelable.Creator<SignActivity> {
-        override fun createFromParcel(parcel: Parcel): SignActivity {
-            return SignActivity(parcel)
-        }
-
-        override fun newArray(size: Int): Array<SignActivity?> {
-            return arrayOfNulls(size)
-        }
     }
 }

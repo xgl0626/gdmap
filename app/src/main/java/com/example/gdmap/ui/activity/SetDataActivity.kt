@@ -2,19 +2,15 @@ package com.example.gdmap.ui.activity
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.utils.AddIconImage
-import com.example.gdmap.utils.ImmersedStatusbarUtils
 import kotlinx.android.synthetic.main.activity_setdata.*
-import kotlinx.android.synthetic.main.activity_weather.*
 
 class SetDataActivity :BaseActivity(){
     private var count=2
@@ -22,12 +18,9 @@ class SetDataActivity :BaseActivity(){
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setdata)
-        setSupportActionBar(toolBar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
         supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
-        ImmersedStatusbarUtils.initSetContentView(this,toolBar)
-        initView()
     }
 
     override fun onStart() {
@@ -37,7 +30,7 @@ class SetDataActivity :BaseActivity(){
         et_activity_setdata_qq.setText(saveData?.getString("qq",""))
         et_activity_setdata_phone.setText(saveData?.getString("tel",""))
     }
-    private fun initView() {
+    override fun initView() {
         saveData=getSharedPreferences("userdata", Context.MODE_PRIVATE)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_qq,1)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_phone,1)
@@ -73,22 +66,30 @@ class SetDataActivity :BaseActivity(){
             count++
         }
     }
-    fun setCanNotEditNoClick(editText: EditText) {
+
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
+    }
+
+    override fun getViewLayout(): Int{
+        return R.layout.activity_setdata
+    }
+
+    private fun setCanNotEditNoClick(editText: EditText) {
         editText.isFocusable = false
         editText.isFocusableInTouchMode = false
         // 如果之前没设置过点击事件，该处可省略
 //        editText.setOnClickListener(null)
     }
 
-    fun setCanEdit(editText: EditText) {
+    private fun setCanEdit(editText: EditText) {
         editText.isFocusable = true
         editText.isFocusableInTouchMode = true
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==android.R.id.home)
         {

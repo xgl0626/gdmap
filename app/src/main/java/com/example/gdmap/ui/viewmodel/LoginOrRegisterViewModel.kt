@@ -23,14 +23,14 @@ class LoginOrRegisterViewModel : ViewModel() {
 
     private var registerSharedPreferences: SharedPreferences =
         MyApplication.context.getSharedPreferences("register_account", MODE_PRIVATE)
-    val result = MutableLiveData<Int>()
+    val loginOrRegisterResult = MutableLiveData<Int>()
     fun login(name: String, password: String) {
 
         val savedName = registerSharedPreferences.getString("name", "")
         val savedPassword = registerSharedPreferences.getString("password", "")
         if (savedName.equals(name) && savedPassword.equals(password)) {
             rememberPassword(name, password)
-            result.value = 200
+            loginOrRegisterResult.value = 200
         } else
 
             Toast.toast("输入用户名或者是密码有误，请重新输入")
@@ -48,15 +48,14 @@ class LoginOrRegisterViewModel : ViewModel() {
     }
 
     @SuppressLint("CommitPrefEdits")
-    fun register(name: String, password: String, password2: String) {
+    fun register(name: String, password: String) {
         val editor = registerSharedPreferences.edit()
         editor?.apply {
             putString("name", name)
             putString("password", password)
-            putString("password2", password2)
             apply()
         }
-        result.value = 200
+        loginOrRegisterResult.value = 200
         Toast.toast("注册成功")
     }
 }

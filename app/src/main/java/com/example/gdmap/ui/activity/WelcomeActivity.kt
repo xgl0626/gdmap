@@ -7,32 +7,19 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
-import android.view.View
-import android.view.View.TRANSLATION_X
-import android.view.View.TRANSLATION_Y
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
-import android.view.animation.TranslateAnimation
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
 
 class WelcomeActivity : BaseActivity() {
-    private  var view: View? = null
-    private  var img:ImageView?=null
             @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        view = View.inflate(this, R.layout.activity_welcome, null)
-        setContentView(view)
-        ImmersedStatusbarUtils.initSetContentView(this, null)
-        initView()
     }
 
-    private fun initView() {
+    override fun initView() {
         val img=findViewById<ImageView>(R.id.iv_activity_welcome_img)
         val objectAnimatorX=ObjectAnimator.ofFloat(img,"translationX",0F,250F)
         val objectAnimatorY=ObjectAnimator.ofFloat(img,"translationY",0F,-1000F)
@@ -43,6 +30,18 @@ class WelcomeActivity : BaseActivity() {
         objectAnimatorX.start()
         objectAnimatorY.start()
         handler.sendMessageDelayed(Message.obtain(), 1000)
+    }
+
+    override fun initClick() {
+
+    }
+
+    override fun initData() {
+
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_welcome
     }
 
     private fun changeToActivity(activity: Activity) {

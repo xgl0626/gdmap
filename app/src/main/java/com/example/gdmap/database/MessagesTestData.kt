@@ -14,7 +14,7 @@ data class MessagesTestData(
 )
 
 data class AnswerTestData(
-    val antuor: String = "xlgxlg",
+    val author: String = "xlgxlg",
     val content: String = "xlgxlglxlglglgl",
     val time: String = "2020.8.30.9:30"
 )

@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:id="@+id/rl_comment">
 
         <com.example.gdmap.ui.widget.CircleImageView
             android:id="@+id/iv_avatar"
@@ -97,5 +98,69 @@
             android:layout_marginTop="10dp"
             android:textSize="12sp"/>
 
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical|right"
+        android:layout_below="@id/rl_comment">
+
+        <ImageButton
+            android:id="@+id/ib_answerButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_answer" />
+
+        <TextView
+            android:id="@+id/tv_answerCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/ib_answerButton"
+            android:layout_toRightOf="@+id/ib_answerButton" />
+
+        <ImageButton
+            android:id="@+id/ib_excitingButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/tv_answerCount"
+            android:layout_toRightOf="@+id/tv_answerCount"
+            android:background="@drawable/ic_home_message_up" />
+
+        <TextView
+            android:id="@+id/tv_excitingCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/ib_excitingButton"
+            android:layout_toRightOf="@+id/ib_excitingButton" />
+
+        <ImageButton
+            android:id="@+id/ib_naiveButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/tv_excitingCount"
+            android:layout_toRightOf="@+id/tv_excitingCount"
+            android:background="@drawable/ic_home_message_gown" />
+
+        <TextView
+            android:id="@+id/tv_naiveCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/ib_naiveButton"
+            android:layout_toRightOf="@+id/ib_naiveButton" />
+
+        <ImageButton
+            android:id="@+id/ib_favoriteButton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_toEndOf="@+id/tv_naiveCount"
+            android:layout_toRightOf="@+id/tv_naiveCount"
+            android:background="@drawable/ic_unfravorite" />
     </RelativeLayout>
 </RelativeLayout>

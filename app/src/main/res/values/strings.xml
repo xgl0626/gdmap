@@ -3,7 +3,7 @@
     <string name="choose_map">卫星图层</string>
     <string name="leave_map">离线地图</string>
     <string name="indoor_map">室内地图</string>
-    <string name="bt_nav_me">我的</string>
+    <string name="bt_nav_me">个人中心</string>
     <string name="bt_nav_surrounding">社区</string>
     <string name="bt_nav_map">地图</string>
     <string name="tv_login">登录</string>

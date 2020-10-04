@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="330dp"
         android:layout_marginTop="48dp"
-        android:background="@color/blueDark"
+        android:background="@color/bg_grey"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -31,10 +31,10 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/blueDark"
+        android:background="@color/bg_grey"
         android:gravity="center"
         android:text="@string/tv_login"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 

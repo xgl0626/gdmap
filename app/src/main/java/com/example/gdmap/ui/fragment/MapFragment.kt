@@ -66,8 +66,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_map, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -192,9 +191,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         AddIconImage.setImageViewToButton(R.drawable.bt_rb_car, bs_rb_drive_car, 2)
         AddIconImage.setImageViewToButton(R.drawable.bt_rb_gobackwork, bs_rb_walk, 2)
         AddIconImage.setImageViewToButton(R.drawable.bt_rb_loadmap, bs_rb_leave_map, 2)
-        AddIconImage.setImageViewToButton(R.drawable.bt_rb_collect, bs_rb_more2, 2)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_bs_search, et_search, 0)
-        AddIconImage.setImageViewToButton(R.drawable.bt_search_more2, bs_rb_more2, 2)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_more,bs_rb_more2,2)
     }
 
 

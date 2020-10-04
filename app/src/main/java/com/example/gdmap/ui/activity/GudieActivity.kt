@@ -1,6 +1,8 @@
 package com.example.gdmap.ui.activity
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import com.amap.api.navi.AMapNavi
 import com.amap.api.navi.AMapNaviListener
 import com.amap.api.navi.AMapNaviViewListener
@@ -9,9 +11,6 @@ import com.amap.api.navi.model.*
 import com.autonavi.tbt.TrafficFacilityInfo
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
-import com.example.gdmap.utils.LogUtils
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_timegulide.*
 import java.lang.Exception
 
@@ -22,10 +21,9 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
     private var startlat: Double? = null
     private var startlng: Double? = null
     private var amapniv:AMapNavi?=null
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timegulide)
-        ImmersedStatusbarUtils.initSetContentView(this,null)
         val intent = intent
         startlat = intent.getDoubleExtra("lat", 0.0)
         startlng = intent.getDoubleExtra("lng", 0.0)
@@ -37,6 +35,20 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
         amapniv?.setUseInnerVoice(true)
         amapniv?.addAMapNaviListener(this)
 
+    }
+
+    override fun initView() {
+
+    }
+
+    override fun initClick() {
+    }
+
+    override fun initData() {
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_timegulide
     }
 
     override fun onResume() {

@@ -2,30 +2,34 @@ package com.example.gdmap.ui.activity
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.View
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
+import com.example.gdmap.ui.viewmodel.LoginOrRegisterViewModel
+import com.example.gdmap.utils.AddIconImage
+import com.example.gdmap.utils.MyApplication
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
-    private var loginSharedPreferences: SharedPreferences?=null
+    private val viewModel by lazy { ViewModelProviders.of(this).get(LoginOrRegisterViewModel::class.java) }
+    private var rememberPassword: SharedPreferences = MyApplication.context.getSharedPreferences(
+        "remember",
+        MODE_PRIVATE
+    )
     private var point = 0
     private var name:String?=null
     private var psw1:String?=null
@@ -47,15 +51,26 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        initview()
-        ImmersedStatusbarUtils.initSetContentView(this, textView2)
-        loginSharedPreferences = getSharedPreferences("register_account", Context.MODE_PRIVATE)
         if (point == 0) {
             requestPermission()
-            point = point + 1
+            point += 1
         }
 
+    }
+
+    override fun getViewLayout(): Int {
+        return R.layout.activity_login
+    }
+
+    override fun initData() {
+        et_activity_login_username.setText(rememberPassword.getString("name",""))
+        et_activity_login_psw.setText(rememberPassword.getString("psw",""))
+        viewModel.loginOrRegisterResult.observe(this, Observer {
+            if(it==200)
+            {
+                changeToActivity(MainActivity())
+            }
+        })
     }
 
     private fun requestPermission() {
@@ -92,35 +107,33 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     fun showDialog() {
         val dialog = AlertDialog.Builder(this)
             .setMessage("是否去设置权限？")
-            .setPositiveButton("是", object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface, which: Int) {
-                    dialog.dismiss()
-                    goToAppSetting()
-                }
-            })
-            .setNegativeButton("否", object : DialogInterface.OnClickListener {
-                override fun onClick(dialog: DialogInterface?, p1: Int) {
-                    dialog?.dismiss()
-                }
-            })
+            .setPositiveButton("是") { dialog, which ->
+                dialog.dismiss()
+                goToAppSetting()
+            }
+            .setNegativeButton("否"
+            ) { dialog, p1 -> dialog?.dismiss() }
             .setCancelable(false)
             .show()
     }
 
     private fun goToAppSetting() {
         val intent = Intent()
-        intent.setAction(ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.action = ACTION_APPLICATION_DETAILS_SETTINGS;
         val uri = Uri.fromParts("package", packageName, null);
         intent.data = uri
         startActivity(intent)
     }
 
-    private fun initview() {
-        setImageViewAndButton(R.mipmap.acticity_login_name, et_activity_login_username, 2)
-        setImageViewAndButton(R.mipmap.activity_login_psw, et_activity_login_psw, 2)
+    override fun initView() {
+        AddIconImage.setImageViewToEditText(R.mipmap.acticity_login_name, et_activity_login_username, 0)
+        AddIconImage.setImageViewToEditText(R.mipmap.activity_login_psw, et_activity_login_psw, 0)
         tv_activity_login_register.setOnClickListener(this)
         bt_activity_login_login.setOnClickListener(this)
 
+    }
+
+    override fun initClick() {
     }
 
     override fun onClick(view: View?) {
@@ -129,38 +142,13 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         when (view?.id) {
             R.id.bt_activity_login_login -> {
                 if (name != "" && psw1 != "")
-                    checkUser(name!!, psw1!!)
+                   viewModel.login(name.toString(),psw1.toString())
                 else
                     Toast.toast("用户名或者密码不能为空")
             }
             R.id.tv_activity_login_register -> {
                 changeToActivity(RegisterActivity())
             }
-        }
-    }
-
-    private fun checkUser(username: String, password: String) {
-        val savedName=loginSharedPreferences?.getString("name", "")
-        val savedPassword=loginSharedPreferences?.getString("password","")
-        if(savedName.equals(username)&&savedPassword.equals(password))
-        {
-            changeToActivity(MainActivity())
-        }
-        else
-            Toast.toast("输入用户名或者是密码有误，请重新输入")
-    }
-
-    private fun setImageViewAndButton(drawable: Int, view: TextView, id: Int) {
-        val drawable: Drawable =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                resources.getDrawable(drawable, null)
-            } else {
-                TODO("VERSION.SDK_INT < LOLLIPOP")
-            }
-        drawable.setBounds(0, 0, 80, 80)
-        when (id) {
-            1 -> view.setCompoundDrawables(null, drawable, null, null)
-            2 -> view.setCompoundDrawables(drawable, null, null, null)
         }
     }
 

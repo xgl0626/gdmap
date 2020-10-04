@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/activity_weather_bg">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/blueDark"
-        app:title="天气预报"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@color/white"
-        tools:layout_editor_absoluteX="0dp" />
+        app:title="天气预报"
+        app:navigationIcon="@drawable/ic_common_toolbar"
+        app:titleTextColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_activity_weather_city_name"
