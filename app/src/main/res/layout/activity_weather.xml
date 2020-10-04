@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_weather_bg">
+    android:background="@drawable/activity_weather_bg"
+    android:fitsSystemWindows="true">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="天气预报"
-        app:navigationIcon="@drawable/ic_common_toolbar"
         app:titleTextColor="@color/black" />
 
     <TextView
@@ -142,19 +144,19 @@
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttime1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttime1"
             android:text="null" />
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttmp"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="130dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttmp"
             android:text="null" />
     </LinearLayout>
 
@@ -168,19 +170,19 @@
         tools:layout_editor_absoluteX="0dp">
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttime2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttime2"
             android:text="null" />
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttmp2"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="130dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttmp2"
             android:text="null" />
     </LinearLayout>
 
@@ -194,19 +196,19 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttime3"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="50dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttime3"
             android:text="null" />
 
         <TextView
+            android:id="@+id/tv_activity_weather_predicttmp3"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginLeft="130dp"
             android:gravity="center"
-            android:id="@+id/tv_activity_weather_predicttmp3"
-            android:text="null"/>
+            android:text="null" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

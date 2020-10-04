@@ -55,7 +55,7 @@
             app:layout_constraintHorizontal_bias="0.611"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.739" />
+            app:layout_constraintVertical_bias="0.639" />
 
         <TextView
             android:id="@+id/tv_fragment_me_user_data"
@@ -72,7 +72,7 @@
             app:layout_constraintHorizontal_bias="0.628"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.391" />
+            app:layout_constraintVertical_bias="0.291" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
@@ -116,7 +116,7 @@
         android:background="@drawable/fragment_me_bt_shape"
         android:gravity="left|center"
         android:paddingLeft="5dp"
-        android:text=" 问一问"
+        android:text=" 灾害小贴士"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

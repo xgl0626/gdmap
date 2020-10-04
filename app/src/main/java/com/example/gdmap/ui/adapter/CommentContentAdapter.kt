@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.database.AnswerTestData
 import com.example.gdmap.database.MessagesTestData
+import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
 
 /**
@@ -98,6 +99,9 @@ class CommentContentAdapter(val context: Context) :
                     title.text = questionData?.title
                     author.text = questionData?.author
                     content.text = questionData?.content
+                    write.setOnClickListener {
+                        changeToActivity(WriteAnswerActivity())
+                    }
                 }
             }
 

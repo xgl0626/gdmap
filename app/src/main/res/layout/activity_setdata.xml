@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/bg_grey"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/fragment_me_setdata"
-        app:navigationIcon="@drawable/ic_common_toolbar"
         app:titleTextColor="@color/black" />
 
     <EditText
@@ -22,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="12dp"
+        android:autoSizeMaxTextSize="15dp"
         android:background="@color/white"
         android:hint="  姓名"
-        android:padding="10dp"
         android:maxLines="1"
-        android:autoSizeMaxTextSize="15dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/et_activity_setdata_data"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
@@ -36,12 +37,12 @@
         android:id="@+id/et_activity_setdata_data"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:padding="10dp"
-        android:maxLines="1"
-        android:autoSizeMaxTextSize="15dp"
         android:layout_marginBottom="8dp"
+        android:autoSizeMaxTextSize="15dp"
         android:background="@color/white"
         android:hint="  简介"
+        android:maxLines="1"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/et_activity_setdata_qq"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -49,12 +50,12 @@
         android:id="@+id/et_activity_setdata_qq"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:padding="10dp"
-        android:maxLines="1"
-        android:autoSizeMaxTextSize="15dp"
         android:layout_marginBottom="12dp"
+        android:autoSizeMaxTextSize="15dp"
         android:background="@color/white"
         android:hint="  qq"
+        android:maxLines="1"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/et_activity_setdata_phone"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -63,13 +64,13 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginEnd="4dp"
-        android:padding="10dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="440dp"
+        android:autoSizeMaxTextSize="15dp"
         android:background="@color/white"
         android:hint="  tel"
         android:maxLines="1"
-        android:autoSizeMaxTextSize="15dp"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

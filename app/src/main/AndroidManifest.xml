@@ -35,16 +35,12 @@
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
             android:screenOrientation="portrait"  />
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" /> <!-- or android:screenOrientation="landscape"-->
+        <activity android:name=".MainActivity" />
         <activity android:name="com.amap.api.navi.AmapRouteActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity android:name=".ui.activity.GudieActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
-        <activity android:name=".ui.activity.SystemActivity" />
         <activity android:name=".ui.activity.SetDataActivity" />
         <activity android:name=".ui.activity.SignActivity" />
         <activity android:name=".ui.activity.WeatherActivity" />
@@ -57,6 +53,7 @@
         <activity android:name=".ui.activity.WalkActivity" />
         <activity android:name=".ui.activity.CommentActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.WriteAnswerActivity" />
 
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data

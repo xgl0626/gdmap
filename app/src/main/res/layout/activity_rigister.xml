@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".ui.activity.LoginActivity">
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
@@ -56,21 +58,21 @@
             android:id="@+id/et_activity_register_username"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:hint=" name"
-            android:padding="5dp"
             android:layout_margin="5dp"
             android:background="@null"
+            android:hint=" name"
+            android:padding="5dp"
             android:theme="@style/MyEditText" />
 
         <EditText
             android:id="@+id/et_activity_register_psw"
             android:layout_width="280dp"
             android:layout_height="50dp"
-            android:hint=" password"
-            android:padding="5dp"
             android:layout_margin="5dp"
             android:background="@null"
+            android:hint=" password"
             android:inputType="textPassword"
+            android:padding="5dp"
             android:theme="@style/MyEditText" />
 
         <Button

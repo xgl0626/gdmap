@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.database.MessagesTestData
 import com.example.gdmap.ui.activity.CommentActivity
+import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
 
 
@@ -37,7 +39,7 @@ class ServiceItemAdapter(val context: Context) :
         val title = view.findViewById<TextView>(R.id.tv_questionTitle)
         val content = view.findViewById<TextView>(R.id.tv_questionDetail)
         val time = view.findViewById<TextView>(R.id.tv_date)
-
+        val write= view.findViewById<ImageButton>(R.id.ib_answerButton)
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -92,6 +94,9 @@ class ServiceItemAdapter(val context: Context) :
                     title.text = data[position].title
                     author.text = data[position].author
                     content.text = data[position].content
+                    write.setOnClickListener {
+                        changeToActivity(WriteAnswerActivity())
+                    }
                 }
             }
         }

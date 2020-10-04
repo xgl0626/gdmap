@@ -9,6 +9,8 @@
         android:id="@+id/iv_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:scaleType="centerCrop" />
 
     <LinearLayout
@@ -41,7 +43,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:orientation="horizontal"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/imageView">
 
         <ImageButton
             android:id="@+id/ib_excitingButton"
