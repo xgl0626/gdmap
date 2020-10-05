@@ -1,9 +1,7 @@
 package com.example.gdmap.ui.activity
 
-import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -52,8 +50,6 @@ class CommentActivity : BaseActivity() {
 
     override fun initView() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         messageItemAdapter = CommentContentAdapter(this)
@@ -63,14 +59,4 @@ class CommentActivity : BaseActivity() {
     override fun initClick() {
 
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> {
-                finish()
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 }

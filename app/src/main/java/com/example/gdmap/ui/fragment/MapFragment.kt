@@ -36,7 +36,6 @@ import com.amap.api.services.poisearch.PoiSearch
 import com.example.gdmap.R
 import com.example.gdmap.ui.activity.WalkActivity
 import com.example.gdmap.ui.activity.WeatherActivity
-import com.example.gdmap.ui.adapter.SurroundingServiceAdapter
 import com.example.gdmap.utils.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
@@ -370,35 +369,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 poiList.add(poiItem)
                 drawMarker(poiItem.latLonPoint.latitude,poiItem.latLonPoint.longitude)
             }
-            sendMsg(0)
         } else {
             Toast.toast("未查询到结果")
         }
-    }
-
-    private val handler: Handler = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if(msg.what==0){
-                val layoutManager = LinearLayoutManager(context)
-                rv_fragment_food_down.layoutManager = layoutManager
-                val serviceAdapter =  SurroundingServiceAdapter(surrlat,surlng,context,poiList)
-                rv_fragment_food_down.adapter = serviceAdapter
-                serviceAdapter?.notifyDataSetChanged()
-                for (poitem in poiList){
-                    val markerOption = MarkerOptions();
-                    markerOption.position(LatLng(poitem.latLonPoint.latitude,
-                        poitem.latLonPoint.longitude))
-                        .draggable(false).title(poitem.title.toString()).setFlat(true).visible(true).infoWindowEnable(true)
-                    aMap?.addMarker(markerOption);
-                }
-            }
-        }
-    }
-    fun sendMsg(index: Int) {
-        val message = Message()
-        message.what = index
-        handler.sendMessage(message)
     }
 }
 

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".ui.activity.WriteAnswerActivity">
@@ -13,7 +12,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
@@ -23,7 +21,7 @@
 
     <EditText
         android:id="@+id/edt_answer_content"
-        android:layout_width="350dp"
+        android:layout_width="330dp"
         android:layout_height="350dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/qa_ic_quiz_new_text_background"

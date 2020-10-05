@@ -44,7 +44,7 @@ object AvatarUtils {
                 if (Build.VERSION.SDK_INT >= 23) { //检查相机权限
                     val permissions =
                         ArrayList<String>()
-                    if (activity?.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    if (activity.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         permissions.add(Manifest.permission.CAMERA)
                     }
                     if (permissions.size == 0) { //有权限,跳转

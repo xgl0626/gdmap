@@ -18,9 +18,6 @@ class SetDataActivity :BaseActivity(){
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
     }
 
     override fun onStart() {
@@ -31,6 +28,7 @@ class SetDataActivity :BaseActivity(){
         et_activity_setdata_phone.setText(saveData?.getString("tel",""))
     }
     override fun initView() {
+        setSupportActionBar(toolbar)
         saveData=getSharedPreferences("userdata", Context.MODE_PRIVATE)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_qq,1)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_setdata_go,et_activity_setdata_phone,1)
@@ -90,12 +88,4 @@ class SetDataActivity :BaseActivity(){
         editText.isFocusableInTouchMode = true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==android.R.id.home)
-        {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }

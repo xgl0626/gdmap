@@ -27,8 +27,6 @@ class WalkActivity :BaseActivity(),TextWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
         val intent=intent
         mylat=intent.getDoubleExtra("lat",0.0)
         mylng=intent.getDoubleExtra("lng",0.0)
@@ -83,13 +81,5 @@ class WalkActivity :BaseActivity(),TextWatcher
                 )
             }
         }
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==android.R.id.home)
-        {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

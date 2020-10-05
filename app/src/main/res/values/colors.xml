@@ -10,6 +10,10 @@
     <color name="blue2">#63B8FF</color>
     <color name="bg_grey" tools:ignore="ResourceName">#F2F3F8</color>
     <color name="status_bar_color">#E5E5E5</color>
+    <!--    问题tab选中颜色-->
+    <color name="qa_tab_selected_color" tools:ignore="ResourceName">#15315B</color>
+    <!--    问题tab未选中颜色-->
+    <color name="qa_tab_unselected_color" tools:ignore="ResourceName">#15315B</color>
     <!--    透明状态栏-->
     <color name="transparentBackground" tools:ignore="ResourceName">#00000000</color>
     <!--    person 界面退出登录字体颜色-->
@@ -19,4 +23,5 @@
     <!--    问题tab未选中颜色-->
     <color name="tab_unselected_color" tools:ignore="ResourceName">#15315B</color>
     <color name="person_back_login" tools:ignore="DuplicateDefinition,ResourceName">#2A4E84</color>
+    <color name="map_et_search_background_color" tools:ignore="ResourceName">#F0F4FD</color>
 </resources>

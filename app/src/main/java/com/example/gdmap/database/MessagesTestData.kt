@@ -18,3 +18,8 @@ data class AnswerTestData(
     val content: String = "xlgxlglxlglglgl",
     val time: String = "2020.8.30.9:30"
 )
+
+data class TabLayoutItem(
+    val title: String = "火灾",
+    val id:Int=1
+)
