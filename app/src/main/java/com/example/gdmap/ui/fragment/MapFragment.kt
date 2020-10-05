@@ -40,7 +40,6 @@ import com.amap.api.services.route.*
 import com.example.gdmap.R
 import com.example.gdmap.ui.activity.WalkActivity
 import com.example.gdmap.ui.activity.WeatherActivity
-import com.example.gdmap.ui.adapter.SurroundingServiceAdapter
 import com.example.gdmap.utils.*
 import com.example.gdmap.utils.drivingrouteutil.AMapUtil
 import com.example.gdmap.utils.drivingrouteutil.DrivingRouteOverlay
@@ -405,9 +404,11 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 drawMarker(poiItem.latLonPoint.latitude, poiItem.latLonPoint.longitude)
 //                end_point=LatLonPoint(poiItem.latLonPoint.latitude,poiItem.latLonPoint.longitude)
             }
+
             end_point=LatLonPoint(result.pois.get(0).latLonPoint.latitude,result.pois.get(0).latLonPoint.longitude)
             drawRouteLine()
 //            sendMsg(0)
+
         } else {
             Toast.toast("未查询到结果")
         }
@@ -419,9 +420,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             if (msg.what == 0) {
                 val layoutManager = LinearLayoutManager(context)
                 rv_fragment_food_down.layoutManager = layoutManager
-                val serviceAdapter = SurroundingServiceAdapter(surrlat, surlng, context, poiList)
-                rv_fragment_food_down.adapter = serviceAdapter
-                serviceAdapter?.notifyDataSetChanged()
+//                val serviceAdapter = SurroundingServiceAdapter(surrlat, surlng, context, poiList)
+//                rv_fragment_food_down.adapter = serviceAdapter
+//                serviceAdapter?.notifyDataSetChanged()
                 for (poitem in poiList) {
                     val markerOption = MarkerOptions();
                     markerOption.position(

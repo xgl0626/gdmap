@@ -20,7 +20,6 @@ class LoginOrRegisterViewModel : ViewModel() {
         "remember",
         MODE_PRIVATE
     )
-
     private var registerSharedPreferences: SharedPreferences =
         MyApplication.context.getSharedPreferences("register_account", MODE_PRIVATE)
     val loginOrRegisterResult = MutableLiveData<Int>()

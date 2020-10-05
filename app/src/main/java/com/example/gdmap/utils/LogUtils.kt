@@ -5,7 +5,7 @@ import java.io.File
 
 object LogUtils{
    val logSwitch=true
-    val TAG="error"
+    val TAG="errorabc"
     inline fun<reified T>log_i(log:Any):String{
         val resultI=if (logSwitch)
         {

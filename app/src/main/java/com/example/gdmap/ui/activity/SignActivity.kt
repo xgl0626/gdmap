@@ -53,8 +53,6 @@ class SignActivity() : BaseActivity() {
     @SuppressLint("ResourceAsColor")
     override fun initView() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)//左侧添加一个默认的返回图标
-        supportActionBar?.setHomeButtonEnabled(true) //设置返回键可用
         val time = android.text.format.Time()
         time.setToNow()
         currentDay = time.monthDay.toString()
@@ -98,11 +96,4 @@ class SignActivity() : BaseActivity() {
         super.onDestroy()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }

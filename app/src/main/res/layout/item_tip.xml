@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_home_message_item"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:id="@+id/divider"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/qa_tab_selected_color"
+            android:text="火灾"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_answerContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发范德萨发生飞洒范德萨发撒地方萨芬"
+        android:layout_below="@+id/divider"
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:textColor="@color/tab_selected_color"
+        android:maxLength="500"
+        android:textSize="16sp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/answerimg"
+        android:layout_below="@id/tv_answerContent"
+        android:layout_marginTop="5dp"
+        />
+</RelativeLayout>

@@ -3,6 +3,7 @@ package com.example.gdmap.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ import com.example.gdmap.database.MessagesTestData
 import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
+import com.example.gdmap.utils.excite
+import com.example.gdmap.utils.favorite
+import com.example.gdmap.utils.naive
 
 
 /**
@@ -40,6 +44,10 @@ class ServiceItemAdapter(val context: Context) :
         val content = view.findViewById<TextView>(R.id.tv_questionDetail)
         val time = view.findViewById<TextView>(R.id.tv_date)
         val write= view.findViewById<ImageButton>(R.id.ib_answerButton)
+        val fravorite =view.findViewById<ImageButton>(R.id.ib_favoriteButton)
+        val excite=view.findViewById<ImageButton>(R.id.ib_excitingButton)
+        val naive =view.findViewById<ImageButton>(R.id.ib_naiveButton)
+
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -97,6 +105,9 @@ class ServiceItemAdapter(val context: Context) :
                     write.setOnClickListener {
                         changeToActivity(WriteAnswerActivity())
                     }
+                    fravorite.favorite()
+                    excite.excite()
+                    naive.naive()
                 }
             }
         }

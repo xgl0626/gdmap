@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,6 +16,9 @@ import com.example.gdmap.database.AnswerTestData
 import com.example.gdmap.database.MessagesTestData
 import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
+import com.example.gdmap.utils.excite
+import com.example.gdmap.utils.favorite
+import com.example.gdmap.utils.naive
 
 /**
  * @Author: xgl
@@ -38,6 +42,8 @@ class CommentContentAdapter(val context: Context) :
         val author = view.findViewById<TextView>(R.id.tv_authorName)
         val content = view.findViewById<TextView>(R.id.tv_answerContent)
         val time = view.findViewById<TextView>(R.id.tv_date)
+        val excite=view.findViewById<ImageButton>(R.id.ib_excitingButton)
+        val naive =view.findViewById<ImageButton>(R.id.ib_naiveButton)
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -102,6 +108,9 @@ class CommentContentAdapter(val context: Context) :
                     write.setOnClickListener {
                         changeToActivity(WriteAnswerActivity())
                     }
+                    fravorite.favorite()
+                    excite.excite()
+                    naive.naive()
                 }
             }
 
@@ -114,6 +123,8 @@ class CommentContentAdapter(val context: Context) :
                     time.text = data[position-1].time
                     author.text = data[position-1].author
                     content.text = data[position-1].content
+                    excite.excite()
+                    naive.naive()
                 }
             }
         }

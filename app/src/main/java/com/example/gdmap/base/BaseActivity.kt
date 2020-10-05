@@ -3,6 +3,7 @@ package com.example.gdmap.base
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,8 @@ abstract class BaseActivity : AppCompatActivity() {
         setContentView(getViewLayout())
         if (supportActionBar != null)
             supportActionBar?.hide()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        supportActionBar?.setHomeButtonEnabled(true); //设置返回键可用
         initFlag()
         initView()
         initData()
@@ -44,5 +47,13 @@ abstract class BaseActivity : AppCompatActivity() {
                 window.statusBarColor = Color.TRANSPARENT
             }
         }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home)
+        {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
