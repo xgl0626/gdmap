@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Message
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -28,16 +29,21 @@ import com.amap.api.maps.UiSettings
 import com.amap.api.maps.model.LatLng
 import com.amap.api.maps.model.MarkerOptions
 import com.amap.api.maps.model.MyLocationStyle
+import com.amap.api.maps.model.RouteOverlay
 import com.amap.api.maps.model.animation.RotateAnimation
 import com.amap.api.maps.offlinemap.OfflineMapActivity
+import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
+import com.amap.api.services.route.*
 import com.example.gdmap.R
 import com.example.gdmap.ui.activity.WalkActivity
 import com.example.gdmap.ui.activity.WeatherActivity
 import com.example.gdmap.ui.adapter.SurroundingServiceAdapter
 import com.example.gdmap.utils.*
+import com.example.gdmap.utils.drivingrouteutil.AMapUtil
+import com.example.gdmap.utils.drivingrouteutil.DrivingRouteOverlay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
@@ -49,7 +55,7 @@ import java.util.*
 
 
 class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatcher,
-    AMap.OnMapTouchListener,PoiSearch.OnPoiSearchListener {
+    AMap.OnMapTouchListener, PoiSearch.OnPoiSearchListener {
     private var aMap: AMap? = null
     private var isFirst: Boolean = true
     private var mListener: OnLocationChangedListener? = null
@@ -61,6 +67,10 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     private var lat: Double? = null
     private var lng: Double? = null
     private var poiList = ArrayList<PoiItem>()
+    private var start_point: LatLonPoint? = null
+    private var end_point: LatLonPoint? = null
+    private var _city:String?=null//记录当前城市的信息
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -71,7 +81,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.activity?.let { ImmersedStatusbarUtils.initSetContentView(it,null) }
+        this.activity?.let { ImmersedStatusbarUtils.initSetContentView(it, null) }
         mv_map.onCreate(savedInstanceState)
         aMap = mv_map.map
         val mUiSettings: UiSettings? = aMap?.uiSettings
@@ -137,9 +147,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
         bs_rb_walk.setOnClickListener {
             val intent = Intent(this.context, WalkActivity::class.java)
-            intent.putExtra("lat",surrlat)
-            intent.putExtra("lng",surlng)
-            intent.putExtra("city",cityString)
+            intent.putExtra("lat", surrlat)
+            intent.putExtra("lng", surlng)
+            intent.putExtra("city", cityString)
             startActivity(intent)
         }
         bs_rb_more2.setOnClickListener {
@@ -164,12 +174,24 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     )
                 )
                 behavior2.state = BottomSheetBehavior.STATE_HIDDEN
+                /*
+                    开始poi搜索
+                 */
+                val dstAddr=et_search.text.toString()
+                // 1 创建一个搜索的条件对象 query
+                val query=PoiSearch.Query(dstAddr,"",_city)
+                // 2 创建一个POISearch句柄和query关联
+                val poiSearch=PoiSearch(MyApplication.context,query)
+                // 3 给search绑定一个回调函数
+                poiSearch.setOnPoiSearchListener(this)
+                // 4 启动搜索
+                poiSearch.searchPOIAsyn();
+
             }
-        bs_rb_drive_car.setOnClickListener {view->
-                context?.let { GudieUtils.startGuilde(it) }
+        bs_rb_drive_car.setOnClickListener { view ->
+            context?.let { GudieUtils.startGuilde(it) }
         }
-        bs_rb_leave_map.setOnClickListener{
-            view ->
+        bs_rb_leave_map.setOnClickListener { view ->
             startActivity(
                 Intent(
                     this.context,
@@ -179,9 +201,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         }
         fab_fragment_map_weather.setOnClickListener { view ->
 //            cityString?.let { context?.let { it1 -> WeatherSearchUtils.weatherSearch(it, it1) } }
-                val intent=Intent(this.activity,WeatherActivity::class.java)
-                intent.putExtra("cityname",cityString)
-                startActivity(intent)
+            val intent = Intent(this.activity, WeatherActivity::class.java)
+            intent.putExtra("cityname", cityString)
+            startActivity(intent)
         }
 
     }
@@ -192,7 +214,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         AddIconImage.setImageViewToButton(R.drawable.bt_rb_gobackwork, bs_rb_walk, 2)
         AddIconImage.setImageViewToButton(R.drawable.bt_rb_loadmap, bs_rb_leave_map, 2)
         AddIconImage.setImageViewToEditText(R.mipmap.fragment_bs_search, et_search, 0)
-        AddIconImage.setImageViewToButton(R.drawable.bt_rb_more,bs_rb_more2,2)
+        AddIconImage.setImageViewToButton(R.drawable.bt_rb_more, bs_rb_more2, 2)
     }
 
 
@@ -200,6 +222,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         val intent = Intent(this.context, activity::class.java)
         startActivity(intent)
     }
+
     /**
      * 画定位图
      * @param lat
@@ -340,6 +363,12 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                                 + aMapLocation.street + ""
 //                                + aMapLocation.streetNum
                     )
+                    //获取用户的起始点的位置
+                    if (start_point==null){
+                        start_point= LatLonPoint(aMapLocation.latitude,aMapLocation.longitude)
+                    }
+                    //设置原地址信息
+                    _city=aMapLocation.city
                     Toast.toast(buffer.toString())
                     contentPlace = buffer.toString()
                     isFirst = false
@@ -365,12 +394,20 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     }
 
     override fun onPoiSearched(result: PoiResult?, code: Int) {
+        //处理得到的POI兴趣点集合 poiResult
         if (code == 1000) {
             for (poiItem in result?.pois!!) {
                 poiList.add(poiItem)
-                drawMarker(poiItem.latLonPoint.latitude,poiItem.latLonPoint.longitude)
+                Log.e("Amap", "搜索到的兴趣点有")
+                Log.e("Amap", "poi title =" + poiItem.getTitle()+
+                        "latitude = " +poiItem.getLatLonPoint().getLatitude()+
+                        "longitude = "+ poiItem.getLatLonPoint().getLongitude())
+                drawMarker(poiItem.latLonPoint.latitude, poiItem.latLonPoint.longitude)
+//                end_point=LatLonPoint(poiItem.latLonPoint.latitude,poiItem.latLonPoint.longitude)
             }
-            sendMsg(0)
+            end_point=LatLonPoint(result.pois.get(0).latLonPoint.latitude,result.pois.get(0).latLonPoint.longitude)
+            drawRouteLine()
+//            sendMsg(0)
         } else {
             Toast.toast("未查询到结果")
         }
@@ -379,26 +416,85 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     private val handler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
-            if(msg.what==0){
+            if (msg.what == 0) {
                 val layoutManager = LinearLayoutManager(context)
                 rv_fragment_food_down.layoutManager = layoutManager
-                val serviceAdapter =  SurroundingServiceAdapter(surrlat,surlng,context,poiList)
+                val serviceAdapter = SurroundingServiceAdapter(surrlat, surlng, context, poiList)
                 rv_fragment_food_down.adapter = serviceAdapter
                 serviceAdapter?.notifyDataSetChanged()
-                for (poitem in poiList){
+                for (poitem in poiList) {
                     val markerOption = MarkerOptions();
-                    markerOption.position(LatLng(poitem.latLonPoint.latitude,
-                        poitem.latLonPoint.longitude))
-                        .draggable(false).title(poitem.title.toString()).setFlat(true).visible(true).infoWindowEnable(true)
+                    markerOption.position(
+                        LatLng(
+                            poitem.latLonPoint.latitude,
+                            poitem.latLonPoint.longitude
+                        )
+                    )
+                        .draggable(false).title(poitem.title.toString()).setFlat(true).visible(true)
+                        .infoWindowEnable(true)
                     aMap?.addMarker(markerOption);
                 }
             }
         }
     }
+
     fun sendMsg(index: Int) {
         val message = Message()
         message.what = index
         handler.sendMessage(message)
     }
+
+    fun drawRouteLine() {
+        //1 创建路径的绘制的句柄 routeSearch
+        val routeSearch = RouteSearch(MyApplication.context);
+        val ft=com.amap.api.services.route.RouteSearch.FromAndTo(start_point,end_point)
+        //设置一个路径搜索的query
+        val query=RouteSearch.DriveRouteQuery(ft,RouteSearch.DRIVING_SINGLE_DEFAULT,null,null,"")
+        // 3 给绘制路径的句柄设置一个callback函数
+        routeSearch.setRouteSearchListener(object :RouteSearch.OnRouteSearchListener
+        {
+            override fun onBusRouteSearched(p0: BusRouteResult?, p1: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDriveRouteSearched(p0: DriveRouteResult?, p1: Int) {
+               if (p1!=1000){
+                   LogUtils.log_e<String>("搜索路径失败")
+                   return
+               }
+                //画出路径
+                val path=p0?.paths?.get(0)
+                val drivingRouteOverlay = DrivingRouteOverlay(
+                    MyApplication.context, aMap, path,
+                    start_point,end_point,null)
+                //删除之前的路径
+                aMap?.clear()
+                //以适当的缩放显示路径
+                drivingRouteOverlay.zoomToSpan()
+                //去掉中间转弯的一些图标提示
+                drivingRouteOverlay.setNodeIconVisibility(false);
+                drivingRouteOverlay.setThroughPointIconVisibility(false)
+                //将路径添加到地图
+                drivingRouteOverlay.addToMap()
+                val dis=path?.distance
+                val dur=path?.duration
+                val des= dur?.toInt()?.let { AMapUtil.getFriendlyTime(it) } +
+                        "("+dis?.toInt()?.let { AMapUtil.getFriendlyLength(it)}+")"
+                Log.e("car",des)
+
+            }
+
+            override fun onRideRouteSearched(p0: RideRouteResult?, p1: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onWalkRouteSearched(p0: WalkRouteResult?, p1: Int) {
+                TODO("Not yet implemented")
+            }
+        })
+        //3 启动路径所有 将query穿进去 向服务器发送请求
+        routeSearch.calculateDriveRouteAsyn(query);
+    }
 }
+
 

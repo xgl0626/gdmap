@@ -58,7 +58,7 @@
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="3d6f7a6aae7ec80972d0e5fd2f0b3d9b">
+            android:value="cfa9a498e7731c34aba55ec8dc740542">
         </meta-data>
         <provider
             android:authorities="com.example.gdmap.fileprovider"
