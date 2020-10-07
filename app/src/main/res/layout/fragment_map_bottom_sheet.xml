@@ -8,51 +8,19 @@
     android:background="@drawable/fragment_map_bs_item_shape">
 
 
-    <RadioGroup
-        android:id="@+id/bottom_sheet_rg"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="19dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/map_rv_choice"
+        android:layout_width="380dp"
+        android:layout_height="81dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="528dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_search"
-        tools:layout_editor_absoluteX="-30dp">
-
-        <RadioButton
-            android:id="@+id/bs_rb_drive_car"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="驾车"
-            android:textSize="10dp" />
-        <RadioButton
-            android:id="@+id/bs_rb_walk"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="步行"
-            android:textSize="10dp" />
-
-        <RadioButton
-            android:id="@+id/bs_rb_leave_map"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="离线地图"
-            android:textSize="10dp" />
-        <RadioButton
-            android:id="@+id/bs_rb_more2"
-            android:layout_width="70dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:gravity="center|bottom"
-            android:hint="更多"
-            android:textSize="10dp" />
-
-    </RadioGroup>
+        app:layout_constraintVertical_bias="0.0" />
 
     <AutoCompleteTextView
         android:id="@+id/et_search"

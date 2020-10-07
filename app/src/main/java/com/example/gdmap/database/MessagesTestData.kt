@@ -23,3 +23,6 @@ data class TabLayoutItem(
     val title: String = "火灾",
     val id:Int=1
 )
+data class Choice(
+    val out:Int
+)
