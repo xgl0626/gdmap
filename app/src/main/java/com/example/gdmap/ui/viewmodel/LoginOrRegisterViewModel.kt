@@ -10,9 +10,9 @@ import com.example.gdmap.utils.MyApplication
 import com.example.gdmap.utils.Toast
 
 /**
- * @Author: 徐国林
+ * @Author: xgl
  * @ClassName: LoginOrRegisterViewModel
- * @Description:
+ * @Description:登录和注册界面网络请求事件处理
  * @Date: 2020/9/2 18:02
  */
 class LoginOrRegisterViewModel : ViewModel() {

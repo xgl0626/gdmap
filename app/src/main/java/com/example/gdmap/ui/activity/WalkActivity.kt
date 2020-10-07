@@ -5,13 +5,11 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.MenuItem
 import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
 import com.example.gdmap.utils.InputTipUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
 import kotlinx.android.synthetic.main.activity_walk.*

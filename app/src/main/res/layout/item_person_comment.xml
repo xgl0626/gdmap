@@ -17,7 +17,6 @@
             android:id="@+id/iv_avatar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:scaleType="centerCrop" />
 
@@ -25,10 +24,8 @@
             android:id="@+id/tv_authorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/iv_avatar"
-            android:layout_toRightOf="@+id/iv_avatar"
             android:textColor="#000"
             android:textSize="18sp"/>
 
@@ -58,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLength="20"
+                android:layout_marginStart="8dp"
                 android:textColor="#000"
                 android:textSize="16sp"/>
 
@@ -66,7 +64,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_questionTitle"
-                android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
@@ -74,30 +71,17 @@
                 android:textSize="14sp"/>
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/iv_questionImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_question"
-            android:layout_marginTop="5dp"/>
-
-        <ImageView
-            android:id="@+id/divider"
+        <com.example.gdmap.ui.widget.NineGridView
+            android:id="@+id/nine_grid_view"
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_below="@+id/tv_recentDate"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:background="#bfbfbf"/>
-
-        <TextView
-            android:id="@+id/tv_recentDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_questionImage"
-            android:layout_marginTop="10dp"
-            android:textSize="12sp"/>
-
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            android:paddingStart="15dp"
+            android:paddingTop="19dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="19dp"
+            android:layout_below="@+id/rl_question"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -110,57 +94,22 @@
             android:id="@+id/ib_answerButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/ic_answer" />
-
-        <TextView
-            android:id="@+id/tv_answerCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toEndOf="@+id/ib_answerButton"
-            android:layout_toRightOf="@+id/ib_answerButton" />
+            android:background="@drawable/ic_answer" />
 
         <ImageButton
             android:id="@+id/ib_excitingButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_toEndOf="@+id/tv_answerCount"
-            android:layout_toRightOf="@+id/tv_answerCount"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@+id/ib_answerButton"
             android:background="@drawable/ic_home_message_up" />
-
-        <TextView
-            android:id="@+id/tv_excitingCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toEndOf="@+id/ib_excitingButton"
-            android:layout_toRightOf="@+id/ib_excitingButton" />
-
-        <ImageButton
-            android:id="@+id/ib_naiveButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_toEndOf="@+id/tv_excitingCount"
-            android:layout_toRightOf="@+id/tv_excitingCount"
-            android:background="@drawable/ic_home_message_gown" />
-
-        <TextView
-            android:id="@+id/tv_naiveCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_toEndOf="@+id/ib_naiveButton"
-            android:layout_toRightOf="@+id/ib_naiveButton" />
 
         <ImageButton
             android:id="@+id/ib_favoriteButton"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_toEndOf="@+id/tv_naiveCount"
-            android:layout_toRightOf="@+id/tv_naiveCount"
+            android:layout_toEndOf="@+id/ib_excitingButton"
             android:background="@drawable/ic_unfravorite" />
     </RelativeLayout>
 </RelativeLayout>

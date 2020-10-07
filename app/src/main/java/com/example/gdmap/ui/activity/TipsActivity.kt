@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.database.TabLayoutItem
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_tips.*
 

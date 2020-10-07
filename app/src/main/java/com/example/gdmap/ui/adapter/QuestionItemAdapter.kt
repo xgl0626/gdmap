@@ -12,38 +12,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
-import com.example.gdmap.database.AnswerTestData
-import com.example.gdmap.database.MessagesTestData
+import com.example.gdmap.bean.MessagesTestData
+import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
+import com.example.gdmap.ui.widget.NineGridView
 import com.example.gdmap.utils.excite
 import com.example.gdmap.utils.favorite
-import com.example.gdmap.utils.naive
+
 
 /**
- * @Author: xgl
- * @ClassName: CommentContentAdapter
+ * @Author: 徐国林
+ * @ClassName: ImageItemAdapter
  * @Description:
- * @Date: 2020/10/4 14:40
+ * @Date: 2020/8/31 22:30
  */
-class CommentContentAdapter(val context: Context) :
+class QuestionItemAdapter(val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val HEADER = 0
-        const val ANSWER = 1
-        const val QUESTION = 2
+        const val LOAD = 1
     }
 
-    private var questionData: MessagesTestData? = null
-    private var data = ArrayList<AnswerTestData>()
+    private var data = ArrayList<MessagesTestData>()
 
-    class AnswerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val avatar = view.findViewById<CircleImageView>(R.id.iv_avatar)
         val author = view.findViewById<TextView>(R.id.tv_authorName)
-        val content = view.findViewById<TextView>(R.id.tv_answerContent)
+        val title = view.findViewById<TextView>(R.id.tv_questionTitle)
+        val content = view.findViewById<TextView>(R.id.tv_questionDetail)
         val time = view.findViewById<TextView>(R.id.tv_date)
-        val excite=view.findViewById<ImageButton>(R.id.ib_excitingButton)
-        val naive =view.findViewById<ImageButton>(R.id.ib_naiveButton)
+        val write = view.findViewById<ImageButton>(R.id.ib_answerButton)
+        val fravorite = view.findViewById<ImageButton>(R.id.ib_favoriteButton)
+        val excite = view.findViewById<ImageButton>(R.id.ib_excitingButton)
+        val nine_views = view.findViewById<NineGridView>(R.id.nine_grid_view)
+
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -51,28 +54,21 @@ class CommentContentAdapter(val context: Context) :
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            itemCount - 1 -> HEADER
-            0 -> QUESTION
-            else -> ANSWER
-        }
+        return if (position == itemCount - 1)
+            HEADER
+        else
+            LOAD
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            QUESTION -> {
+            LOAD -> {
                 val view = LayoutInflater.from(parent.context).inflate(
                     R.layout.item_person_comment,
                     parent,
                     false
                 )
-                return ServiceItemAdapter.CommentViewHolder(view)
-            }
-
-            ANSWER -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_person_answer, parent, false)
-                return AnswerViewHolder(view)
+                return CommentViewHolder(view)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context).inflate(
@@ -95,38 +91,27 @@ class CommentContentAdapter(val context: Context) :
                 }
             }
 
-            QUESTION -> {
-                val viewHolder = holder as ServiceItemAdapter.CommentViewHolder
+            LOAD -> {
+                val viewHolder = holder as CommentViewHolder
                 viewHolder.apply {
                     Glide.with(avatar)
                         .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
                         .load(R.drawable.ic_image).into(avatar)
-                    time.text = questionData?.time
-                    title.text = questionData?.title
-                    author.text = questionData?.author
-                    content.text = questionData?.content
+                    time.text = data[position].time
+                    title.text = data[position].title
+                    author.text = data[position].author
+                    content.text = data[position].content
                     write.setOnClickListener {
                         changeToActivity(WriteAnswerActivity())
                     }
                     fravorite.favorite()
                     excite.excite()
-                    naive.naive()
+//                    nine_views.setImages()
                 }
             }
-
-            ANSWER -> {
-                val viewHolder = holder as AnswerViewHolder
-                viewHolder.apply {
-                    Glide.with(avatar)
-                        .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
-                        .load(R.drawable.ic_image).into(avatar)
-                    time.text = data[position-1].time
-                    author.text = data[position-1].author
-                    content.text = data[position-1].content
-                    excite.excite()
-                    naive.naive()
-                }
-            }
+        }
+        holder.itemView.setOnClickListener {
+            changeToActivity(CommentActivity())
         }
     }
 
@@ -136,20 +121,17 @@ class CommentContentAdapter(val context: Context) :
     }
 
     override fun getItemCount(): Int {
-        return data.size + 2
+        return data.size + 1
     }
 
-    fun addCommentItem(newQuestionData: MessagesTestData) {
-        this.questionData = newQuestionData
-    }
-
-    fun addData(newDataLists: List<AnswerTestData>) {
+    fun addData(newDataLists: List<MessagesTestData>) {
         data.clear()
         initRefreshImages(newDataLists)
     }
 
-    fun initRefreshImages(dataLists: List<AnswerTestData>) {
+    fun initRefreshImages(dataLists: List<MessagesTestData>) {
         data.addAll(dataLists)
         notifyDataSetChanged()
     }
+
 }

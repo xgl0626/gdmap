@@ -24,4 +24,6 @@
     <color name="tab_unselected_color" tools:ignore="ResourceName">#15315B</color>
     <color name="person_back_login" tools:ignore="DuplicateDefinition,ResourceName">#2A4E84</color>
     <color name="map_et_search_background_color" tools:ignore="ResourceName">#F0F4FD</color>
+    <color name="quiz_picture_empty_color">#E8F0FC</color>
+    <color name="comment_background">#626262</color>
 </resources>

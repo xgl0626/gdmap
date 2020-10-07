@@ -2,31 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/shape_home_message_item"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@drawable/shape_home_message_item">
 
     <com.example.gdmap.ui.widget.CircleImageView
         android:id="@+id/iv_avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:scaleType="centerCrop"
-        android:layout_marginStart="5dp" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
+        android:id="@+id/divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/iv_avatar"
-        android:layout_toRightOf="@+id/iv_avatar"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_authorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:textColor="#000"
             android:textSize="16sp" />
 
@@ -35,77 +34,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:orientation="horizontal"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/imageView"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="5dp">
-
-        <ImageButton
-            android:id="@+id/ib_excitingButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_home_message_up"/>
-        <TextView
-            android:id="@+id/tv_excitingCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"/>
-        <ImageButton
-            android:id="@+id/ib_naiveButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_home_message_gown" />
-        <TextView
-            android:id="@+id/tv_naiveCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <ImageButton
-            android:id="@+id/ib_acceptButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/ic_unfravorite"
-            android:visibility="gone" />
-    </LinearLayout>
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_below="@+id/answerimg"
-        android:layout_margin="10dp"
-        android:layout_toEndOf="@+id/iv_avatar"
-        android:layout_toRightOf="@+id/iv_avatar"
-        android:background="#000"/>
 
     <TextView
         android:id="@+id/tv_answerContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/iv_avatar"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:maxLength="500"
-        android:textSize="16sp"/>
-    <ImageView
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_more_reply"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/answerimg"
-        android:layout_below="@id/tv_answerContent"
-        android:layout_marginTop="5dp"
-        />
+        android:layout_below="@+id/tv_answerContent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/tv_more_reply"
+        android:textColor="@color/person_back_login"
+        android:textSize="14sp" />
 </RelativeLayout>

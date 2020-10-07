@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="步行导航"
+        app:title="@string/tb_walkguuide"
         app:titleTextColor="@color/black" />
 
     <TextView

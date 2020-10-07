@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">城市灾害评估</string>
+    <string name="app_name">safcity</string>
     <string name="choose_map">卫星图层</string>
     <string name="leave_map">离线地图</string>
     <string name="indoor_map">室内地图</string>
@@ -17,5 +17,17 @@
     <string name="fragment_me_setdata">  个人信息</string>
     <string name="activity_set_leave">退出登录</string>
     <string name="activity_setData_toolbar">修改信息</string>
-    <string name="bt_activity_sign">点击签到</string>
+    <string name="bt_activity_sign">我的收藏</string>
+    <string name="tb_answer">回答评论</string>
+    <string name="tb_comment_content">话题详情</string>
+    <string name="tv_login_register">立即注册</string>
+    <string name="login_bt_login">登录</string>
+    <string name="tb_product">产品相关</string>
+    <string name="tb_question">提出问题</string>
+    <string name="register_tv_register">注册</string>
+    <string name="tb_search">搜索</string>
+    <string name="tb_tips">灾害小贴士</string>
+    <string name="tb_walkguuide">步行导航</string>
+    <string name="tb_weather">天气预报</string>
+    <string name="tv_more_reply">查看回复</string>
 </resources>

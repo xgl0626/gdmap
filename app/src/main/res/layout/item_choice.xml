@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="38dp">
+    android:layout_height="40dp"
+    android:padding="5dp">
 
     <ImageView
         android:id="@+id/map_iv_out"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.121"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333"
+        app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@drawable/bt_rb_car" />
 
     <ImageView
         android:id="@+id/map_iv_guide"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/map_iv_route"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.515"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/acticity_question_message_guilde" />
 
     <ImageView
         android:id="@+id/map_iv_route"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

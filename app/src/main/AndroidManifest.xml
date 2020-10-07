@@ -46,7 +46,6 @@
         <activity android:name=".ui.activity.GudieActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SetDataActivity" />
-        <activity android:name=".ui.activity.SignActivity" />
         <activity android:name=".ui.activity.WeatherActivity" />
         <activity android:name=".ui.activity.WelcomeActivity">
             <intent-filter>
@@ -59,10 +58,14 @@
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.WriteAnswerActivity" />
         <activity android:name=".ui.activity.TipsActivity" />
+        <activity android:name=".ui.activity.WriteQuestionActivity" />
+        <activity android:name=".ui.activity.CollectActivity" />
+        <activity android:name=".ui.activity.ProductActivity" />
+
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="cfa9a498e7731c34aba55ec8dc740542">
+            android:value="3d6f7a6aae7ec80972d0e5fd2f0b3d9b">
         </meta-data>
         <provider
             android:name="androidx.core.content.FileProvider"

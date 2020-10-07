@@ -15,11 +15,13 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginVertical="100dp"
+        android:layout_marginLeft="10dp"
         android:clickable="true"
         app:backgroundTint="@android:color/white"
         android:backgroundTint="@android:color/white"
         android:src="@drawable/floatingaction_button_weather"
-        app:rippleColor="@color/blue" />
+        app:rippleColor="@color/blue"
+        android:focusable="true" />
 
     <RelativeLayout
         android:id="@+id/bottom_sheet1"
@@ -34,18 +36,4 @@
         <include layout="@layout/fragment_map_bottom_sheet" />
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/ns_search_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/fragment_map_bs_item_shape"
-        android:visibility="gone"
-        app:behavior_hideable="true"
-        app:behavior_peekHeight="200dp"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <include layout="@layout/activity_bottom_sheet_search" />
-    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

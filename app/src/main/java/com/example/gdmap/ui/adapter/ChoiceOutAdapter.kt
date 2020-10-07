@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gdmap.R
-import com.example.gdmap.database.Choice
+import com.example.gdmap.bean.Choice
 import com.example.gdmap.utils.GuideChoice
 import com.example.gdmap.utils.RouteChoice
-import kotlinx.android.synthetic.main.item_choice.*
 
 /**
  *@Date 2020/10/6
@@ -20,7 +19,7 @@ import kotlinx.android.synthetic.main.item_choice.*
  *@author SpreadWater
  *@description
  */
-class ChoiceOutAdapter(val data:ArrayList<Choice>,val context:Context,val fragment:Fragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChoiceOutAdapter(val data:ArrayList<Choice>, val context:Context, val fragment:Fragment):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val choicedata=data
     private var choice:RouteChoice?=null

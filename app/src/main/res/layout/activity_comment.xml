@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,23 +15,172 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="话题详情"
+        app:title="@string/tb_comment_content"
         app:titleTextColor="@color/black" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/srl_main"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_gravity="center"
-        app:layout_anchorGravity="center"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:layout_editor_absoluteX="0dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="650dp"
-            android:padding="5dp" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_question_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.example.gdmap.ui.widget.CircleImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_image" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_question_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="沐风"
+                            android:textColor="#5B595A"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_question_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="1小时前"
+                            android:textColor="#989898"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/ib_answerButton"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/ic_answer"
+                        android:padding="6dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_question_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:text="诗和远方"
+                    android:textColor="#363636"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_question_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="10"
+                    android:text="水光潋滟晴方好，山色空蒙雨亦奇。\n欲把西湖比西子，淡抹浓妆总相宜。"
+                    android:textColor="#6e6e6e"
+                    android:textSize="14sp" />
+
+                <com.example.gdmap.ui.widget.NineGridView
+                    android:id="@+id/nine_grid_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@+id/rl_question"
+                    android:layout_marginTop="32dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="19dp"
+                    android:paddingEnd="15dp"
+                    android:paddingBottom="19dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="16dp"
+                    android:background="#e6e6e6" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_question_answer_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_question_container"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                    <com.example.gdmap.ui.widget.CommentExpandableListView
+                        android:id="@+id/comment_expand_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="64dp"
+                        android:divider="@null"
+                        android:listSelector="@android:color/transparent"
+                        android:scrollbars="none" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:elevation="2dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_answer_or_reply"
+            android:layout_width="0dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="22dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_et_search_place"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:text="说点什么吧..."
+            android:textColor="#B6B6B6"
+            android:textSize="12sp"
+            tools:ignore="RtlSymmetry" />
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:id="@+id/ib_excitingButton"
+            android:src="@drawable/ic_home_message_up" />
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/ib_favoriteButton"
+            android:src="@drawable/ic_unfravorite" />
+
+    </LinearLayout>
+</RelativeLayout>

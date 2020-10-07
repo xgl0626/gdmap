@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="灾害小贴士"
+        app:title="@string/tb_tips"
         app:titleTextColor="@color/black" />
 
     <com.example.gdmap.ui.widget.MyTabLayout

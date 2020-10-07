@@ -2,7 +2,6 @@ package com.example.gdmap.ui.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import com.amap.api.services.weather.LocalWeatherForecastResult
 import com.amap.api.services.weather.LocalWeatherLiveResult
@@ -10,7 +9,6 @@ import com.amap.api.services.weather.WeatherSearch
 import com.amap.api.services.weather.WeatherSearchQuery
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.utils.ImmersedStatusbarUtils
 import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
 import com.example.gdmap.utils.Toast

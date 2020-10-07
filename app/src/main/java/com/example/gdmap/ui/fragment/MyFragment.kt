@@ -12,10 +12,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
-import com.example.gdmap.ui.activity.LoginActivity
-import com.example.gdmap.ui.activity.SetDataActivity
-import com.example.gdmap.ui.activity.SignActivity
-import com.example.gdmap.ui.activity.TipsActivity
+import com.example.gdmap.ui.activity.*
 import com.example.gdmap.utils.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import top.limuyang2.photolibrary.LPhotoHelper
@@ -40,9 +37,9 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         bt_fragment_me_data.setOnClickListener(this)
         bt_fragment_me_question.setOnClickListener(this)
         bt_fragment_me_set.setOnClickListener(this)
-        bt_fragment_me_day.setOnClickListener(this)
+        bt_fragment_collect.setOnClickListener(this)
         iv_fragment_me_user_avator.setOnClickListener(this)
-        AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_day, bt_fragment_me_day, 0)
+        AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_day, bt_fragment_collect, 0)
         AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_set, bt_fragment_me_set, 0)
         AddIconImage.setImageViewToButton(
             R.mipmap.fragment_me_bt_question,
@@ -64,8 +61,9 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
+            R.id.bt_fragment_me_set-> changeToActivity(ProductActivity())
             R.id.bt_fragment_me_data -> changeToActivity2(SetDataActivity())
-            R.id.bt_fragment_me_day -> changeToActivity(SignActivity())
+            R.id.bt_fragment_collect -> changeToActivity(CollectActivity())
             R.id.bt_fragment_me_question -> changeToActivity(TipsActivity())
             R.id.iv_fragment_me_user_avator -> {
                 ImageSelectutils.selectImageFromAlbum(1, this)
@@ -81,7 +79,8 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                     val selectedPhotos = LPhotoHelper.getSelectedPhotos(data).map {
                         it.toString()
                     }
-                    Glide.with(iv_fragment_me_user_avator).load(selectedPhotos[0]).into(iv_fragment_me_user_avator)
+                    Glide.with(iv_fragment_me_user_avator).load(selectedPhotos[0])
+                        .into(iv_fragment_me_user_avator)
                 }
             }
         }

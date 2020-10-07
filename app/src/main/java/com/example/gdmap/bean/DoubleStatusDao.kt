@@ -1,4 +1,4 @@
-package com.example.gdmap.database
+package com.example.gdmap.bean
 
 import android.content.Context
 import androidx.core.content.edit

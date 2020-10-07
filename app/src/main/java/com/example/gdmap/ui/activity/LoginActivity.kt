@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -16,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import com.example.gdmap.database.DoubleStatusDao
+import com.example.gdmap.bean.DoubleStatusDao
 import com.example.gdmap.ui.viewmodel.LoginOrRegisterViewModel
 import com.example.gdmap.utils.AddIconImage
 import com.example.gdmap.utils.MyApplication

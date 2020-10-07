@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="天气预报"
+        app:title="@string/tb_weather"
         app:titleTextColor="@color/black" />
 
     <TextView

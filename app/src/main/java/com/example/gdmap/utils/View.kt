@@ -3,7 +3,7 @@ package com.example.gdmap.utils
 import android.animation.ValueAnimator
 import android.view.View
 import com.example.gdmap.R
-import com.example.gdmap.database.DoubleStatusDao
+import com.example.gdmap.bean.DoubleStatusDao
 
 /**
  * @Author: xgl
@@ -41,18 +41,6 @@ fun View.favorite() {
             setBackgroundResource(R.drawable.ic_fravorite)
         } else {
             setBackgroundResource(R.drawable.ic_unfravorite)
-        }
-    }
-}
-
-fun View.naive() {
-    setOnClickListener {
-        pressToZoomOut()
-        if (!DoubleStatusDao.getStatus(it.id)) {
-            DoubleStatusDao.saveStatus(it.id, true)
-            setBackgroundResource(R.drawable.ic_home_message_black_down)
-        } else {
-            setBackgroundResource(R.drawable.ic_home_message_gown)
         }
     }
 }

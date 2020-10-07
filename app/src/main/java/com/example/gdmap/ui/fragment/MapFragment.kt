@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.AdapterView
-import android.widget.Switch
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
@@ -29,16 +28,14 @@ import com.amap.api.maps.LocationSource.OnLocationChangedListener
 import com.amap.api.maps.UiSettings
 import com.amap.api.maps.model.*
 import com.amap.api.maps.model.animation.RotateAnimation
-import com.amap.api.maps.offlinemap.OfflineMapActivity
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.amap.api.services.route.*
 import com.example.gdmap.R
-import com.example.gdmap.database.Choice
+import com.example.gdmap.bean.Choice
 import com.example.gdmap.ui.activity.GudieActivity
-import com.example.gdmap.ui.activity.WalkActivity
 import com.example.gdmap.ui.activity.WeatherActivity
 import com.example.gdmap.ui.adapter.ChoiceOutAdapter
 import com.example.gdmap.utils.*
@@ -48,12 +45,10 @@ import com.example.gdmap.utils.walkrouteutil.WalkRouteOverlay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import kotlinx.android.synthetic.main.activity_bottom_sheet_search.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map_bottom_sheet.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.log
 
 
 class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatcher,
@@ -85,7 +80,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.activity?.let { ImmersedStatusbarUtils.initSetContentView(it, null) }
         mv_map.onCreate(savedInstanceState)
         aMap = mv_map.map
         val mUiSettings: UiSettings? = aMap?.uiSettings
@@ -163,7 +157,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         adapter.setChoice(this)
         adapter.setGuidechoice(this)
         val behavior1 = BottomSheetBehavior.from(bottom_sheet1)
-        val behavior2 = BottomSheetBehavior.from(ns_search_dialog)
         behavior1.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
@@ -176,22 +169,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             }
 
         })
-        behavior2.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(p0: View, p1: Float) {
-
-            }
-
-            override fun onStateChanged(p0: View, p1: Int) {
-                when (p1) {
-                    STATE_COLLAPSED -> behavior2.state = STATE_HIDDEN
-                }
-            }
-        })
-
-        iv_fragment_food_back.setOnClickListener { view ->
-            behavior2.state = STATE_HIDDEN
-
-        }
         et_search.addTextChangedListener(this)
         et_search.onItemClickListener =
             AdapterView.OnItemClickListener { p0, p1, p2, p3 ->
@@ -210,7 +187,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                         }
                     )
                 )
-                behavior2.state = BottomSheetBehavior.STATE_HIDDEN
                 poiSearch()
             }
         //驾车导航
@@ -472,39 +448,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         }
     }
 
-    private val handler: Handler = object : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what == 0) {
-                val layoutManager = LinearLayoutManager(context)
-                rv_fragment_food_down.layoutManager = layoutManager
-//                val serviceAdapter = SurroundingServiceAdapter(surrlat, surlng, context, poiList)
-//                rv_fragment_food_down.adapter = serviceAdapter
-//                serviceAdapter?.notifyDataSetChanged()
-                for (poitem in poiList) {
-                    val markerOption = MarkerOptions();
-                    markerOption.position(
-                        LatLng(
-                            poitem.latLonPoint.latitude,
-                            poitem.latLonPoint.longitude
-                        )
-                    )
-                        .draggable(false).title(poitem.title.toString()).setFlat(true).visible(true)
-                        .infoWindowEnable(true)
-                    aMap?.addMarker(markerOption);
-                }
-            }
-        }
-    }
 
-    fun sendMsg(index: Int) {
-        val message = Message()
-        message.what = index
-        handler.sendMessage(message)
-    }
-
-    fun drawDrivingRouteLine() {
         //1 创建路径的绘制的句柄 routeSearch
+        fun drawDrivingRouteLine() {
         val routeSearch = RouteSearch(MyApplication.context);
         val ft = com.amap.api.services.route.RouteSearch.FromAndTo(start_point, end_point)
         //设置一个路径搜索的query

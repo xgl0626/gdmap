@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gdmap.ui.activity.SearchActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
-import com.example.gdmap.ui.adapter.ServiceItemAdapter
-import com.example.gdmap.ui.viewmodel.ServiceViewModel
+import com.example.gdmap.ui.activity.WriteQuestionActivity
+import com.example.gdmap.ui.adapter.QuestionItemAdapter
+import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.AddIconImage
+import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.fragment_service.*
 
 /**
@@ -26,8 +28,8 @@ import kotlinx.android.synthetic.main.fragment_service.*
  */
 class ServiceFragment : BaseFragment(){
     private var dialog: ProgressDialog? = null
-    private var messageItemAdapter: ServiceItemAdapter? = null
-    private val viewModel by lazy {  ViewModelProviders.of(this).get(ServiceViewModel::class.java)}
+    private var messageItemAdapter: QuestionItemAdapter? = null
+    private val viewModel by lazy {  ViewModelProviders.of(this).get(QuestionViewModel::class.java)}
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,8 +39,11 @@ class ServiceFragment : BaseFragment(){
     }
 
     override fun initClick() {
-        et_fragment_home_search.setOnClickListener {
+        et_fragment_home_search.setOnSingleClickListener{
             changeToActivity(SearchActivity())
+        }
+        tv_question.setOnSingleClickListener {
+            changeToActivity(WriteQuestionActivity())
         }
     }
 
@@ -49,16 +54,16 @@ class ServiceFragment : BaseFragment(){
         dialog?.show()
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
-        messageItemAdapter = this.context?.let { ServiceItemAdapter(it) }
+        messageItemAdapter = this.context?.let { QuestionItemAdapter(it) }
         recyclerView.adapter = messageItemAdapter
 
     }
 
     override fun initData() {
         srl_main.setOnRefreshListener {
-            viewModel.getHomeData()
+            viewModel.getQuestionData()
         }
-        viewModel.getHomeData()
+        viewModel.getQuestionData()
         viewModel.commentData.observe(viewLifecycleOwner, Observer {
             messageItemAdapter?.addData(it)
             srl_main.isRefreshing = false

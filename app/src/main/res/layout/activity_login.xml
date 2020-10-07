@@ -42,7 +42,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="310dp"
         android:layout_height="190dp"
-        android:background="@drawable/fragment_map_bs_item_shape"
+        android:background="@drawable/shape_et_search_place"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,7 +79,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:background="@drawable/activity_login__button_shape"
-            android:text="登录"
+            android:text="@string/login_bt_login"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -89,7 +89,7 @@
         android:layout_height="20dp"
         android:layout_marginBottom="48dp"
         android:gravity="center"
-        android:text="立即注册"
+        android:text="@string/tv_login_register"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

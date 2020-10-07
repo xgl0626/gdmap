@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="搜索"
+        app:title="@string/tb_search"
         app:titleTextColor="@color/black" />
 
     <EditText
