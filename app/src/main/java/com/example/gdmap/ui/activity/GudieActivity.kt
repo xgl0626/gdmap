@@ -16,11 +16,12 @@ import java.lang.Exception
 
 
 class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
-    private var endlng: Double? = null
-    private var endlat: Double? = null
-    private var startlat: Double? = null
-    private var startlng: Double? = null
+    private var endlng: Double=0.0
+    private var endlat: Double=0.0
+    private var startlat: Double=0.0
+    private var startlng: Double=0.0
     private var amapniv:AMapNavi?=null
+    private var choice:Boolean=false
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
         startlng = intent.getDoubleExtra("lng", 0.0)
         endlat = intent.getDoubleExtra("endlat",0.0)
         endlng = intent.getDoubleExtra("endlng",0.0)
+        choice=intent.getBooleanExtra("choice",false)
         navi_view.onCreate(savedInstanceState)
         navi_view.setAMapNaviViewListener(this)
         amapniv=AMapNavi.getInstance(applicationContext)
@@ -135,8 +137,18 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
         } catch (e:Exception) {
             e.printStackTrace();
         }
-        amapniv?.calculateWalkRoute(startlat?.let { startlng?.let { it1 -> NaviLatLng(it, it1) } },
-            endlat?.let { endlng?.let { it1 -> NaviLatLng(it, it1) } })
+        if (choice){
+            amapniv?.calculateWalkRoute(startlat?.let { startlng?.let { it1 -> NaviLatLng(it, it1) } },
+                endlat?.let { endlng?.let { it1 -> NaviLatLng(it, it1) } })
+        }else{
+            val startLatLng=NaviLatLng(startlat,startlng)
+            val endLatLng=NaviLatLng(endlat,endlng)
+            val sList=ArrayList<NaviLatLng>()
+            val eList=ArrayList<NaviLatLng>()
+            sList.add(startLatLng)
+            eList.add(endLatLng)
+            amapniv?.calculateDriveRoute(sList,eList,null, strategy);//起始点坐标、终点坐标、途经点坐标、strategy
+        }
     }
 
     override fun onReCalculateRouteForTrafficJam() {

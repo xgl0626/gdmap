@@ -118,9 +118,13 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         when (result) {
             //驾车导航
             0 -> {
-                val start=Poi("南方花园",LatLng(surrlat,surlng),"")
-                val end=Poi("丁香苑", LatLng(endlat,endlng),"")
-                GudieUtils.startGuilde(MyApplication.context,start,end)
+                val intent = Intent(this.context, GudieActivity::class.java)
+                intent.putExtra("lat", surrlat)
+                intent.putExtra("lng", surlng)
+                intent.putExtra("endlat", endlat)
+                intent.putExtra("endlng", endlng)
+                intent.putExtra("choice",false)
+                startActivity(intent)
             }
             //步行导航
             1 -> {
@@ -129,6 +133,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 intent.putExtra("lng", surlng)
                 intent.putExtra("endlat", endlat)
                 intent.putExtra("endlng", endlng)
+                intent.putExtra("choice",true)
                 startActivity(intent)
             }
         }
