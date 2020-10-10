@@ -54,7 +54,7 @@ object ImageSelectutils {
         val selectedList: ArrayList<String>? = if (selected.isNullOrEmpty()) {
             null
         } else {
-          selected
+           selected
         }
         PermissionX.init(activity)
             .permissions(

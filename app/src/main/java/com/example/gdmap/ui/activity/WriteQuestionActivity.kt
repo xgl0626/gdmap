@@ -20,6 +20,7 @@ import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.activity_tips.toolbar
+import top.limuyang2.photolibrary.LPhotoHelper
 
 /**
  * @Author: xgl
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_tips.toolbar
  */
 class WriteQuestionActivity : BaseActivity() {
     companion object {
-        const val MAX_SELECTABLE_IMAGE_COUNT = 9
+        const val MAX_SELECTABLE_IMAGE_COUNT = 5
     }
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
@@ -61,11 +62,10 @@ class WriteQuestionActivity : BaseActivity() {
             if (index == nine_grid_view.childCount - 1) {
                 ImageSelectutils.selectImageFromAlbum(
                     MAX_SELECTABLE_IMAGE_COUNT,
-                    this,
-                    viewModel.imageUrls.value
+                    this
                 )
             } else {
-                Toast.toast("最多只能添加9张图片哦")
+                Toast.toast("最多只能添加5张图片哦")
             }
         }
 
@@ -110,11 +110,13 @@ class WriteQuestionActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_CHOOSE_PHOTO_ALBUM -> {
-
+                val imageListUri = ArrayList((LPhotoHelper.getSelectedPhotos(data))).map { it.toString() }
+                val imageListAbsolutePath = ArrayList<String>()
+                imageListUri.forEach { imageListAbsolutePath.add(it) }
+                viewModel.setImageList(imageListAbsolutePath)
             }
         }
     }
-
     override fun getViewLayout(): Int {
         return R.layout.activity_question
     }

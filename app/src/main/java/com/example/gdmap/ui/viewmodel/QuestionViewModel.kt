@@ -44,5 +44,4 @@ class QuestionViewModel : ViewModel() {
     fun setImageList(imageList: ArrayList<String>) {
         imageUrls.value = imageList
     }
-
 }

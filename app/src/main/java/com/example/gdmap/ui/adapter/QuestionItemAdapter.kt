@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,7 +15,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.bean.MessagesTestData
 import com.example.gdmap.ui.activity.CommentActivity
-import com.example.gdmap.ui.activity.WriteAnswerActivity
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.ui.widget.NineGridView
 import com.example.gdmap.utils.excite
@@ -42,9 +42,8 @@ class QuestionItemAdapter(val context: Context) :
         val title = view.findViewById<TextView>(R.id.tv_questionTitle)
         val content = view.findViewById<TextView>(R.id.tv_questionDetail)
         val time = view.findViewById<TextView>(R.id.tv_date)
-        val write = view.findViewById<ImageButton>(R.id.ib_answerButton)
-        val fravorite = view.findViewById<ImageButton>(R.id.ib_favoriteButton)
-        val excite = view.findViewById<ImageButton>(R.id.ib_excitingButton)
+        val fravorite = view.findViewById<ImageView>(R.id.iv_favorite)
+        val excite = view.findViewById<ImageView>(R.id.iv_excite)
         val nine_views = view.findViewById<NineGridView>(R.id.nine_grid_view)
 
     }
@@ -101,9 +100,6 @@ class QuestionItemAdapter(val context: Context) :
                     title.text = data[position].title
                     author.text = data[position].author
                     content.text = data[position].content
-                    write.setOnClickListener {
-                        changeToActivity(WriteAnswerActivity())
-                    }
                     fravorite.favorite()
                     excite.excite()
 //                    nine_views.setImages()

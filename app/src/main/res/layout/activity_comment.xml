@@ -73,14 +73,6 @@
                             android:textColor="#989898"
                             android:textSize="12sp" />
                     </LinearLayout>
-
-                    <ImageButton
-                        android:id="@+id/ib_answerButton"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/ic_answer"
-                        android:padding="6dp" />
                 </LinearLayout>
 
                 <TextView

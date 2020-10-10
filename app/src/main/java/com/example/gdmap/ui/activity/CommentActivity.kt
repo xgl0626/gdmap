@@ -18,9 +18,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
+import com.example.gdmap.bean.AnswerTestData
 import com.example.gdmap.bean.ReplyBean
 import com.example.gdmap.ui.adapter.AnswerAndReplyAdapter
 import com.example.gdmap.ui.adapter.OnItemOnClick
+import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.excite
 import com.example.gdmap.utils.favorite
@@ -37,6 +39,7 @@ import kotlinx.android.synthetic.main.dialog_comment_layout.view.*
  * @Date: 2020/9/5 21:56
  */
 class CommentActivity : BaseActivity() {
+    private var questionAdapter:QuestionItemAdapter?=null
     private var answerAndReplyAdapter: AnswerAndReplyAdapter? = null
     private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
 
@@ -69,6 +72,7 @@ class CommentActivity : BaseActivity() {
     }
 
     private fun initAnswerAndReply() {
+        questionAdapter= QuestionItemAdapter(this)
         answerAndReplyAdapter = AnswerAndReplyAdapter(this)
         comment_expand_list_view.setGroupIndicator(null)
         //默认展开所有回复
@@ -99,21 +103,14 @@ class CommentActivity : BaseActivity() {
             Toast.makeText(this, "点击了回复", Toast.LENGTH_SHORT).show()
             false
         }
-
-        ib_answerButton.setOnSingleClickListener {
-            changeToActivity(WriteAnswerActivity())
-        }
         ib_excitingButton.excite()
         ib_favoriteButton.favorite()
-    }
-
-    private fun changeToActivity(activity: Activity) {
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
+        tv_answer_or_reply.setOnSingleClickListener {
+            showAnswer(1)
+        }
     }
 
     private fun showReply(groupPosition: Int) {
-        Log.d("tagtagtag", "123458")
         val dialog = BottomSheetDialog(this)
         val replyView: View =
             LayoutInflater.from(this).inflate(R.layout.dialog_comment_layout, null)
@@ -132,10 +129,56 @@ class CommentActivity : BaseActivity() {
                     dialog.dismiss()
                     val detailBean = ReplyBean("小红", replyContent)
                     answerAndReplyAdapter?.addReplyData(detailBean, groupPosition)
-                    comment_expand_list_view.expandGroup(groupPosition, true)
                     com.example.gdmap.utils.Toast.toast("回复成功")
                 } else {
                     com.example.gdmap.utils.Toast.toast("回复内容不能为空")
+                }
+            }
+            et_comment_content.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    charSequence: CharSequence,
+                    i: Int,
+                    i1: Int,
+                    i2: Int
+                ) {
+                }
+
+                override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                    if (!TextUtils.isEmpty(charSequence) && charSequence.length > 2) {
+                        bt_dialog_send.setBackgroundColor(Color.parseColor("#FFB568"))
+                    } else {
+                        bt_dialog_send.setBackgroundColor(Color.parseColor("#D8D8D8"))
+                    }
+                }
+
+                override fun afterTextChanged(editable: Editable) {}
+            })
+        }
+        dialog.show()
+    }
+    private fun showAnswer(questionId:Int) {
+        val dialog = BottomSheetDialog(this)
+        val replyView: View =
+            LayoutInflater.from(this).inflate(R.layout.dialog_comment_layout, null)
+        dialog.setContentView(replyView)
+        /**
+         * 解决bsd显示不全的情况
+         */
+        val parent = replyView.parent as View
+        val behavior = BottomSheetBehavior.from(parent)
+        replyView.measure(0, 0)
+        behavior.peekHeight = replyView.measuredHeight
+        replyView.apply {
+            et_comment_content.hint = "请输入回答内容..."
+            bt_dialog_send.setOnSingleClickListener {
+                val answerContent = et_comment_content.text.toString().trim { it <= ' ' }
+                if (!TextUtils.isEmpty(answerContent)) {
+                    dialog.dismiss()
+                    val detailBean = AnswerTestData("小红", answerContent)
+                    answerAndReplyAdapter?.addAnswerData(detailBean)
+                    com.example.gdmap.utils.Toast.toast("回答成功")
+                } else {
+                    com.example.gdmap.utils.Toast.toast("回答内容不能为空")
                 }
             }
             et_comment_content.addTextChangedListener(object : TextWatcher {

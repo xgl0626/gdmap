@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".ui.activity.WriteAnswerActivity">
-
+    android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -22,7 +20,7 @@
     <EditText
         android:id="@+id/et_question_title"
         android:layout_width="330dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/ic_quiz_new_text_background"
         android:gravity="start|top"
@@ -33,7 +31,6 @@
         android:paddingTop="10dp"
         android:paddingEnd="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +39,7 @@
     <EditText
         android:id="@+id/et_question_content"
         android:layout_width="330dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/ic_quiz_new_text_background"
         android:gravity="start|top"
@@ -53,7 +50,6 @@
         android:paddingTop="10dp"
         android:paddingEnd="15dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -71,6 +67,7 @@
         android:paddingBottom="19dp"
         app:layout_constraintTop_toBottomOf="@+id/et_question_content"
         tools:layout_editor_absoluteX="0dp" />
+
     <Button
         android:id="@+id/bt_send_answer"
         android:layout_width="100dp"
@@ -81,6 +78,8 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nine_grid_view" />
+        app:layout_constraintTop_toBottomOf="@id/nine_grid_view"
+        app:layout_constraintVertical_bias="0.643" />
 </androidx.constraintlayout.widget.ConstraintLayout>

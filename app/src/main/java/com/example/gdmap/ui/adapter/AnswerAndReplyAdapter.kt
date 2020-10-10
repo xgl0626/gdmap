@@ -1,7 +1,6 @@
 package com.example.gdmap.ui.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -94,15 +93,15 @@ class AnswerAndReplyAdapter(val context: Context) :
             author.text = answerList[groupPosition].author
             time.text = answerList[groupPosition].time
             content.text = answerList[groupPosition].content
-//            excite.setOnSingleClickListener {
-//                if (isLike) {
-//                    isLike = false
-//                    it.pressToZoomOut()
-//                } else {
-//                    isLike = true
-//                    it.pressToZoomOut()
-//                }
-//            }
+            excite.setOnSingleClickListener {
+                if (isLike) {
+                    isLike = false
+                    it.pressToZoomOut()
+                } else {
+                    isLike = true
+                    it.pressToZoomOut()
+                }
+            }
             moreReply.setOnSingleClickListener {
                 if (isExpand) {
                     this@AnswerAndReplyAdapter.isExpand = false
@@ -156,7 +155,7 @@ class AnswerAndReplyAdapter(val context: Context) :
         val author = view.findViewById<TextView>(R.id.tv_authorName)
         val content = view.findViewById<TextView>(R.id.tv_answerContent)
         val time = view.findViewById<TextView>(R.id.tv_date)
-//        val excite = view.findViewById<ImageView>(R.id.ib_excitingButton)
+        val excite = view.findViewById<ImageView>(R.id.iv_excite)
         val moreReply = view.findViewById<TextView>(R.id.tv_more_reply)
     }
 

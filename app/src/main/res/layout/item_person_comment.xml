@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_home_message_item"
@@ -90,26 +91,20 @@
         android:gravity="center_vertical|right"
         android:layout_below="@id/rl_comment">
 
-        <ImageButton
-            android:id="@+id/ib_answerButton"
+        <ImageView
+            android:id="@+id/iv_excite"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/ic_answer" />
+            android:background="@drawable/ic_home_message_up"
+             />
 
-        <ImageButton
-            android:id="@+id/ib_excitingButton"
+        <ImageView
+            android:id="@+id/iv_favorite"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@+id/ib_answerButton"
-            android:background="@drawable/ic_home_message_up" />
-
-        <ImageButton
-            android:id="@+id/ib_favoriteButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_toEndOf="@+id/ib_excitingButton"
-            android:background="@drawable/ic_unfravorite" />
+            android:layout_toEndOf="@+id/iv_excite"
+            android:background="@drawable/ic_unfravorite"
+            />
     </RelativeLayout>
 </RelativeLayout>
