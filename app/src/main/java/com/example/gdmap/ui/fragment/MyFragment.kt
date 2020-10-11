@@ -6,13 +6,18 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
+import com.example.gdmap.config.TokenConfig
 import com.example.gdmap.ui.activity.*
+import com.example.gdmap.ui.viewmodel.MyViewModel
 import com.example.gdmap.utils.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import top.limuyang2.photolibrary.LPhotoHelper
@@ -23,7 +28,15 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         const val TAKE_PHOTO = 1
     }
 
-    private var saveData: SharedPreferences? = null
+    var avatar: String = ""
+    var qq: String = ""
+    var tel: String = ""
+    var dcp: String = ""
+    var Myname: String = ""
+    private val viewModel by lazy {
+        ViewModelProviders.of(this).get(MyViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,7 +46,25 @@ class MyFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun initView() {
-        saveData = context?.getSharedPreferences("userdata", MODE_PRIVATE)
+        viewModel.getUserInfo(TokenConfig.token.token)
+        viewModel.MyInfoResultValue.observe(this, Observer {
+            if (it != null) {
+                tv_fragment_me_user_data.text=it.description
+                tv_fragment_me_user_name.text=it.nickname
+                if (it.avatar!=""){
+                    Glide.with(iv_fragment_me_user_avator).load(it.avatar).placeholder(R.drawable.ic_image)
+                        .into(iv_fragment_me_user_avator)
+                }else{
+                    Glide.with(iv_fragment_me_user_avator).load(R.drawable.ic_image).placeholder(R.drawable.ic_image)
+                        .into(iv_fragment_me_user_avator)
+                }
+                avatar = it.avatar
+                qq = it.qq
+                tel = it.tel
+                dcp = it.description
+                Myname = it.nickname
+            }
+        })
         bt_fragment_me_data.setOnClickListener(this)
         bt_fragment_me_question.setOnClickListener(this)
         bt_fragment_me_set.setOnClickListener(this)
@@ -61,7 +92,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.bt_fragment_me_set-> changeToActivity(ProductActivity())
+            R.id.bt_fragment_me_set -> changeToActivity(ProductActivity())
             R.id.bt_fragment_me_data -> changeToActivity2(SetDataActivity())
             R.id.bt_fragment_collect -> changeToActivity(CollectActivity())
             R.id.bt_fragment_me_question -> changeToActivity(TipsActivity())
@@ -81,6 +112,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                     }
                     Glide.with(iv_fragment_me_user_avator).load(selectedPhotos[0])
                         .into(iv_fragment_me_user_avator)
+                    avatar = selectedPhotos[0]
                 }
             }
         }
@@ -93,12 +125,15 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     private fun changeToActivity2(activity: Activity) {
         val intent = Intent(this.activity, activity::class.java)
+        intent.putExtra("avatar", avatar)
+        intent.putExtra("qq", qq)
+        intent.putExtra("tel", tel)
+        intent.putExtra("dcp", dcp)
+        intent.putExtra("name", Myname)
         startActivity(intent)
     }
 
     override fun onStart() {
-        tv_fragment_me_user_data.text = saveData?.getString("data", "")
-        tv_fragment_me_user_name.text = saveData?.getString("name", "")
         super.onStart()
     }
 }

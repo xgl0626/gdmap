@@ -71,4 +71,7 @@ interface ApiService {
     @POST("/collect")
     fun collect(@Header("Authorization") token: String,
                 @Field("id") id: Int):Observable<ResponseStatus>
+
+    @POST("/user/getUserInfo")
+    fun getInfo(@Header("Authorization") token: String):Observable<UserInfoResponse>
 }

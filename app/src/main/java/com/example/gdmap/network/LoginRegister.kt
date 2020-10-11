@@ -10,18 +10,21 @@ import rx.Observable
  *@author SpreadWater
  *@description
  */
- interface LoginRegister {
+interface LoginRegister {
     //注册
     @POST("/signup")
     @FormUrlEncoded
-    fun SignUp(@Field("user_id")user_id:String, @Field("password")password:String ):Observable<UserResponse>
+    fun SignUp(
+        @Field("user_id") user_id: String,
+        @Field("password") password: String
+    ): Observable<UserResponse>
+
     //登录
     @POST("/signin")
     @FormUrlEncoded
-    fun SiginIn(@Field("user_id")user_id:String, @Field("password")password:String):Observable<UserResponse>
-    //获取用户信息
-    @POST("/user/getUserInfo")
-    @FormUrlEncoded
-    fun getUserInfo(@Header("Token")token:String):Observable<UserResponse>
+    fun SiginIn(
+        @Field("user_id") user_id: String,
+        @Field("password") password: String
+    ): Observable<UserResponse>
 
 }

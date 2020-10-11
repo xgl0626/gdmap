@@ -35,7 +35,7 @@ class LoginOrRegisterViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.status == 10000) {
-                    rememberPassword(name, password, it.data.token)
+                    rememberPassword(name, password)
                     loginOrRegisterResult.value = 200
                     TokenConfig.token.token = it.data.token
                     Toast.toast("登录成功")
@@ -46,13 +46,12 @@ class LoginOrRegisterViewModel : ViewModel() {
     }
 
     @SuppressLint("CommitPrefEdits")
-    private fun rememberPassword(name: String, psw: String, token: String) {
+    private fun rememberPassword(name: String, psw: String) {
         Log.d("tagtag", "$name$psw")
         val editor = rememberPassword.edit()
         editor?.apply {
             putString("name", name)
             putString("psw", psw)
-            putString("token", token)
             apply()
         }
     }
