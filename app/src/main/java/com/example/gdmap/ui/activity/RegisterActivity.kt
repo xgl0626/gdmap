@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.startActivity
@@ -13,12 +14,16 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
+import com.example.gdmap.network.LoginRegister
+import com.example.gdmap.network.ServiceCreator
 import com.example.gdmap.ui.viewmodel.LoginOrRegisterViewModel
 import com.example.gdmap.utils.AddIconImage
 
 import com.example.gdmap.utils.Toast
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.activity_rigister.*
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 class RegisterActivity : BaseActivity() {
     private val viewModel by lazy {
@@ -71,4 +76,5 @@ class RegisterActivity : BaseActivity() {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
     }
+
 }
