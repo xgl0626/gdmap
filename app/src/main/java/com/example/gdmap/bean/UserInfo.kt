@@ -10,6 +10,5 @@ data class UserInfo(
     val description: String,
     val nickname: String,
     val qq: String,
-    val tel:String,
-    val token: String
+    val tel:String
 )

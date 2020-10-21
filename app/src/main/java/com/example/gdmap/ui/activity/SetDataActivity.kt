@@ -7,14 +7,19 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.EditText
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
+import com.example.gdmap.bean.UserInfo
+import com.example.gdmap.ui.viewmodel.SearchViewModel
+import com.example.gdmap.ui.viewmodel.SetDataViewModel
 import com.example.gdmap.utils.AddIconImage
 import kotlinx.android.synthetic.main.activity_setdata.*
 
 class SetDataActivity :BaseActivity(){
     private var count=2
     private var saveData: SharedPreferences?=null
+    private val viewModel by lazy { ViewModelProviders.of(this).get(SetDataViewModel::class.java) }
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +58,9 @@ class SetDataActivity :BaseActivity(){
                 setCanNotEditNoClick(et_activity_setdata_name)
                 setCanNotEditNoClick(et_activity_setdata_phone)
                 bt_activity_setdata_setData.text = "编辑"
+                val user=UserInfo(et_activity_setdata_data.text.toString(),et_activity_setdata_name.text.toString(),
+                    et_activity_setdata_qq.text.toString(),et_activity_setdata_phone.text.toString())
+                viewModel.updateInfo(user)
                 val editor=saveData?.edit()
                 editor?.putString("name",et_activity_setdata_name.text.toString())
                 editor?.putString("qq",et_activity_setdata_qq.text.toString())

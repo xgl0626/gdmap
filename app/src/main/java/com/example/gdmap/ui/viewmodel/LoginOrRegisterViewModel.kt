@@ -64,6 +64,7 @@ class LoginOrRegisterViewModel : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 if (it.status == 10000) {
+                    rememberPassword(name, password)
                     loginOrRegisterResult.value = 200
                     Toast.toast("注册成功")
                 } else {

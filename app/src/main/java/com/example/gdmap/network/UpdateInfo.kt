@@ -2,10 +2,8 @@ package com.example.gdmap.network
 
 import com.example.gdmap.bean.UpdateInformation
 import com.example.gdmap.bean.UserResponse
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Header
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 import rx.Observable
 
 /**
@@ -17,12 +15,9 @@ import rx.Observable
 interface UpdateInfo {
     //更新用户信息
     @POST("/user/updateUserInfo")
-    @FormUrlEncoded
+    @Multipart
     fun updateInfo(
         @Header("Authorization") token: String,
-        @Field("qq") qq: String,
-        @Field("tel") tel: String,
-        @Field("description") description: String,
-        @Field("nickname") nickname: String
+        @Part page: List<MultipartBody.Part>
     ): Observable<UpdateInformation>
 }

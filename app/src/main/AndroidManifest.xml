@@ -66,7 +66,7 @@
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="3d6f7a6aae7ec80972d0e5fd2f0b3d9b"></meta-data>
+            android:value="cfa9a498e7731c34aba55ec8dc740542"></meta-data>
         <!--        打包版80374b0322d1504de1ce7ad3a345cc5f-->
         <!--        调试版3d6f7a6aae7ec80972d0e5fd2f0b3d9b-->
         <!--        张涛cfa9a498e7731c34aba55ec8dc740542-->

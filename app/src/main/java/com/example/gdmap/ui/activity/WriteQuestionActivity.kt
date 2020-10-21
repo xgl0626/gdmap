@@ -127,7 +127,8 @@ class WriteQuestionActivity : BaseActivity() {
         when (requestCode) {
             REQUEST_CODE_CHOOSE_PHOTO_ALBUM -> {
                 val imageListUri =
-                    ArrayList((LPhotoHelper.getSelectedPhotos(data))).map { it.toString() }
+                    ArrayList((LPhotoHelper.getSelectedPhotos(data))).map {
+                        it.toString() }
                 val imageListAbsolutePath = ArrayList<String>()
                 imageListUri.forEach { imageListAbsolutePath.add(it) }
                 viewModel.setImageList(imageListAbsolutePath)

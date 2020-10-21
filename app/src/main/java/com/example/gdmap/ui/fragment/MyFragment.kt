@@ -15,9 +15,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
+import com.example.gdmap.bean.UserInfo
 import com.example.gdmap.config.TokenConfig
+import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.activity.*
 import com.example.gdmap.ui.viewmodel.MyViewModel
+import com.example.gdmap.ui.viewmodel.SetDataViewModel
 import com.example.gdmap.utils.*
 import kotlinx.android.synthetic.main.fragment_me.*
 import top.limuyang2.photolibrary.LPhotoHelper
@@ -36,6 +39,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(MyViewModel::class.java)
     }
+    private val viewModel2  by lazy { ViewModelProviders.of(this).get(SetDataViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,8 +56,9 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                 tv_fragment_me_user_data.text = it.nickname
                 tv_fragment_me_user_name.text = it.description
                 Log.d("mydata", it.toString())
-                if (it.avatar != "") {
-                    Glide.with(iv_fragment_me_user_avator).load(it.avatar)
+                if (it.avatar.isNotEmpty()) {
+                    Log.d("zt",it.avatar)
+                    Glide.with(iv_fragment_me_user_avator).load(BASE_URL+it.avatar)
                         .placeholder(R.drawable.ic_image)
                         .into(iv_fragment_me_user_avator)
                 } else {
@@ -81,6 +86,15 @@ class MyFragment : BaseFragment(), View.OnClickListener {
             0
         )
         AddIconImage.setImageViewToButton(R.mipmap.acticity_login_name, bt_fragment_me_data, 0)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getUserInfo(TokenConfig.token.token)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun initClick() {
@@ -113,8 +127,17 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                     val selectedPhotos = LPhotoHelper.getSelectedPhotos(data).map {
                         it.toString()
                     }
+                    val imageListUri =
+                        ArrayList((LPhotoHelper.getSelectedPhotos(data))).map {
+                            it.toString() }
+                    val imageListAbsolutePath = ArrayList<String>()
+                    imageListUri.forEach { imageListAbsolutePath.add(it) }
+
                     Glide.with(iv_fragment_me_user_avator).load(selectedPhotos[0])
                         .into(iv_fragment_me_user_avator)
+                    val user=UserInfo(dcp,Myname,qq,tel)
+                    viewModel2.setImageList(imageListAbsolutePath)
+                    viewModel2.updateInfo(user)
                     avatar = selectedPhotos[0]
                 }
             }
