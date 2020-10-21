@@ -14,64 +14,76 @@ import java.io.File
  * @Date: 2020/10/11 12:52
  */
 interface ApiService {
-    @Multipart
+
+    @POST("/question/getQuestionListLatest")
+    @FormUrlEncoded
+    fun getQuestionList(@Header("Authorization") token: String,@Field("page") page:Int): Observable<QuestionList>
+
     @POST("/question/addQuestion")
+    @Multipart
     fun addQuestion(
         @Header("Authorization") token: String,
-        @Query("title") title: String,
-        @Query("place") place: String,
-        @Query("description") description: String,
-        @Part("photo") photoList: List<MultipartBody.Part>
+        @Part page: List<MultipartBody.Part>
     ): Observable<ResponseStatus>
 
-    @GET("/question/getQuestionInfo")
+    @POST("/question/getQuestionInfo")
+    @FormUrlEncoded
     fun getQuestionContent(@Field("question_id") question_id: Int): Observable<Question>
 
 
-    @FormUrlEncoded
     @POST("/question/search")
+    @FormUrlEncoded
     fun search(@Field("title") title: String): Observable<Search>
 
-    @Multipart
     @POST("/answer/addAnswer")
+    @FormUrlEncoded
     fun addAnswer(
         @Header("Authorization") token: String,
-        @Query("title") title: String,
-        @Query("description") description: String,
-        @Part("photo") photoList: List<MultipartBody.Part>
+        @Field("question_id") question_id: Int,
+        @Field("description") description: String
     ): Observable<ResponseStatus>
 
-    @GET("/answer/getAnswerList")
+    @POST("/answer/getAnswerList")
+    @FormUrlEncoded
     fun getAnswerList(
         @Header("Authorization") token: String,
         @Field("question_id") question_id: Int
-    ): Observable<MutableList<Answer>>
+    ): Observable<Answer>
 
-    @FormUrlEncoded
     @POST("/comment/addComment")
+    @FormUrlEncoded
     fun addComment(
         @Header("Authorization") token: String,
         @Field("answer_id") answer_id: Int,
         @Field("description") description: String
     ): Observable<ResponseStatus>
 
-    @GET("/comment/getCommentList")
-    fun getCommentList(@Header("Authorization") token: String,
-                       @Field("answer_id") answer_id: Int):Observable<Comment>
-
+    @POST("/comment/getCommentList")
     @FormUrlEncoded
-    @POST("/like ")
+    fun getCommentList(
+        @Header("Authorization") token: String,
+        @Field("answer_id") answer_id: Int
+    ): Observable<Comment>
+
+    @POST("/like")
+    @FormUrlEncoded
     fun like(
         @Header("Authorization") token: String,
         @Field("id") id: Int,
         @Field("type") type: String
-    ):Observable<ResponseStatus>
+    ): Observable<ResponseStatus>
 
-    @FormUrlEncoded
+
     @POST("/collect")
-    fun collect(@Header("Authorization") token: String,
-                @Field("id") id: Int):Observable<ResponseStatus>
+    @FormUrlEncoded
+    fun collect(
+        @Header("Authorization") token: String,
+        @Field("id") id: Int
+    ): Observable<ResponseStatus>
 
     @POST("/user/getUserInfo")
-    fun getInfo(@Header("Authorization") token: String):Observable<UserInfoResponse>
+    fun getInfo(@Header("Authorization") token: String): Observable<UserInfoResponse>
+
+    @GET("/question/getCollectedQuestion")
+    fun getCollectQuestionList():Observable<Question>
 }

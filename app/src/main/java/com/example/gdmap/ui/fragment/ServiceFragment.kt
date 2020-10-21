@@ -17,6 +17,7 @@ import com.example.gdmap.ui.activity.WriteQuestionActivity
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.AddIconImage
+import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.fragment_service.*
 
@@ -38,6 +39,10 @@ class ServiceFragment : BaseFragment(){
         return inflater.inflate(R.layout.fragment_service, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getQuestionListData()
+    }
     override fun initClick() {
         et_fragment_home_search.setOnSingleClickListener{
             changeToActivity(SearchActivity())
@@ -61,12 +66,13 @@ class ServiceFragment : BaseFragment(){
 
     override fun initData() {
         srl_main.setOnRefreshListener {
-            viewModel.getQuestionData()
+            viewModel.getQuestionListData()
+            srl_main.isRefreshing=false
         }
-        viewModel.getQuestionData()
+        viewModel.getQuestionListData()
         viewModel.commentData.observe(viewLifecycleOwner, Observer {
             messageItemAdapter?.addData(it)
-            srl_main.isRefreshing = false
+            LogUtils.log_d<String>(it.toString())
         })
         dialog?.dismiss()
     }

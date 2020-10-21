@@ -49,13 +49,16 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         viewModel.getUserInfo(TokenConfig.token.token)
         viewModel.MyInfoResultValue.observe(this, Observer {
             if (it != null) {
-                tv_fragment_me_user_data.text=it.description
-                tv_fragment_me_user_name.text=it.nickname
-                if (it.avatar!=""){
-                    Glide.with(iv_fragment_me_user_avator).load(it.avatar).placeholder(R.drawable.ic_image)
+                tv_fragment_me_user_data.text = it.nickname
+                tv_fragment_me_user_name.text = it.description
+                Log.d("mydata", it.toString())
+                if (it.avatar != "") {
+                    Glide.with(iv_fragment_me_user_avator).load(it.avatar)
+                        .placeholder(R.drawable.ic_image)
                         .into(iv_fragment_me_user_avator)
-                }else{
-                    Glide.with(iv_fragment_me_user_avator).load(R.drawable.ic_image).placeholder(R.drawable.ic_image)
+                } else {
+                    Glide.with(iv_fragment_me_user_avator).load(R.drawable.ic_image)
+                        .placeholder(R.drawable.ic_image)
                         .into(iv_fragment_me_user_avator)
                 }
                 avatar = it.avatar
@@ -131,9 +134,5 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         intent.putExtra("dcp", dcp)
         intent.putExtra("name", Myname)
         startActivity(intent)
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 }

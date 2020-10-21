@@ -3,6 +3,7 @@ package com.example.gdmap.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.bean.MessagesTestData
+import com.example.gdmap.bean.QuestionData
 import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.ui.widget.NineGridView
 import com.example.gdmap.utils.excite
 import com.example.gdmap.utils.favorite
+import com.example.gdmap.utils.setOnSingleClickListener
 
 
 /**
@@ -34,7 +37,7 @@ class QuestionItemAdapter(val context: Context) :
         const val LOAD = 1
     }
 
-    private var data = ArrayList<MessagesTestData>()
+    private var data = ArrayList<QuestionData>()
 
     class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val avatar = view.findViewById<CircleImageView>(R.id.iv_avatar)
@@ -42,9 +45,9 @@ class QuestionItemAdapter(val context: Context) :
         val title = view.findViewById<TextView>(R.id.tv_questionTitle)
         val content = view.findViewById<TextView>(R.id.tv_questionDetail)
         val time = view.findViewById<TextView>(R.id.tv_date)
-        val fravorite = view.findViewById<ImageView>(R.id.iv_favorite)
-        val excite = view.findViewById<ImageView>(R.id.iv_excite)
         val nine_views = view.findViewById<NineGridView>(R.id.nine_grid_view)
+        val place = view.findViewById<TextView>(R.id.tv_place)
+
 
     }
 
@@ -92,27 +95,29 @@ class QuestionItemAdapter(val context: Context) :
 
             LOAD -> {
                 val viewHolder = holder as CommentViewHolder
+                viewHolder.setIsRecyclable(false)
                 viewHolder.apply {
                     Glide.with(avatar)
                         .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
                         .load(R.drawable.ic_image).into(avatar)
-                    time.text = data[position].time
-                    title.text = data[position].title
-                    author.text = data[position].author
-                    content.text = data[position].content
-                    fravorite.favorite()
-                    excite.excite()
-//                    nine_views.setImages()
+                    time.text = data[position].created_at
+                    title.text = data[position].tittle
+                    author.text = data[position].nickname
+                    content.text = data[position].description
+                    place.text = data[position].place
+                    Log.d("photo", data[position].photo_avatar + data[position].photo_url)
+                    nine_views.setImages(data[position].photo_url)
+                    itemView.setOnSingleClickListener {
+                        changeToActivity(CommentActivity(), data[position].question_id)
+                    }
                 }
             }
         }
-        holder.itemView.setOnClickListener {
-            changeToActivity(CommentActivity())
-        }
     }
 
-    private fun changeToActivity(activity: Activity) {
+    private fun changeToActivity(activity: Activity, questionId: Int) {
         val intent = Intent(context, activity::class.java)
+        intent.putExtra("questionId", questionId)
         context.startActivity(intent)
     }
 
@@ -120,12 +125,12 @@ class QuestionItemAdapter(val context: Context) :
         return data.size + 1
     }
 
-    fun addData(newDataLists: List<MessagesTestData>) {
+    fun addData(newDataLists: List<QuestionData>) {
         data.clear()
         initRefreshImages(newDataLists)
     }
 
-    fun initRefreshImages(dataLists: List<MessagesTestData>) {
+    fun initRefreshImages(dataLists: List<QuestionData>) {
         data.addAll(dataLists)
         notifyDataSetChanged()
     }

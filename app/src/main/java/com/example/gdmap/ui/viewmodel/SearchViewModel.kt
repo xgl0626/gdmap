@@ -20,11 +20,11 @@ class SearchViewModel : ViewModel() {
 
     fun search(title: String) {
         ServiceCreator.create(ApiService::class.java)
-            ?.search(title)
-            ?.subscribeOn(Schedulers.io())
-            ?.unsubscribeOn(Schedulers.io())
-            ?.observeOn(AndroidSchedulers.mainThread())
-            ?.subscribe {
+            .search(title)
+            .subscribeOn(Schedulers.io())
+            .unsubscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
                 if (it.status == 10000) {
                     questionList.value = it.data
                 } else {

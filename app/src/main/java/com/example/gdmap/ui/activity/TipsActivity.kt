@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_tips.*
  */
 class TipsActivity :BaseActivity(){
 
-    private val tabItemList= arrayListOf<String>("火灾","地震","台风","海啸","火灾","地震","台风","海啸")
+    private val tabItemList= arrayListOf<String>("火灾","地震","水灾","飓风（龙卷风、台风等）")
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

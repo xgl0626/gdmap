@@ -47,7 +47,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginStart="16dp"
-                        android:src="@drawable/ic_image" />
+                        android:scaleType="centerCrop" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -60,7 +60,6 @@
                             android:id="@+id/tv_question_author"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="沐风"
                             android:textColor="#5B595A"
                             android:textSize="14sp" />
 
@@ -69,7 +68,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
-                            android:text="1小时前"
                             android:textColor="#989898"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -82,7 +80,6 @@
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="6dp"
-                    android:text="诗和远方"
                     android:textColor="#363636"
                     android:textSize="18sp" />
 
@@ -94,7 +91,6 @@
                     android:layout_marginEnd="10dp"
                     android:ellipsize="end"
                     android:maxLines="10"
-                    android:text="水光潋滟晴方好，山色空蒙雨亦奇。\n欲把西湖比西子，淡抹浓妆总相宜。"
                     android:textColor="#6e6e6e"
                     android:textSize="14sp" />
 
@@ -150,7 +146,7 @@
             android:layout_width="0dp"
             android:layout_height="34dp"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="22dp"
+            android:layout_marginEnd="30dp"
             android:layout_weight="1"
             android:background="@drawable/shape_et_search_place"
             android:gravity="center_vertical"
@@ -163,15 +159,15 @@
         <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:id="@+id/ib_excitingButton"
+            android:layout_marginEnd="20dp"
+            android:id="@+id/iv_excitingButton"
             android:src="@drawable/ic_home_message_up" />
 
         <ImageView
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
-            android:id="@+id/ib_favoriteButton"
+            android:layout_marginEnd="30dp"
+            android:id="@+id/iv_favoriteButton"
             android:src="@drawable/ic_unfravorite" />
 
     </LinearLayout>

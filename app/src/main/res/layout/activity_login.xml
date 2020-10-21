@@ -17,16 +17,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
-    <ImageView
+    <com.example.gdmap.ui.widget.CircleImageView
+        android:id="@+id/iv_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@drawable/bg_activity_login_plane"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintVertical_bias="0.124" />
 
     <TextView
         android:id="@+id/textView2"

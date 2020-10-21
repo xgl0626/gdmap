@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
     <!--用于写入缓存数据到扩展存储卡-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!--用于申请调用A-GPS模块-->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -28,9 +29,10 @@
     <application
         android:name="com.example.gdmap.utils.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -64,10 +66,10 @@
         <service android:name="com.amap.api.location.APSService"></service>
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="cfa9a498e7731c34aba55ec8dc740542">
-        </meta-data>
-<!--        打包版80374b0322d1504de1ce7ad3a345cc5f-->
-<!--        调试版3d6f7a6aae7ec80972d0e5fd2f0b3d9b-->
+            android:value="3d6f7a6aae7ec80972d0e5fd2f0b3d9b"></meta-data>
+        <!--        打包版80374b0322d1504de1ce7ad3a345cc5f-->
+        <!--        调试版3d6f7a6aae7ec80972d0e5fd2f0b3d9b-->
+        <!--        张涛cfa9a498e7731c34aba55ec8dc740542-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.gdmap.fileprovider"

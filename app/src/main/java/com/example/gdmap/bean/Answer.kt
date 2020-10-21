@@ -13,6 +13,7 @@ data class Answer(
 )
 
 data class AnswerData(
+    val replyList:ArrayList<CommentData>?=null,
     val answer_id: Int,
     val created_at: String,
     val deleted_at: String,

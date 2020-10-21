@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
  *@description
  */
 object ServiceCreator {
+
     private const val BASE_URL = "http://47.93.114.84:8081"
     private val retrofit: Retrofit
     init {

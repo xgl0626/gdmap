@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.gdmap.R
-import com.example.gdmap.bean.AnswerTestData
+import com.example.gdmap.bean.AnswerData
+import com.example.gdmap.bean.CommentData
 import com.example.gdmap.bean.ReplyBean
 import com.example.gdmap.ui.widget.CircleImageView
+import com.example.gdmap.utils.isLike
 import com.example.gdmap.utils.pressToZoomOut
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlin.collections.ArrayList
@@ -26,12 +28,9 @@ import kotlin.collections.ArrayList
  */
 class AnswerAndReplyAdapter(val context: Context) :
     BaseExpandableListAdapter() {
-    var onSingleClick: OnItemOnClick? = null
-    val answerList = ArrayList<AnswerTestData>()
-
-    fun setOnItemClick(onItemOnClick: OnItemOnClick) {
-        this.onSingleClick = onItemOnClick
-    }
+    private val answerList = ArrayList<AnswerData>()
+    var onPraiseClickListener: ((View, AnswerData) -> Unit)? = null
+    var onGroupClickListener: ((Int, AnswerData) -> Unit)? = null
 
     override fun getGroupCount(): Int {
         return answerList.size
@@ -50,7 +49,7 @@ class AnswerAndReplyAdapter(val context: Context) :
         return answerList[i]
     }
 
-    override fun getChild(i: Int, i1: Int): ReplyBean? {
+    override fun getChild(i: Int, i1: Int): CommentData? {
         return answerList[i].replyList?.get(i1)
     }
 
@@ -66,8 +65,6 @@ class AnswerAndReplyAdapter(val context: Context) :
         return true
     }
 
-    var isLike = false
-    var isExpand = false
     override fun getGroupView(
         groupPosition: Int,
         isExpand: Boolean,
@@ -90,29 +87,15 @@ class AnswerAndReplyAdapter(val context: Context) :
                 .error(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(avatar)
-            author.text = answerList[groupPosition].author
-            time.text = answerList[groupPosition].time
-            content.text = answerList[groupPosition].content
-            excite.setOnSingleClickListener {
-                if (isLike) {
-                    isLike = false
-                    it.pressToZoomOut()
-                } else {
-                    isLike = true
-                    it.pressToZoomOut()
-                }
+            author.text = answerList[groupPosition].nickname
+            time.text = answerList[groupPosition].created_at
+            content.text = answerList[groupPosition].description
+            itemView.setOnClickListener {
+                onGroupClickListener?.invoke(groupPosition, answerList[groupPosition])
             }
-            moreReply.setOnSingleClickListener {
-                if (isExpand) {
-                    this@AnswerAndReplyAdapter.isExpand = false
-                    moreReply.text = "查看回复"
-                    onSingleClick?.onClick(it, groupPosition, "收起")
-
-                } else {
-                    this@AnswerAndReplyAdapter.isExpand = true
-                    moreReply.text = "收起"
-                    onSingleClick?.onClick(it, groupPosition, "查看回复")
-                }
+            excite.isLike(answerList[groupPosition].answer_id)
+            excite.setOnSingleClickListener {
+                onPraiseClickListener?.invoke(it, answerList[groupPosition])
             }
         }
         return convertView
@@ -136,13 +119,14 @@ class AnswerAndReplyAdapter(val context: Context) :
             childHolder = convertView.tag as ChildHolder
         }
         val replyUser: String? =
-            answerList[groupPosition].replyList?.get(childPosition)?.author
+            answerList[groupPosition].replyList?.get(childPosition)?.nickname
         if (!TextUtils.isEmpty(replyUser)) {
             childHolder.author.text = "$replyUser:"
         } else {
             childHolder.author.text = "无名" + ":"
         }
-        childHolder.content.text = answerList[groupPosition].replyList?.get(childPosition)?.content
+        childHolder.content.text =
+            answerList[groupPosition].replyList?.get(childPosition)?.description
         return convertView
     }
 
@@ -156,7 +140,6 @@ class AnswerAndReplyAdapter(val context: Context) :
         val content = view.findViewById<TextView>(R.id.tv_answerContent)
         val time = view.findViewById<TextView>(R.id.tv_date)
         val excite = view.findViewById<ImageView>(R.id.iv_excite)
-        val moreReply = view.findViewById<TextView>(R.id.tv_more_reply)
     }
 
     class ChildHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -169,7 +152,7 @@ class AnswerAndReplyAdapter(val context: Context) :
      * func:回答成功后插入一条数据
      * @param answerBean 新的评论数据
      */
-    fun addAnswerData(answerBean: AnswerTestData?) {
+    fun addAnswerData(answerBean: AnswerData?) {
         if (answerBean != null) {
             answerList.add(answerBean)
             notifyDataSetChanged()
@@ -181,7 +164,7 @@ class AnswerAndReplyAdapter(val context: Context) :
     /*
         添加所有回答数据
      */
-    fun addData(newDataLists: List<AnswerTestData>) {
+    fun addData(newDataLists: List<AnswerData>) {
         answerList.clear()
         initRefreshImages(newDataLists)
     }
@@ -190,7 +173,7 @@ class AnswerAndReplyAdapter(val context: Context) :
         刷新回答数据
      */
 
-    fun initRefreshImages(dataLists: List<AnswerTestData>) {
+    fun initRefreshImages(dataLists: List<AnswerData>) {
         answerList.addAll(dataLists)
         notifyDataSetChanged()
     }
@@ -199,13 +182,13 @@ class AnswerAndReplyAdapter(val context: Context) :
      * func:回复成功后插入一条数据
      * @param replyBean 新的回复数据
      */
-    fun addReplyData(replyBean: ReplyBean?, groupPosition: Int) {
+    fun addReplyData(replyBean: CommentData?, groupPosition: Int) {
         if (replyBean != null) {
             Log.e(TAG, "addTheReplyData: >>>>该刷新回复列表了:$replyBean")
             if (answerList[groupPosition].replyList != null) {
                 answerList[groupPosition].replyList?.add(replyBean)
             } else {
-                val replyList: MutableList<ReplyBean> = ArrayList<ReplyBean>()
+                val replyList: MutableList<CommentData> = ArrayList()
                 replyList.add(replyBean)
                 answerList[groupPosition].replyList?.addAll(replyList)
             }
@@ -220,13 +203,9 @@ class AnswerAndReplyAdapter(val context: Context) :
      * @param replyBeanList 所有回复数据
      * @param groupPosition 当前的评论
      */
-    private fun addAllReplyList(replyBeanList: List<ReplyBean>, groupPosition: Int) {
-        if (answerList[groupPosition].replyList != null) {
-            answerList[groupPosition].replyList?.clear()
-            answerList[groupPosition].replyList?.addAll(replyBeanList)
-        } else {
-            answerList[groupPosition].replyList?.addAll(replyBeanList)
-        }
+    fun addAllReplyList(replyBeanList: List<CommentData>, groupPosition: Int) {
+        answerList[groupPosition].replyList?.clear()
+        answerList[groupPosition].replyList?.addAll(replyBeanList)
         notifyDataSetChanged()
     }
 

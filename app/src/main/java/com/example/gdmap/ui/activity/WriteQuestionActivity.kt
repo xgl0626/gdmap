@@ -1,11 +1,13 @@
 package com.example.gdmap.ui.activity
 
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.drawable.Drawable
-import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -13,14 +15,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
+import com.example.gdmap.config.TokenConfig.token
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
-import com.example.gdmap.utils.ImageSelectutils
+import com.example.gdmap.utils.*
 import com.example.gdmap.utils.ImageSelectutils.REQUEST_CODE_CHOOSE_PHOTO_ALBUM
-import com.example.gdmap.utils.LogUtils
-import com.example.gdmap.utils.Toast
-import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.activity_comment.nine_grid_view
+import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_tips.toolbar
 import top.limuyang2.photolibrary.LPhotoHelper
+import java.io.File
 
 /**
  * @Author: xgl
@@ -33,6 +36,7 @@ class WriteQuestionActivity : BaseActivity() {
         const val MAX_SELECTABLE_IMAGE_COUNT = 5
     }
 
+    private val photoList = ArrayList<File>()
     private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -46,10 +50,22 @@ class WriteQuestionActivity : BaseActivity() {
     }
 
     override fun initClick() {
+        Log.d("question", token.toString())
+        bt_send_answer.setOnSingleClickListener {
+            val title = et_question_title.text.toString()
+            val content = et_question_content.text.toString()
+            viewModel.addQuestion(
+                title,
+                "重庆",
+                content
+            )
+            finish()
+        }
     }
 
     override fun initData() {
         initAddImageView()
+
     }
 
     private fun initAddImageView() {
@@ -68,7 +84,6 @@ class WriteQuestionActivity : BaseActivity() {
                 Toast.toast("最多只能添加5张图片哦")
             }
         }
-
         viewModel.imageUrls.observe(this, Observer { selectedImageFiles ->
             selectedImageFiles ?: return@Observer
             LogUtils.log_d<String>(selectedImageFiles.toString())
@@ -106,17 +121,20 @@ class WriteQuestionActivity : BaseActivity() {
         })
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_CHOOSE_PHOTO_ALBUM -> {
-                val imageListUri = ArrayList((LPhotoHelper.getSelectedPhotos(data))).map { it.toString() }
+                val imageListUri =
+                    ArrayList((LPhotoHelper.getSelectedPhotos(data))).map { it.toString() }
                 val imageListAbsolutePath = ArrayList<String>()
                 imageListUri.forEach { imageListAbsolutePath.add(it) }
                 viewModel.setImageList(imageListAbsolutePath)
             }
         }
     }
+
     override fun getViewLayout(): Int {
         return R.layout.activity_question
     }

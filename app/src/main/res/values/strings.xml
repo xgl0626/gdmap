@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">safcity</string>
+    <string name="app_name">SafCity</string>
     <string name="choose_map">卫星图层</string>
     <string name="leave_map">离线地图</string>
     <string name="indoor_map">室内地图</string>

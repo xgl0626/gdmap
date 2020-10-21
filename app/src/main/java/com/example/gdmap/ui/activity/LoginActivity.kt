@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
@@ -54,6 +55,7 @@ class LoginActivity : BaseActivity() {
                     Manifest.permission.ACCESS_WIFI_STATE,
                     Manifest.permission.INTERNET,
                     Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS,
                     Manifest.permission.READ_EXTERNAL_STORAGE
@@ -110,6 +112,7 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun initView() {
+        Glide.with(iv_logo).load(R.drawable.app_logo).into(iv_logo)
         AddIconImage.setImageViewToEditText(
             R.mipmap.acticity_login_name,
             et_activity_login_username,

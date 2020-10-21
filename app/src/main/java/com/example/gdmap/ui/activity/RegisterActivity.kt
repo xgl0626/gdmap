@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.gdmap.MainActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
@@ -21,7 +22,9 @@ import com.example.gdmap.utils.AddIconImage
 
 import com.example.gdmap.utils.Toast
 import com.example.gdmap.utils.setOnSingleClickListener
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_rigister.*
+import kotlinx.android.synthetic.main.activity_rigister.iv_logo
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -49,6 +52,7 @@ class RegisterActivity : BaseActivity() {
     }
 
     override fun initView() {
+        Glide.with(iv_logo).load(R.drawable.app_logo).into(iv_logo)
         AddIconImage.setImageViewToEditText(
             R.mipmap.acticity_login_name,
             et_activity_register_username,

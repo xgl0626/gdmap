@@ -394,7 +394,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     }
                     //设置原地址信息
                     _city = aMapLocation.city
-                    Toast.toast(buffer.toString())
                     contentPlace = buffer.toString()
                     isFirst = false
                 }

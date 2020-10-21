@@ -34,6 +34,7 @@ class LoginOrRegisterViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
+                Log.d("token1",it.data.token)
                 if (it.status == 10000) {
                     rememberPassword(name, password)
                     loginOrRegisterResult.value = 200

@@ -18,6 +18,6 @@ data class CommentData(
     val deleted_at: String,
     val description: String,
     val nickname: String,
-    val photo_avatar: String,
+    val photo_avatar: String?=null,
     val updated_at: String
 )

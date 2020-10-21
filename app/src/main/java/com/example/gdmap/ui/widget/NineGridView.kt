@@ -7,9 +7,12 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
+import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.utils.dip
 import com.example.gdmap.utils.setOnSingleClickListener
+import java.io.File
 import androidx.core.view.forEach as forEach
 
 
@@ -17,7 +20,8 @@ import androidx.core.view.forEach as forEach
  * 图片九宫格布局
  * Created By jay68 on 2018/9/29.
  */
-class NineGridView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : FrameLayout(context, attrs, defStyleAttr) {
+class NineGridView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
+    FrameLayout(context, attrs, defStyleAttr) {
     companion object {
         const val MODE_FILL = 0
         const val MODE_NORMAL = 1
@@ -29,7 +33,8 @@ class NineGridView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     private var arrangement = MODE_NORMAL
 
     init {
-        val typeArrayList = context.obtainStyledAttributes(attrs, intArrayOf(R.attr.arrangementMode))
+        val typeArrayList =
+            context.obtainStyledAttributes(attrs, intArrayOf(R.attr.arrangementMode))
         arrangement = typeArrayList.getInt(R.styleable.NineGridView_arrangementMode, MODE_NORMAL)
         typeArrayList.recycle()
     }
@@ -138,7 +143,8 @@ class NineGridView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
     fun setImages(urls: List<String>) {
         repeat(childCount) {
             if (it < urls.size) {
-                Glide.with(context).load(urls[it]).into(getChildAt(it) as ImageView)
+                Glide.with(context)
+                    .load(BASE_URL + urls[it]).into(getChildAt(it) as ImageView)
             } else {
                 removeViewAt(it)
             }
@@ -147,7 +153,10 @@ class NineGridView(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : 
         for (i in childCount until urls.size) {
             this.addView(ImageView(context).apply {
                 scaleType = ImageView.ScaleType.CENTER_CROP
-                Glide.with(context).load(urls[i]).into(this@apply)
+                Glide.with(context)
+                    .load(BASE_URL + urls[i]).into(
+                        this@apply
+                    )
             }, childCount)
         }
     }

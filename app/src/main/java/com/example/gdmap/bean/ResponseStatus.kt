@@ -8,5 +8,8 @@ package com.example.gdmap.bean
  */
 data class ResponseStatus(
     val info: String,
-    val status: Int
+    val status: Int,
+    val data: StatusData
 )
+
+data class StatusData(val status: Int)

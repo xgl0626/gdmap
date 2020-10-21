@@ -57,15 +57,4 @@
         android:maxLength="500"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_more_reply"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_answerContent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/tv_more_reply"
-        android:textColor="@color/person_back_login"
-        android:textSize="14sp" />
 </RelativeLayout>
