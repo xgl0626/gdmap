@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
-    <com.example.gdmap.ui.widget.CircleImageView
+    <com.example.gdmap.ui.widget.RectangleView
         android:id="@+id/iv_logo"
         android:layout_width="80dp"
         android:layout_height="80dp"

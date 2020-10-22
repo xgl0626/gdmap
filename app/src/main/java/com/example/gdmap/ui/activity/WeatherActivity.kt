@@ -2,6 +2,7 @@ package com.example.gdmap.ui.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import com.amap.api.services.weather.LocalWeatherForecastResult
 import com.amap.api.services.weather.LocalWeatherLiveResult
@@ -64,6 +65,8 @@ class WeatherActivity :BaseActivity(),WeatherSearch.OnWeatherSearchListener
         {
             if(localWeatherLiveResult!=null&&localWeatherLiveResult.liveResult!=null)
             {
+                tv_weather_name1.visibility= View.VISIBLE
+                tv_weather_name2.visibility= View.VISIBLE
                 val weatherlive=localWeatherLiveResult.liveResult
                 tv_activity_weather_city_name.text=city
                 tv_activity_weather_nowtime.text=weatherlive.reportTime+" 发布"

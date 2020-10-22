@@ -20,6 +20,7 @@ import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.bean.AnswerData
 import com.example.gdmap.bean.CommentData
+import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.adapter.AnswerAndReplyAdapter
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.CommentViewModel
@@ -66,8 +67,7 @@ class CommentActivity : BaseActivity() {
                 tv_question_time.text = created_at
                 tv_question_title.text = tittle
                 Glide.with(iv_avatar)
-                    .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
-                    .load(R.drawable.ic_image).into(iv_avatar)
+                    .load(BASE_URL+photo_avatar).into(iv_avatar)
             }
         })
         questionId?.let { viewModel.getAnswerList(it) }
@@ -91,7 +91,7 @@ class CommentActivity : BaseActivity() {
     private fun initAnswerAndReply() {
         answerAndReplyAdapter = AnswerAndReplyAdapter(this).apply {
             onGroupClickListener = { groupPosition, answerdata ->
-                showReply(groupPosition, answerdata)
+//                showReply(groupPosition, answerdata)
             }
             onPraiseClickListener = { view, answerData ->
                 view.excite(answerData.answer_id)

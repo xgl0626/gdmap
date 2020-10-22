@@ -13,10 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.gdmap.R
 import com.example.gdmap.bean.AnswerData
 import com.example.gdmap.bean.CommentData
-import com.example.gdmap.bean.ReplyBean
+import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.utils.isLike
-import com.example.gdmap.utils.pressToZoomOut
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlin.collections.ArrayList
 
@@ -82,9 +81,8 @@ class AnswerAndReplyAdapter(val context: Context) :
             groupHolder = convertView.tag as GroupHolder
         }
         groupHolder.apply {
-            Glide.with(context).load(R.drawable.ic_image)
+            Glide.with(context).load(BASE_URL+answerList[groupPosition].photo_avatar)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .error(R.mipmap.ic_launcher)
                 .centerCrop()
                 .into(avatar)
             author.text = answerList[groupPosition].nickname

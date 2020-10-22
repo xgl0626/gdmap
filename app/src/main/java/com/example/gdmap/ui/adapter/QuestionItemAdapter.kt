@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.bean.MessagesTestData
 import com.example.gdmap.bean.QuestionData
+import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.ui.widget.NineGridView
@@ -96,16 +97,15 @@ class QuestionItemAdapter(val context: Context) :
             LOAD -> {
                 val viewHolder = holder as CommentViewHolder
                 viewHolder.setIsRecyclable(false)
+                Log.d("photo",data[position].photo_avatar)
                 viewHolder.apply {
                     Glide.with(avatar)
-                        .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_image))
-                        .load(R.drawable.ic_image).into(avatar)
+                        .load(BASE_URL+data[position].photo_avatar).into(avatar)
                     time.text = data[position].created_at
                     title.text = data[position].tittle
                     author.text = data[position].nickname
                     content.text = data[position].description
                     place.text = data[position].place
-                    Log.d("photo", data[position].photo_avatar + data[position].photo_url)
                     nine_views.setImages(data[position].photo_url)
                     itemView.setOnSingleClickListener {
                         changeToActivity(CommentActivity(), data[position].question_id)

@@ -59,11 +59,9 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                 if (it.avatar.isNotEmpty()) {
                     Log.d("zt",it.avatar)
                     Glide.with(iv_fragment_me_user_avator).load(BASE_URL+it.avatar)
-                        .placeholder(R.drawable.ic_image)
                         .into(iv_fragment_me_user_avator)
                 } else {
-                    Glide.with(iv_fragment_me_user_avator).load(R.drawable.ic_image)
-                        .placeholder(R.drawable.ic_image)
+                    Glide.with(iv_fragment_me_user_avator).load(R.mipmap.acticity_login_name)
                         .into(iv_fragment_me_user_avator)
                 }
                 avatar = it.avatar
