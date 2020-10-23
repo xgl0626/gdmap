@@ -17,7 +17,7 @@
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:titleTextColor="@color/black" />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/srl_main"
+        android:id="@+id/srl_collect"
         android:layout_width="match_parent"
         android:layout_height="650dp"
         android:layout_gravity="center"

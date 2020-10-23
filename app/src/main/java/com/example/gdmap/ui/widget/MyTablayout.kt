@@ -3,6 +3,7 @@ package com.example.gdmap.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.widget.TextView
 import com.example.gdmap.R
 import com.google.android.material.tabs.TabLayout
@@ -34,6 +35,7 @@ class MyTabLayout : TabLayout {
                     val tab_layout_text: TextView = tab.customView!!.findViewById(R.id.map_tv_label_item)
                     tab_layout_text.setBackgroundResource(R.drawable.shape_et_search_place)
                 }
+
             }
 
             override fun onTabUnselected(tab: Tab) {
@@ -44,6 +46,7 @@ class MyTabLayout : TabLayout {
                     val tab_layout_text: TextView = tab.customView!!.findViewById(R.id.map_tv_label_item)
                     tab_layout_text.setBackgroundResource(R.drawable.shape_no_select_label_item)
                 }
+
             }
 
             override fun onTabReselected(tab: Tab) {}

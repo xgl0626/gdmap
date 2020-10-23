@@ -85,5 +85,9 @@ interface ApiService {
     fun getInfo(@Header("Authorization") token: String): Observable<UserInfoResponse>
 
     @GET("/question/getCollectedQuestion")
-    fun getCollectQuestionList():Observable<Question>
+    fun getCollectQuestionList(@Header("Authorization") token: String):Observable<QuestionList>
+
+    @POST("/getTips")
+    @FormUrlEncoded
+    fun getTips(@Field("tittle") tittle: String):Observable<Tips>
 }

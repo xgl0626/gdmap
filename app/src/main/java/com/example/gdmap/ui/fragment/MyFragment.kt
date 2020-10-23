@@ -55,9 +55,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
             if (it != null) {
                 tv_fragment_me_user_data.text = it.nickname
                 tv_fragment_me_user_name.text = it.description
-                Log.d("mydata", it.toString())
                 if (it.avatar.isNotEmpty()) {
-                    Log.d("zt",it.avatar)
                     Glide.with(iv_fragment_me_user_avator).load(BASE_URL+it.avatar)
                         .into(iv_fragment_me_user_avator)
                 } else {
