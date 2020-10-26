@@ -74,13 +74,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/bt_fragment_me_set"
+        android:id="@+id/bt_fragment_me_disaster"
         android:layout_width="330dp"
         android:layout_height="50dp"
         android:background="@drawable/fragment_me_bt_shape"
         android:gravity="left|center"
         android:paddingLeft="5dp"
-        android:text="  产品相关"
+        android:text="  评估灾害"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

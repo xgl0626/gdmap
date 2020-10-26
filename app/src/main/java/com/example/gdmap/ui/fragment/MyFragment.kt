@@ -71,11 +71,11 @@ class MyFragment : BaseFragment(), View.OnClickListener {
         })
         bt_fragment_me_data.setOnClickListener(this)
         bt_fragment_me_question.setOnClickListener(this)
-        bt_fragment_me_set.setOnClickListener(this)
+        bt_fragment_me_disaster.setOnClickListener(this)
         bt_fragment_collect.setOnClickListener(this)
         iv_fragment_me_user_avator.setOnClickListener(this)
         AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_day, bt_fragment_collect, 0)
-        AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_set, bt_fragment_me_set, 0)
+        AddIconImage.setImageViewToButton(R.mipmap.fragment_me_bt_set, bt_fragment_me_disaster, 0)
         AddIconImage.setImageViewToButton(
             R.mipmap.fragment_me_bt_question,
             bt_fragment_me_question,
@@ -105,7 +105,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.bt_fragment_me_set -> changeToActivity(ProductActivity())
+            R.id.bt_fragment_me_disaster -> changeToActivity(LoadDisasterActivity())
             R.id.bt_fragment_me_data -> changeToActivity2(SetDataActivity())
             R.id.bt_fragment_collect -> changeToActivity(CollectActivity())
             R.id.bt_fragment_me_question -> changeToActivity(TipsActivity())

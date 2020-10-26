@@ -86,7 +86,6 @@ class WriteQuestionActivity : BaseActivity() {
         }
         viewModel.imageUrls.observe(this, Observer { selectedImageFiles ->
             selectedImageFiles ?: return@Observer
-            LogUtils.log_d<String>(selectedImageFiles.toString())
             viewModel.resetInvalid()
             //对view进行复用
             for (i in 0 until nine_grid_view.childCount - 1) {
@@ -128,7 +127,8 @@ class WriteQuestionActivity : BaseActivity() {
             REQUEST_CODE_CHOOSE_PHOTO_ALBUM -> {
                 val imageListUri =
                     ArrayList((LPhotoHelper.getSelectedPhotos(data))).map {
-                        it.toString() }
+                        it.toString()
+                    }
                 val imageListAbsolutePath = ArrayList<String>()
                 imageListUri.forEach { imageListAbsolutePath.add(it) }
                 viewModel.setImageList(imageListAbsolutePath)

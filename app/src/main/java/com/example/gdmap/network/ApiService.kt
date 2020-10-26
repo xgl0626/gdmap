@@ -26,6 +26,12 @@ interface ApiService {
         @Part page: List<MultipartBody.Part>
     ): Observable<ResponseStatus>
 
+    @POST("/redirect")
+    @Multipart
+    fun redirect(
+        @Part page: List<MultipartBody.Part>
+    ): Observable<RedirectBean>
+
     @POST("/question/getQuestionInfo")
     @FormUrlEncoded
     fun getQuestionContent(@Field("question_id") question_id: Int): Observable<Question>

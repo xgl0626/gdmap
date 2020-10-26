@@ -30,4 +30,7 @@
     <string name="tb_walkguuide">步行导航</string>
     <string name="tb_weather">天气预报</string>
     <string name="tv_more_reply">查看回复</string>
+    <string name="load_disaster">评估本地灾害</string>
+    <string name="bt_activity_load_disater">评估灾害</string>
+    <string name="tb_sos">求救</string>
 </resources>

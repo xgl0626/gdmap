@@ -10,17 +10,45 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"></com.amap.api.maps.MapView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:id="@+id/fab_fragment_map_weather"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="32dp"
+        android:layout_height="22dp"
         android:layout_marginVertical="100dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/floatingaction_button_weather"
         android:clickable="true"
-        app:backgroundTint="@android:color/white"
-        android:backgroundTint="@android:color/white"
-        android:src="@drawable/floatingaction_button_weather"
-        app:rippleColor="@color/blue"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/fab_fragment_map_sos"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginVertical="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_gravity="right"
+        android:background="@drawable/sos"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/fab_fragment_map_satellite"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginVertical="200dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/satellite"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <ImageView
+        android:id="@+id/fab_fragment_map_formal"
+        android:layout_width="32dp"
+        android:layout_height="28dp"
+        android:layout_marginVertical="250dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/map"
+        android:clickable="true"
         android:focusable="true" />
 
     <RelativeLayout

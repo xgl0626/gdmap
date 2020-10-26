@@ -2,11 +2,13 @@ package com.example.gdmap.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,6 +38,7 @@ import com.amap.api.services.route.*
 import com.example.gdmap.R
 import com.example.gdmap.bean.Choice
 import com.example.gdmap.ui.activity.GudieActivity
+import com.example.gdmap.ui.activity.SosActivity
 import com.example.gdmap.ui.activity.WeatherActivity
 import com.example.gdmap.ui.adapter.ChoiceOutAdapter
 import com.example.gdmap.utils.*
@@ -45,6 +48,8 @@ import com.example.gdmap.utils.walkrouteutil.WalkRouteOverlay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.dialog_comment_layout.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map_bottom_sheet.*
 import java.text.SimpleDateFormat
@@ -59,8 +64,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     private var mLocationClient: AMapLocationClient? = null
     private var cityString: String? = null
     private var contentPlace: String? = null
-    private var surlng= 0.0
-    private var surrlat= 0.0
+    private var surlng = 0.0
+    private var surrlat = 0.0
     private var lat: Double? = null
     private var lng: Double? = null
     private var poiList = ArrayList<PoiItem>()
@@ -68,8 +73,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     private var end_point: LatLonPoint? = null
     private var _city: String? = null//记录当前城市的信息
     private var route: Boolean = true
-    private var endlng= 0.0
-    private var endlat= 0.0
+    private var endlng = 0.0
+    private var endlat = 0.0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -117,7 +122,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 intent.putExtra("lng", surlng)
                 intent.putExtra("endlat", endlat)
                 intent.putExtra("endlng", endlng)
-                intent.putExtra("choice",false)
+                intent.putExtra("choice", false)
                 startActivity(intent)
             }
             //步行导航
@@ -127,7 +132,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 intent.putExtra("lng", surlng)
                 intent.putExtra("endlat", endlat)
                 intent.putExtra("endlng", endlng)
-                intent.putExtra("choice",true)
+                intent.putExtra("choice", true)
                 startActivity(intent)
             }
         }
@@ -189,15 +194,27 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 )
                 poiSearch()
             }
-        //驾车导航
-//        bs_rb_drive_car.setOnClickListener { view ->
-//            context?.let { GudieUtils.startGuilde(it) }
-//        }
+
+        //进入天气
         fab_fragment_map_weather.setOnClickListener { view ->
-//            cityString?.let { context?.let { it1 -> WeatherSearchUtils.weatherSearch(it, it1) } }
             val intent = Intent(this.activity, WeatherActivity::class.java)
             intent.putExtra("cityname", cityString)
             startActivity(intent)
+        }
+        //卫星地图
+        fab_fragment_map_satellite.setOnClickListener {
+            aMap?.mapType = AMap.MAP_TYPE_SATELLITE
+            //隐藏掉地图上的文字
+            aMap?.showMapText(false)
+        }
+
+        fab_fragment_map_formal.setOnClickListener {
+            aMap?.mapType = AMap.MAP_TYPE_NORMAL
+            aMap?.showMapText(true)
+
+        }
+        fab_fragment_map_sos.setOnClickListener {
+            changeToActivity(SosActivity())
         }
         //点击事件
         aMap?.setOnMarkerClickListener {
@@ -205,19 +222,20 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             return@setOnMarkerClickListener false
         }
         //拖拽事件
-        aMap?.setOnMarkerDragListener(object : AMap.OnMarkerDragListener {
-            override fun onMarkerDragEnd(p0: Marker?) {
-                TODO("Not yet implemented")
-            }
+        aMap?.setOnMarkerDragListener(
+            object : AMap.OnMarkerDragListener {
+                override fun onMarkerDragEnd(p0: Marker?) {
+                    TODO("Not yet implemented")
+                }
 
-            override fun onMarkerDragStart(p0: Marker?) {
-                TODO("Not yet implemented")
-            }
+                override fun onMarkerDragStart(p0: Marker?) {
+                    TODO("Not yet implemented")
+                }
 
-            override fun onMarkerDrag(p0: Marker?) {
-                TODO("Not yet implemented")
-            }
-        })
+                override fun onMarkerDrag(p0: Marker?) {
+                    TODO("Not yet implemented")
+                }
+            })
     }
 
 
@@ -434,8 +452,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 result.pois.get(0).latLonPoint.latitude,
                 result.pois.get(0).latLonPoint.longitude
             )
-            endlat=result.pois.get(0).latLonPoint.latitude
-            endlng=result.pois.get(0).latLonPoint.longitude
+            endlat = result.pois.get(0).latLonPoint.latitude
+            endlng = result.pois.get(0).latLonPoint.longitude
             if (route) {
                 drawDrivingRouteLine()
             } else {
@@ -448,8 +466,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     }
 
 
-        //1 创建路径的绘制的句柄 routeSearch
-        fun drawDrivingRouteLine() {
+    //1 创建路径的绘制的句柄 routeSearch
+    fun drawDrivingRouteLine() {
         val routeSearch = RouteSearch(MyApplication.context);
         val ft = com.amap.api.services.route.RouteSearch.FromAndTo(start_point, end_point)
         //设置一个路径搜索的query

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_weather.*
 
 /**
  * @Author: xgl
@@ -20,6 +21,7 @@ class ProductActivity :BaseActivity()
 
     }
     override fun initView() {
+        setSupportActionBar(toolbar)
     }
 
     override fun initClick() {

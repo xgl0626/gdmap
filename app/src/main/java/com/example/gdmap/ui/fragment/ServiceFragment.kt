@@ -3,16 +3,18 @@ package com.example.gdmap.ui.fragment
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gdmap.ui.activity.SearchActivity
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
+import com.example.gdmap.ui.activity.LoadDisasterActivity
+import com.example.gdmap.ui.activity.SearchActivity
 import com.example.gdmap.ui.activity.WriteQuestionActivity
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
@@ -27,10 +29,10 @@ import kotlinx.android.synthetic.main.fragment_service.*
  * @Description:
  * @Date: 2020/10/3 10:05
  */
-class ServiceFragment : BaseFragment(){
+class ServiceFragment : BaseFragment() {
     private var dialog: ProgressDialog? = null
     private var messageItemAdapter: QuestionItemAdapter? = null
-    private val viewModel by lazy {  ViewModelProviders.of(this).get(QuestionViewModel::class.java)}
+    private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,8 +45,9 @@ class ServiceFragment : BaseFragment(){
         super.onStart()
         viewModel.getQuestionListData()
     }
+
     override fun initClick() {
-        et_fragment_home_search.setOnSingleClickListener{
+        et_fragment_home_search.setOnSingleClickListener {
             changeToActivity(SearchActivity())
         }
         tv_question.setOnSingleClickListener {
@@ -52,6 +55,13 @@ class ServiceFragment : BaseFragment(){
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        toolbar.inflateMenu(R.menu.service_fragment_menu)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initView() {
         AddIconImage.setImageViewToEditText(R.drawable.ic_search, et_fragment_home_search, 1)
         dialog = ProgressDialog(context)
@@ -67,7 +77,7 @@ class ServiceFragment : BaseFragment(){
     override fun initData() {
         srl_main.setOnRefreshListener {
             viewModel.getQuestionListData()
-            srl_main.isRefreshing=false
+            srl_main.isRefreshing = false
         }
         viewModel.getQuestionListData()
         viewModel.commentData.observe(viewLifecycleOwner, Observer {
@@ -81,4 +91,5 @@ class ServiceFragment : BaseFragment(){
         val intent = Intent(this.activity, activity::class.java)
         this.activity?.startActivity(intent)
     }
+
 }
