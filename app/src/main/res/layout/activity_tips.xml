@@ -15,7 +15,7 @@
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/tb_tips"
-        app:titleTextColor="@color/black" />
+        app:titleTextColor="@color/tab_selected_color" />
 
     <com.example.gdmap.ui.widget.MyTabLayout
         android:id="@+id/tl_category"

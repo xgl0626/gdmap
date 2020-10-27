@@ -15,7 +15,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/bt_activity_sign"
         app:navigationIcon="@drawable/ic_common_toolbar"
-        app:titleTextColor="@color/black" />
+        app:titleTextColor="@color/tab_selected_color" />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_collect"
         android:layout_width="match_parent"

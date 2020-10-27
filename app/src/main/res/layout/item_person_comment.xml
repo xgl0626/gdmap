@@ -94,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="重庆"
+            android:textColor="@color/tab_selected_color"
             android:id="@+id/tv_place"
             android:textSize="15sp"
             android:padding="10dp"

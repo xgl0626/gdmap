@@ -52,7 +52,6 @@ class RegisterActivity : BaseActivity() {
     }
 
     override fun initView() {
-        Glide.with(iv_logo).load(R.drawable.app_logo).into(iv_logo)
         AddIconImage.setImageViewToEditText(
             R.mipmap.acticity_login_name,
             et_activity_register_username,

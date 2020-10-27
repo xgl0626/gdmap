@@ -15,8 +15,23 @@
         app:navigationIcon="@drawable/ic_common_toolbar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/bt_activity_load_disater"
-        app:titleTextColor="@color/black" />
-
+        app:titleTextColor="@color/tab_selected_color"/>
+    <TextView
+        android:id="@+id/tv_concern"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_quiz_new_text_background"
+        android:gravity="start|top"
+        android:text="      这里你可以上传两张此次灾前和灾后的图片，我们将会返回一张该地区地域灾害等级评估。"
+        android:paddingStart="5dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
     <com.example.gdmap.ui.widget.NineGridView
         android:id="@+id/nine_grid_view"
         android:layout_width="match_parent"
@@ -26,7 +41,7 @@
         android:paddingTop="19dp"
         android:paddingEnd="15dp"
         android:paddingBottom="19dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/tv_concern"
         tools:layout_editor_absoluteX="0dp" />
 
         <com.example.gdmap.ui.widget.RectangleView

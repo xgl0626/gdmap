@@ -38,6 +38,7 @@ import com.amap.api.services.route.*
 import com.example.gdmap.R
 import com.example.gdmap.bean.Choice
 import com.example.gdmap.ui.activity.GudieActivity
+import com.example.gdmap.ui.activity.LoadDisasterActivity
 import com.example.gdmap.ui.activity.SosActivity
 import com.example.gdmap.ui.activity.WeatherActivity
 import com.example.gdmap.ui.adapter.ChoiceOutAdapter
@@ -215,6 +216,9 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         }
         fab_fragment_map_sos.setOnClickListener {
             changeToActivity(SosActivity())
+        }
+        fab_fragment_map_city.setOnClickListener {
+            changeToActivity(LoadDisasterActivity())
         }
         //点击事件
         aMap?.setOnMarkerClickListener {

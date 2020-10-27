@@ -105,7 +105,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.bt_fragment_me_disaster -> changeToActivity(LoadDisasterActivity())
+            R.id.bt_fragment_me_disaster -> changeToActivity(ProductActivity())
             R.id.bt_fragment_me_data -> changeToActivity2(SetDataActivity())
             R.id.bt_fragment_collect -> changeToActivity(CollectActivity())
             R.id.bt_fragment_me_question -> changeToActivity(TipsActivity())
