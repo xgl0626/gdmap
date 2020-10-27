@@ -3,6 +3,8 @@ package com.example.gdmap.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.drawToBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -18,6 +21,7 @@ import com.example.gdmap.bean.MessagesTestData
 import com.example.gdmap.bean.QuestionData
 import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.activity.CommentActivity
+import com.example.gdmap.ui.activity.ViewImageActivity
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.ui.widget.NineGridView
 import com.example.gdmap.utils.excite
@@ -107,6 +111,13 @@ class QuestionItemAdapter(val context: Context) :
                     content.text = data[position].description
                     place.text = data[position].place
                     nine_views.setImages(data[position].photo_url)
+                    nine_views.setOnItemClickListener { itemView, index ->
+                        val iv=itemView as ImageView
+                        val bitmap=iv.drawToBitmap()
+                        val intent=Intent(context,ViewImageActivity::class.java)
+                        intent.putExtra("url",bitmap)
+                        context.startActivity(intent)
+                    }
                     itemView.setOnSingleClickListener {
                         changeToActivity(CommentActivity(), data[position].question_id)
                     }
