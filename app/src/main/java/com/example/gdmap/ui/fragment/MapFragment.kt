@@ -453,11 +453,13 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             )
             endlat = result.pois.get(0).latLonPoint.latitude
             endlng = result.pois.get(0).latLonPoint.longitude
-            if (route) {
-                drawDrivingRouteLine()
-            } else {
-                drawWalkingRouteLine()
-            }
+            drawDrivingRouteLine()
+            drawWalkingRouteLine()
+//            if (route) {
+//                drawDrivingRouteLine()
+//            } else {
+//                drawWalkingRouteLine()
+//            }
 
         } else {
             Toast.toast("未查询到结果")
@@ -500,7 +502,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     start_point, end_point, null
                 )
                 //删除之前的路径
-                aMap?.clear()
+//                aMap?.clear()
                 //以适当的缩放显示路径
                 drivingRouteOverlay.zoomToSpan()
                 //去掉中间转弯的一些图标提示
@@ -561,7 +563,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     start_point, end_point
                 )
                 //删除之前的路径
-                aMap?.clear()
+//                aMap?.clear()
                 walkRouteOverlay.zoomToSpan()
                 walkRouteOverlay.addToMap()
             }

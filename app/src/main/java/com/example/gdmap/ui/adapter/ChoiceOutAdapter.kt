@@ -42,9 +42,9 @@ class ChoiceOutAdapter(val data:ArrayList<Choice>, val context:Context, val frag
         val viewHolder = holder as ChoiceViewHolder
         Glide.with(context).load(choicedata[position].out).into(viewHolder.out)
         //route的点击事件
-        viewHolder.route.setOnClickListener { view ->
-                choice?.Route(position)
-        }
+//        viewHolder.route.setOnClickListener { view ->
+//                choice?.Route(position)
+//        }
         if(position==0)
         {
             viewHolder.choiceName.text="驾车"
