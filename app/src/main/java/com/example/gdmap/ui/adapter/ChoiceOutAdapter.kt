@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -33,6 +34,7 @@ class ChoiceOutAdapter(val data:ArrayList<Choice>, val context:Context, val frag
     class ChoiceViewHolder(view: View):RecyclerView.ViewHolder(view){
         val out=view.findViewById<ImageView>(R.id.map_iv_out)
         val route=view.findViewById<ImageView>(R.id.map_iv_route)
+        val choiceName=view.findViewById<TextView>(R.id.tv_choice_name)
         val guide=view.findViewById<ImageView>(R.id.map_iv_guide)
     }
 
@@ -42,6 +44,14 @@ class ChoiceOutAdapter(val data:ArrayList<Choice>, val context:Context, val frag
         //route的点击事件
         viewHolder.route.setOnClickListener { view ->
                 choice?.Route(position)
+        }
+        if(position==0)
+        {
+            viewHolder.choiceName.text="驾车"
+        }
+        else
+        {
+            viewHolder.choiceName.text="步行"
         }
         //guide的点击事件
         viewHolder.guide.setOnClickListener { view->

@@ -6,8 +6,10 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.gdmap.bean.QuestionData
+import com.example.gdmap.bean.RedirectBean
 import com.example.gdmap.bean.RedirectData
 import com.example.gdmap.config.TokenConfig.token
 import com.example.gdmap.network.ApiService
@@ -19,6 +21,7 @@ import com.example.gdmap.utils.getFilePathFromContentUri
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.io.File
@@ -46,7 +49,6 @@ class QuestionViewModel : ViewModel() {
                 ?.unsubscribeOn(Schedulers.io())
                 ?.observeOn(AndroidSchedulers.mainThread())
                 ?.subscribe {
-                    LogUtils.log_d<String>(it.toString())
                     if (it.status == 10000) {
                         commentData.value = it.data
                     } else {
@@ -89,7 +91,7 @@ class QuestionViewModel : ViewModel() {
             .unsubscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnError {
-                it.printStackTrace()
+                Log.d("redirect", it.message.toString())
             }
             .subscribe {
                 Log.d("redirect", it.toString())
@@ -134,7 +136,6 @@ class QuestionViewModel : ViewModel() {
                     it.printStackTrace()
                 }
                 .subscribe {
-                    Log.d("question", it.toString())
                     if (it.status == 10000) {
                         Toast.toast("提问成功")
                     } else {

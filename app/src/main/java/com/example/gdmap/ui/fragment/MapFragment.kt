@@ -2,13 +2,9 @@ package com.example.gdmap.ui.fragment
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +26,7 @@ import com.amap.api.maps.LocationSource.OnLocationChangedListener
 import com.amap.api.maps.UiSettings
 import com.amap.api.maps.model.*
 import com.amap.api.maps.model.animation.RotateAnimation
+import com.amap.api.navi.view.RouteOverLay
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
@@ -49,8 +46,6 @@ import com.example.gdmap.utils.walkrouteutil.WalkRouteOverlay
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.dialog_comment_layout.view.*
 import kotlinx.android.synthetic.main.fragment_map.*
 import kotlinx.android.synthetic.main.fragment_map_bottom_sheet.*
 import java.text.SimpleDateFormat
@@ -283,7 +278,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
             .alpha(0.8f);
         val marker = aMap!!.addMarker(markerOptions)
         val animation: RotateAnimation =
-            RotateAnimation(marker.getRotateAngle(), marker.getRotateAngle() + 180F, 0F, 0F, 0F)
+            RotateAnimation(marker.rotateAngle, marker.rotateAngle + 180F, 0F, 0F, 0F)
         val duration = 1000L
         animation.setDuration(duration)
         animation.setInterpolator(LinearInterpolator())
@@ -473,10 +468,16 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     //1 创建路径的绘制的句柄 routeSearch
     fun drawDrivingRouteLine() {
         val routeSearch = RouteSearch(MyApplication.context);
-        val ft = com.amap.api.services.route.RouteSearch.FromAndTo(start_point, end_point)
+        val ft = RouteSearch.FromAndTo(start_point, end_point)
         //设置一个路径搜索的query
         val query =
-            RouteSearch.DriveRouteQuery(ft, RouteSearch.DRIVING_SINGLE_DEFAULT, null, null, "")
+            RouteSearch.DriveRouteQuery(
+                ft,
+                RouteSearch.DRIVING_MULTI_STRATEGY_FASTEST_SAVE_MONEY_SHORTEST,
+                null,
+                null,
+                ""
+            )
         // 3 给绘制路径的句柄设置一个callback函数
         routeSearch.setRouteSearchListener(object : RouteSearch.OnRouteSearchListener {
             override fun onBusRouteSearched(p0: BusRouteResult?, p1: Int) {
@@ -489,7 +490,11 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     return
                 }
                 //画出路径
-                val path = p0?.paths?.get(0)
+                LogUtils.log_d<String>(p0?.paths?.size.toString())
+                for (path in p0?.paths!!) {
+                    LogUtils.log_d<String>(path.toString())
+                }
+                val path = p0.paths?.get(0)
                 val drivingRouteOverlay = DrivingRouteOverlay(
                     MyApplication.context, aMap, path,
                     start_point, end_point, null
@@ -526,8 +531,8 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
     fun drawWalkingRouteLine() {
         //1 创建路径的绘制的句柄 routeSearch
         val routeSearch = RouteSearch(MyApplication.context);
-        val ft = com.amap.api.services.route.RouteSearch.FromAndTo(start_point, end_point)
-        val query = RouteSearch.WalkRouteQuery(ft, RouteSearch.WALK_DEFAULT)
+        val ft = RouteSearch.FromAndTo(start_point, end_point)
+        val query = RouteSearch.WalkRouteQuery(ft, RouteSearch.WALK_MULTI_PATH)
         routeSearch.setRouteSearchListener(object : RouteSearch.OnRouteSearchListener {
             override fun onDriveRouteSearched(p0: DriveRouteResult?, p1: Int) {
                 TODO("Not yet implemented")
@@ -547,7 +552,10 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                     return
                 }
                 val path = p0?.paths?.get(0)
-
+                LogUtils.log_d<String>(p0?.paths?.size.toString())
+                for (path in p0?.paths!!) {
+                    LogUtils.log_d<String>(path.toString())
+                }
                 val walkRouteOverlay = WalkRouteOverlay(
                     MyApplication.context, aMap, path,
                     start_point, end_point
@@ -561,7 +569,6 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         //3 启动路径所有 将query穿进去 向服务器发送请求
         routeSearch.calculateWalkRouteAsyn(query);
     }
-
     fun poiSearch() {
         val dstAddr = et_search.text.toString()
         // 1 创建一个搜索的条件对象 query
