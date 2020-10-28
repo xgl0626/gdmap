@@ -44,17 +44,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_concern"
         tools:layout_editor_absoluteX="0dp" />
 
-        <com.example.gdmap.ui.widget.RectangleView
-            android:id="@+id/iv_load_disaster"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            app:layout_constraintBottom_toTopOf="@+id/bt_send_images"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nine_grid_view"
-            app:layout_constraintVertical_bias="0.671"
-            />
+    <com.example.gdmap.ui.widget.RectangleView
+        android:id="@+id/iv_load_disaster"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_send_images"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nine_grid_view"
+        app:layout_constraintVertical_bias="0.35" />
 
     <Button
         android:id="@+id/bt_send_images"

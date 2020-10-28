@@ -1,24 +1,35 @@
 package com.example.gdmap.ui.activity
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
+import android.os.*
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
+import com.bumptech.glide.GlideBuilder
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.BaseRequestOptions
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.ImageSelectutils
+import com.example.gdmap.utils.MyApplication.Companion.context
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_load_disaster.*
 import top.limuyang2.photolibrary.LPhotoHelper
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 /**
  * @Author: xgl
@@ -28,9 +39,12 @@ import top.limuyang2.photolibrary.LPhotoHelper
  */
 
 class LoadDisasterActivity : BaseActivity() {
+    private var dialog: ProgressDialog? = null
+
     companion object {
         const val MAX_SELECTABLE_IMAGE_COUNT = 2
     }
+
     private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -44,15 +58,39 @@ class LoadDisasterActivity : BaseActivity() {
 
     override fun initClick() {
         bt_send_images.setOnClickListener {
+            sendMsg(0)
             viewModel.redirect()
-            finish()
+        }
+    }
+
+    fun sendMsg(index: Int) {
+        val message = Message()
+        message.what = index
+        handler.sendMessage(message)
+    }
+
+    private val handler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                0 -> {
+                    dialog = ProgressDialog(this@LoadDisasterActivity)
+                    dialog?.setMessage("加载数据中，由于模型较大，请耐心等待...")
+                    dialog?.show()
+                }
+                1 -> {
+                    dialog?.dismiss()
+                }
+            }
+
         }
     }
 
     override fun initData() {
         initAddImageView()
         viewModel.redirectData.observe(this, Observer {
-            Glide.with(iv_load_disaster).load(BASE_URL+it.photo_url).into(iv_load_disaster)
+            sendMsg(1)
+            Glide.with(iv_load_disaster).load(BASE_URL + it.photo_url).into(iv_load_disaster)
         })
     }
 

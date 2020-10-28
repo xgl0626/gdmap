@@ -30,7 +30,6 @@ import kotlinx.android.synthetic.main.fragment_service.*
  * @Date: 2020/10/3 10:05
  */
 class ServiceFragment : BaseFragment() {
-    private var dialog: ProgressDialog? = null
     private var messageItemAdapter: QuestionItemAdapter? = null
     private val viewModel by lazy { ViewModelProviders.of(this).get(QuestionViewModel::class.java) }
     override fun onCreateView(
@@ -64,9 +63,6 @@ class ServiceFragment : BaseFragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun initView() {
         AddIconImage.setImageViewToEditText(R.drawable.ic_search, et_fragment_home_search, 1)
-        dialog = ProgressDialog(context)
-        dialog?.setMessage("加载数据中...")
-        dialog?.show()
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
         messageItemAdapter = this.context?.let { QuestionItemAdapter(it) }
@@ -82,9 +78,7 @@ class ServiceFragment : BaseFragment() {
         viewModel.getQuestionListData()
         viewModel.commentData.observe(viewLifecycleOwner, Observer {
             messageItemAdapter?.addData(it)
-            LogUtils.log_d<String>(it.toString())
         })
-        dialog?.dismiss()
     }
 
     private fun changeToActivity(activity: Activity) {

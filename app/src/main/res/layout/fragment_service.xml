@@ -41,7 +41,7 @@
         android:layout_height="32dp"
         android:background="@drawable/shape_toast"
         android:gravity="center"
-        android:text="提问"
+        android:text="Add"
         android:id="@+id/tv_question"
         android:textColor="@color/bg_grey"
         android:textSize="16sp"

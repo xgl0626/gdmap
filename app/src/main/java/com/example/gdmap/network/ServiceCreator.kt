@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit
  *@description
  */
 object ServiceCreator {
-
     private const val BASE_URL = "http://47.93.114.84:8081"
     private val retrofit: Retrofit
     init {
@@ -21,9 +20,9 @@ object ServiceCreator {
         logging.level = HttpLoggingInterceptor.Level.BASIC
 
         val OkHttpClient = with(okhttp3.OkHttpClient.Builder()) {
-            connectTimeout(5L, TimeUnit.SECONDS)
-            writeTimeout(10L, TimeUnit.SECONDS)
-            readTimeout(10L, TimeUnit.SECONDS)
+            connectTimeout(120L, TimeUnit.SECONDS)
+            writeTimeout(120L, TimeUnit.SECONDS)
+            readTimeout(120L, TimeUnit.SECONDS)
             addInterceptor(logging)
             build()
         }
