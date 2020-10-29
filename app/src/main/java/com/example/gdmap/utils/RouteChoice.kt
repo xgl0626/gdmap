@@ -7,5 +7,5 @@ package com.example.gdmap.utils
  *@description
  */
 interface RouteChoice {
-    fun Route(result:Int)
+    fun Route(result: Int)
 }

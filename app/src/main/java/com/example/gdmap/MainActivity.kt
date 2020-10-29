@@ -14,11 +14,12 @@ import com.example.gdmap.ui.fragment.ServiceFragment
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), OnPageChangeListener{
+class MainActivity : BaseActivity(), OnPageChangeListener {
     private lateinit var fragmentsAdapter: FragmentsAdapter
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             super.onCreate(savedInstanceState)
         }
     }

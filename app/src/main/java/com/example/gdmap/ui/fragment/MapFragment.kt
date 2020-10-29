@@ -26,7 +26,6 @@ import com.amap.api.maps.LocationSource.OnLocationChangedListener
 import com.amap.api.maps.UiSettings
 import com.amap.api.maps.model.*
 import com.amap.api.maps.model.animation.RotateAnimation
-import com.amap.api.navi.view.RouteOverLay
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
 import com.amap.api.services.poisearch.PoiResult
@@ -169,6 +168,23 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
                 }
             }
 
+        })
+        et_search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null) {
+                    if (s.isEmpty()) {
+                        aMap?.clear()
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
         })
         et_search.addTextChangedListener(this)
         et_search.onItemClickListener =
@@ -571,6 +587,7 @@ class MapFragment : Fragment(), LocationSource, AMapLocationListener, TextWatche
         //3 启动路径所有 将query穿进去 向服务器发送请求
         routeSearch.calculateWalkRouteAsyn(query);
     }
+
     fun poiSearch() {
         val dstAddr = et_search.text.toString()
         // 1 创建一个搜索的条件对象 query

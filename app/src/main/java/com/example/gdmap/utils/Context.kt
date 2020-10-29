@@ -4,12 +4,6 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
-import android.view.View
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.gdmap.R
 
 /**
  * @Author: xgl

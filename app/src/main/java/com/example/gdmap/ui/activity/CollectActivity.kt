@@ -12,16 +12,13 @@ import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.CollectViewModel
-import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_collect.*
-import kotlinx.android.synthetic.main.activity_collect.recyclerView
-import kotlinx.android.synthetic.main.activity_collect.toolbar
-import kotlinx.android.synthetic.main.fragment_service.*
 
 class CollectActivity() : BaseActivity() {
     private var collectItemAdapter: QuestionItemAdapter? = null
-    private val viewModel by lazy {  ViewModelProviders.of(this).get(CollectViewModel::class.java)}
+    private val viewModel by lazy { ViewModelProviders.of(this).get(CollectViewModel::class.java) }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +29,7 @@ class CollectActivity() : BaseActivity() {
         recyclerView.adapter = collectItemAdapter
         srl_collect.setOnRefreshListener {
             viewModel.getCollectQuestionList()
-            srl_collect.isRefreshing=false
+            srl_collect.isRefreshing = false
         }
         viewModel.collectData.observe(this, Observer {
             collectItemAdapter?.addData(it)

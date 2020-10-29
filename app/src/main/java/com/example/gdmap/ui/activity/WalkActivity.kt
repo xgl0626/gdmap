@@ -14,21 +14,21 @@ import com.example.gdmap.utils.InputTipUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
 import kotlinx.android.synthetic.main.activity_walk.*
 
-class WalkActivity :BaseActivity(),TextWatcher
-{
-    private var mylat:Double?=null
-    private var mylng:Double?=null
-    private var ideallat:Double?=null
-    private var ideallng:Double?=null
-    private var cityName:String?=null
+class WalkActivity : BaseActivity(), TextWatcher {
+    private var mylat: Double? = null
+    private var mylng: Double? = null
+    private var ideallat: Double? = null
+    private var ideallng: Double? = null
+    private var cityName: String? = null
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(toolbar)
-        val intent=intent
-        mylat=intent.getDoubleExtra("lat",0.0)
-        mylng=intent.getDoubleExtra("lng",0.0)
-        cityName=intent.getStringExtra("city")
+        val intent = intent
+        mylat = intent.getDoubleExtra("lat", 0.0)
+        mylng = intent.getDoubleExtra("lng", 0.0)
+        cityName = intent.getStringExtra("city")
         com.example.gdmap.utils.Toast.toast(cityName.toString())
     }
 
@@ -42,13 +42,13 @@ class WalkActivity :BaseActivity(),TextWatcher
             }
         bt_activity_walk_glide.setOnClickListener {
 
-                val intent = Intent(context, GudieActivity::class.java)
-                intent.putExtra("lat", mylat)
-                intent.putExtra("lng", mylng)
-                intent.putExtra("endlat", ideallat)
-                intent.putExtra("endlng", ideallng)
-                startActivity(intent)
-            }
+            val intent = Intent(context, GudieActivity::class.java)
+            intent.putExtra("lat", mylat)
+            intent.putExtra("lng", mylng)
+            intent.putExtra("endlat", ideallat)
+            intent.putExtra("endlng", ideallng)
+            startActivity(intent)
+        }
     }
 
     override fun initClick() {

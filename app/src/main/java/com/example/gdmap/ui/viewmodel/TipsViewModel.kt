@@ -2,7 +2,6 @@ package com.example.gdmap.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.gdmap.bean.QuestionData
 import com.example.gdmap.bean.Tip
 import com.example.gdmap.network.ApiService
 import com.example.gdmap.network.ServiceCreator
@@ -17,9 +16,9 @@ import rx.schedulers.Schedulers
  *@author SpreadWater
  *@description
  */
-class TipsViewModel :ViewModel() {
+class TipsViewModel : ViewModel() {
     val tipData = MutableLiveData<List<Tip>>()
-    fun getTips(tittle:String){
+    fun getTips(tittle: String) {
         ServiceCreator.create(ApiService::class.java)
             .getTips(tittle)
             .subscribeOn(Schedulers.io())

@@ -1,6 +1,5 @@
 package com.example.gdmap.ui.viewmodel
 
-import android.util.Base64
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

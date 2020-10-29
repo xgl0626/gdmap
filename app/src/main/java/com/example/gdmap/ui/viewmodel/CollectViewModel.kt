@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers
  *@author SpreadWater
  *@description
  */
-class CollectViewModel: ViewModel() {
+class CollectViewModel : ViewModel() {
     val imageUrls = MutableLiveData<ArrayList<String>>()
     val collectData = MutableLiveData<List<QuestionData>>()
     private var token2: String? = null
@@ -25,7 +25,8 @@ class CollectViewModel: ViewModel() {
     init {
         token2 = "Bearer ${TokenConfig.token.token}"
     }
-    fun getCollectQuestionList(){
+
+    fun getCollectQuestionList() {
         token2?.let {
             ServiceCreator.create(ApiService::class.java)
                 .getCollectQuestionList(token2!!)

@@ -7,8 +7,8 @@ import com.amap.api.navi.*
 import com.amap.api.navi.model.AMapNaviLocation
 
 object GudieUtils : INaviInfoCallback {
-    fun startGuilde(context: Context,start:Poi,end:Poi) {
-        val amapNaviParams = AmapNaviParams(start,null,end, AmapNaviType.DRIVER)
+    fun startGuilde(context: Context, start: Poi, end: Poi) {
+        val amapNaviParams = AmapNaviParams(start, null, end, AmapNaviType.DRIVER)
         //设置是否多条路径
         amapNaviParams.isMultipleRouteNaviMode = true
         //设置是否语音播报
@@ -21,7 +21,8 @@ object GudieUtils : INaviInfoCallback {
         amapNaviParams.theme = (
                 AmapNaviTheme.WHITE)
         AmapNaviPage.getInstance().showRouteActivity(
-            context, amapNaviParams, this)
+            context, amapNaviParams, this
+        )
     }
 
     override fun onGetNavigationText(p0: String?) {

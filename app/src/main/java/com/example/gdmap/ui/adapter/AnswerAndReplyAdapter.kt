@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,7 +19,6 @@ import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.utils.isLike
 import com.example.gdmap.utils.setOnSingleClickListener
-import kotlin.collections.ArrayList
 
 /**
  * @Author: xgl
@@ -81,7 +82,7 @@ class AnswerAndReplyAdapter(val context: Context) :
             groupHolder = convertView.tag as GroupHolder
         }
         groupHolder.apply {
-            Glide.with(context).load(BASE_URL+answerList[groupPosition].photo_avatar)
+            Glide.with(context).load(BASE_URL + answerList[groupPosition].photo_avatar)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .centerCrop()
                 .into(avatar)

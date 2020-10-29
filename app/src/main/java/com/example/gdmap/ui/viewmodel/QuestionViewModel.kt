@@ -1,27 +1,20 @@
 package com.example.gdmap.ui.viewmodel
 
-import android.content.ContentResolver
-import android.net.Uri
-import android.provider.MediaStore
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.example.gdmap.bean.QuestionData
-import com.example.gdmap.bean.RedirectBean
 import com.example.gdmap.bean.RedirectData
 import com.example.gdmap.config.TokenConfig.token
 import com.example.gdmap.network.ApiService
 import com.example.gdmap.network.ServiceCreator
-import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.MyApplication.Companion.context
 import com.example.gdmap.utils.Toast
 import com.example.gdmap.utils.getFilePathFromContentUri
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import java.io.File
@@ -33,7 +26,7 @@ import java.io.File
 class QuestionViewModel : ViewModel() {
     private val isInvalidList = arrayListOf<Boolean>()
     val commentData = MutableLiveData<List<QuestionData>>()
-    val redirectData= MutableLiveData<RedirectData>()
+    val redirectData = MutableLiveData<RedirectData>()
     val imageUrls = MutableLiveData<ArrayList<String>>()
     private var token2: String? = null
 
@@ -96,7 +89,7 @@ class QuestionViewModel : ViewModel() {
             .subscribe {
                 Log.d("redirect", it.toString())
                 if (it.status == 10000) {
-                    redirectData.value=it.data
+                    redirectData.value = it.data
                     Toast.toast("上传成功")
                 } else {
                     Toast.toast("上传失败")

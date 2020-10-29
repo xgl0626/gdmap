@@ -1,7 +1,5 @@
 package com.example.gdmap.ui.viewmodel
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
@@ -61,19 +59,19 @@ class SetDataViewModel : ViewModel() {
                 builder.addFormDataPart(name, file.name, imageBody)
             }
         }
-            updateService.updateInfo(token2, builder.build().parts())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    if (it.status == 10000) {
-                        Toast.toast("更新成功！")
-                    } else {
-                        if (it.data.message.isNotEmpty()) {
-                            Log.d("zt", it.data.message)
-                        }
-                        Log.d("zt", "null")
-                        Toast.toast("更新失败!")
+        updateService.updateInfo(token2, builder.build().parts())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (it.status == 10000) {
+                    Toast.toast("更新成功！")
+                } else {
+                    if (it.data.message.isNotEmpty()) {
+                        Log.d("zt", it.data.message)
                     }
+                    Log.d("zt", "null")
+                    Toast.toast("更新失败!")
                 }
-        }
+            }
     }
+}

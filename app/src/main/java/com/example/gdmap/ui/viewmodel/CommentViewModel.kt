@@ -1,15 +1,12 @@
 package com.example.gdmap.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.gdmap.bean.AnswerData
-
-import com.example.gdmap.bean.CommentData
 import com.example.gdmap.bean.QuestionData
 import com.example.gdmap.config.TokenConfig
-import com.example.gdmap.network.ServiceCreator
 import com.example.gdmap.network.ApiService
+import com.example.gdmap.network.ServiceCreator
 import com.example.gdmap.utils.Toast
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

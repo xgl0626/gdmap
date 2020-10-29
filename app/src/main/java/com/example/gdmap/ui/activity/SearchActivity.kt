@@ -3,7 +3,6 @@ package com.example.gdmap.ui.activity
 import android.app.ProgressDialog
 import android.os.Build
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,15 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
-import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.ui.viewmodel.SearchViewModel
-import com.example.gdmap.utils.AddIconImage
 import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.recyclerView
-import kotlinx.android.synthetic.main.activity_search.toolbar
-import kotlinx.android.synthetic.main.fragment_service.*
 
 /**
  * @Author: 徐国林

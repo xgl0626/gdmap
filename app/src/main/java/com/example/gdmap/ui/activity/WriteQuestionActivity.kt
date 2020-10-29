@@ -1,12 +1,10 @@
 package com.example.gdmap.ui.activity
 
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
@@ -17,8 +15,10 @@ import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.config.TokenConfig.token
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
-import com.example.gdmap.utils.*
+import com.example.gdmap.utils.ImageSelectutils
 import com.example.gdmap.utils.ImageSelectutils.REQUEST_CODE_CHOOSE_PHOTO_ALBUM
+import com.example.gdmap.utils.Toast
+import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.activity_comment.nine_grid_view
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_tips.toolbar

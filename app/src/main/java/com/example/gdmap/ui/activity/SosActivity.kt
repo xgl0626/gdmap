@@ -5,9 +5,7 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.activity_sos.*
-import kotlinx.android.synthetic.main.activity_sos.toolbar
 
 /**
  * @Author: xgl

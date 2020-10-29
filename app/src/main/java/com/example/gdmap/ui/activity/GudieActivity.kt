@@ -12,28 +12,28 @@ import com.autonavi.tbt.TrafficFacilityInfo
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_timegulide.*
-import java.lang.Exception
 
 
-class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
-    private var endlng: Double=0.0
-    private var endlat: Double=0.0
-    private var startlat: Double=0.0
-    private var startlng: Double=0.0
-    private var amapniv:AMapNavi?=null
-    private var choice:Boolean=false
+class GudieActivity : BaseActivity(), AMapNaviListener, AMapNaviViewListener {
+    private var endlng: Double = 0.0
+    private var endlat: Double = 0.0
+    private var startlat: Double = 0.0
+    private var startlng: Double = 0.0
+    private var amapniv: AMapNavi? = null
+    private var choice: Boolean = false
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val intent = intent
         startlat = intent.getDoubleExtra("lat", 0.0)
         startlng = intent.getDoubleExtra("lng", 0.0)
-        endlat = intent.getDoubleExtra("endlat",0.0)
-        endlng = intent.getDoubleExtra("endlng",0.0)
-        choice=intent.getBooleanExtra("choice",false)
+        endlat = intent.getDoubleExtra("endlat", 0.0)
+        endlng = intent.getDoubleExtra("endlng", 0.0)
+        choice = intent.getBooleanExtra("choice", false)
         navi_view.onCreate(savedInstanceState)
         navi_view.setAMapNaviViewListener(this)
-        amapniv=AMapNavi.getInstance(applicationContext)
+        amapniv = AMapNavi.getInstance(applicationContext)
         amapniv?.setUseInnerVoice(true)
         amapniv?.addAMapNaviListener(this)
 
@@ -62,6 +62,7 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
         super.onPause()
         navi_view.onPause()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         navi_view.onDestroy()
@@ -109,6 +110,7 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
 
     override fun onGpsOpenStatus(p0: Boolean) {
     }
+
     override fun updateAimlessModeCongestionInfo(p0: AimLessModeCongestionInfo?) {
     }
 
@@ -134,20 +136,27 @@ class GudieActivity:BaseActivity(), AMapNaviListener,AMapNaviViewListener {
         var strategy = 0;
         try {
             strategy = amapniv?.strategyConvert(true, false, false, true, true)!!
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace();
         }
-        if (choice){
-            amapniv?.calculateWalkRoute(startlat?.let { startlng?.let { it1 -> NaviLatLng(it, it1) } },
+        if (choice) {
+            amapniv?.calculateWalkRoute(startlat?.let {
+                startlng?.let { it1 ->
+                    NaviLatLng(
+                        it,
+                        it1
+                    )
+                }
+            },
                 endlat?.let { endlng?.let { it1 -> NaviLatLng(it, it1) } })
-        }else{
-            val startLatLng=NaviLatLng(startlat,startlng)
-            val endLatLng=NaviLatLng(endlat,endlng)
-            val sList=ArrayList<NaviLatLng>()
-            val eList=ArrayList<NaviLatLng>()
+        } else {
+            val startLatLng = NaviLatLng(startlat, startlng)
+            val endLatLng = NaviLatLng(endlat, endlng)
+            val sList = ArrayList<NaviLatLng>()
+            val eList = ArrayList<NaviLatLng>()
             sList.add(startLatLng)
             eList.add(endLatLng)
-            amapniv?.calculateDriveRoute(sList,eList,null, strategy);//起始点坐标、终点坐标、途经点坐标、strategy
+            amapniv?.calculateDriveRoute(sList, eList, null, strategy);//起始点坐标、终点坐标、途经点坐标、strategy
         }
     }
 

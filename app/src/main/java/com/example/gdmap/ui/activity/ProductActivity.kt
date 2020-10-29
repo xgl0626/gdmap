@@ -13,13 +13,13 @@ import kotlinx.android.synthetic.main.activity_weather.*
  * @Description:
  * @Date: 2020/10/5 21:36
  */
-class ProductActivity :BaseActivity()
-{
+class ProductActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
+
     override fun initView() {
         setSupportActionBar(toolbar)
     }

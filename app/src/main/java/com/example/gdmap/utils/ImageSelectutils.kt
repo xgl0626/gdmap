@@ -2,14 +2,12 @@ package com.example.gdmap.utils
 
 import android.Manifest
 import android.net.Uri
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.gdmap.R
 import com.permissionx.guolindev.PermissionX
 import top.limuyang2.photolibrary.LPhotoHelper
 import top.limuyang2.photolibrary.util.LPPImageType
-import kotlin.math.max
 
 
 /**
@@ -54,7 +52,7 @@ object ImageSelectutils {
         val selectedList: ArrayList<String>? = if (selected.isNullOrEmpty()) {
             null
         } else {
-           selected
+            selected
         }
         PermissionX.init(activity)
             .permissions(

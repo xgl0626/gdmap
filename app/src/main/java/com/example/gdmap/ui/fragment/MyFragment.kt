@@ -2,11 +2,8 @@ package com.example.gdmap.ui.fragment
 
 import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +18,8 @@ import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.activity.*
 import com.example.gdmap.ui.viewmodel.MyViewModel
 import com.example.gdmap.ui.viewmodel.SetDataViewModel
-import com.example.gdmap.utils.*
+import com.example.gdmap.utils.AddIconImage
+import com.example.gdmap.utils.ImageSelectutils
 import kotlinx.android.synthetic.main.fragment_me.*
 import top.limuyang2.photolibrary.LPhotoHelper
 
@@ -39,7 +37,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
     private val viewModel by lazy {
         ViewModelProviders.of(this).get(MyViewModel::class.java)
     }
-    private val viewModel2  by lazy { ViewModelProviders.of(this).get(SetDataViewModel::class.java) }
+    private val viewModel2 by lazy { ViewModelProviders.of(this).get(SetDataViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +54,7 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                 tv_fragment_me_user_data.text = it.nickname
                 tv_fragment_me_user_name.text = it.description
                 if (it.avatar.isNotEmpty()) {
-                    Glide.with(iv_fragment_me_user_avator).load(BASE_URL+it.avatar)
+                    Glide.with(iv_fragment_me_user_avator).load(BASE_URL + it.avatar)
                         .into(iv_fragment_me_user_avator)
                 } else {
                     Glide.with(iv_fragment_me_user_avator).load(R.mipmap.acticity_login_name)
@@ -125,13 +123,14 @@ class MyFragment : BaseFragment(), View.OnClickListener {
                     }
                     val imageListUri =
                         ArrayList((LPhotoHelper.getSelectedPhotos(data))).map {
-                            it.toString() }
+                            it.toString()
+                        }
                     val imageListAbsolutePath = ArrayList<String>()
                     imageListUri.forEach { imageListAbsolutePath.add(it) }
 
                     Glide.with(iv_fragment_me_user_avator).load(selectedPhotos[0])
                         .into(iv_fragment_me_user_avator)
-                    val user=UserInfo(dcp,Myname,qq,tel)
+                    val user = UserInfo(dcp, Myname, qq, tel)
                     viewModel2.setImageList(imageListAbsolutePath)
                     viewModel2.updateInfo(user)
                     avatar = selectedPhotos[0]

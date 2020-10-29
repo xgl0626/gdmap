@@ -192,10 +192,10 @@ public class AMapUtil {
         if ("向右前方".equals(actionName) || "靠右".equals(actionName) || actionName.contains("向右前方")) {
             return R.drawable.dir5;
         }
-        if ("向左后方".equals(actionName)|| actionName.contains("向左后方")) {
+        if ("向左后方".equals(actionName) || actionName.contains("向左后方")) {
             return R.drawable.dir7;
         }
-        if ("向右后方".equals(actionName)|| actionName.contains("向右后方")) {
+        if ("向右后方".equals(actionName) || actionName.contains("向右后方")) {
             return R.drawable.dir8;
         }
         if ("直行".equals(actionName)) {
@@ -242,8 +242,8 @@ public class AMapUtil {
             }
             if (busStep.getRailway() != null) {
                 RouteRailwayItem railway = busStep.getRailway();
-                sb.append(railway.getTrip()+"("+railway.getDeparturestop().getName()
-                        +" - "+railway.getArrivalstop().getName()+")");
+                sb.append(railway.getTrip() + "(" + railway.getDeparturestop().getName()
+                        + " - " + railway.getArrivalstop().getName() + ")");
                 sb.append(" > ");
             }
         }

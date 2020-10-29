@@ -1,11 +1,12 @@
 package com.example.gdmap.ui.fragment
 
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,13 +14,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseFragment
-import com.example.gdmap.ui.activity.LoadDisasterActivity
 import com.example.gdmap.ui.activity.SearchActivity
 import com.example.gdmap.ui.activity.WriteQuestionActivity
 import com.example.gdmap.ui.adapter.QuestionItemAdapter
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.AddIconImage
-import com.example.gdmap.utils.LogUtils
 import com.example.gdmap.utils.setOnSingleClickListener
 import kotlinx.android.synthetic.main.fragment_service.*
 

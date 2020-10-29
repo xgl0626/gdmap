@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
+import androidx.core.view.forEach
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
 import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.utils.dip
 import com.example.gdmap.utils.setOnSingleClickListener
-import java.io.File
-import androidx.core.view.forEach as forEach
 
 
 /**

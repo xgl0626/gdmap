@@ -4,31 +4,24 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.BaseRequestOptions
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.example.gdmap.R
 import com.example.gdmap.base.BaseActivity
 import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.viewmodel.QuestionViewModel
 import com.example.gdmap.utils.ImageSelectutils
-import com.example.gdmap.utils.MyApplication.Companion.context
 import com.example.gdmap.utils.Toast
 import kotlinx.android.synthetic.main.activity_load_disaster.*
 import top.limuyang2.photolibrary.LPhotoHelper
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 
 /**

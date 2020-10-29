@@ -3,7 +3,6 @@ package com.example.gdmap.ui.viewmodel
 import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.nfc.Tag
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,6 @@ import com.example.gdmap.utils.MyApplication
 import com.example.gdmap.utils.Toast
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
-import kotlin.math.log
 
 /**
  * @Author: xgl
@@ -34,7 +32,7 @@ class LoginOrRegisterViewModel : ViewModel() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                Log.d("token1",it.data.token)
+                Log.d("token1", it.data.token)
                 if (it.status == 10000) {
                     rememberPassword(name, password)
                     loginOrRegisterResult.value = 200

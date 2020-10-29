@@ -3,29 +3,22 @@ package com.example.gdmap.ui.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
-import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.drawToBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.gdmap.R
-import com.example.gdmap.bean.MessagesTestData
 import com.example.gdmap.bean.QuestionData
 import com.example.gdmap.config.TokenConfig.BASE_URL
 import com.example.gdmap.ui.activity.CommentActivity
 import com.example.gdmap.ui.activity.ViewImageActivity
 import com.example.gdmap.ui.widget.CircleImageView
 import com.example.gdmap.ui.widget.NineGridView
-import com.example.gdmap.utils.excite
-import com.example.gdmap.utils.favorite
 import com.example.gdmap.utils.setOnSingleClickListener
 
 
@@ -101,10 +94,10 @@ class QuestionItemAdapter(val context: Context) :
             LOAD -> {
                 val viewHolder = holder as CommentViewHolder
                 viewHolder.setIsRecyclable(false)
-                Log.d("photo",data[position].photo_avatar)
+                Log.d("photo", data[position].photo_avatar)
                 viewHolder.apply {
                     Glide.with(avatar)
-                        .load(BASE_URL+data[position].photo_avatar).into(avatar)
+                        .load(BASE_URL + data[position].photo_avatar).into(avatar)
                     time.text = data[position].created_at
                     title.text = data[position].tittle
                     author.text = data[position].nickname
@@ -112,10 +105,10 @@ class QuestionItemAdapter(val context: Context) :
                     place.text = data[position].place
                     nine_views.setImages(data[position].photo_url)
                     nine_views.setOnItemClickListener { itemView, index ->
-                        val iv=itemView as ImageView
-                        val bitmap=iv.drawToBitmap()
-                        val intent=Intent(context,ViewImageActivity::class.java)
-                        intent.putExtra("url",bitmap)
+                        val iv = itemView as ImageView
+                        val bitmap = iv.drawToBitmap()
+                        val intent = Intent(context, ViewImageActivity::class.java)
+                        intent.putExtra("url", bitmap)
                         context.startActivity(intent)
                     }
                     itemView.setOnSingleClickListener {

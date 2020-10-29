@@ -22,25 +22,25 @@ fun View.pressToZoomOut() {
 }
 
 fun View.excite(viewId: Int) {
-        pressToZoomOut()
-        if (!DoubleStatusDao.getStatus(viewId)) {
-            setBackgroundResource(R.drawable.ic_home_message_black_up)
-            DoubleStatusDao.saveStatus(viewId, true)
-        } else {
-            setBackgroundResource(R.drawable.ic_home_message_up)
-            DoubleStatusDao.saveStatus(viewId, false)
-        }
+    pressToZoomOut()
+    if (!DoubleStatusDao.getStatus(viewId)) {
+        setBackgroundResource(R.drawable.ic_home_message_black_up)
+        DoubleStatusDao.saveStatus(viewId, true)
+    } else {
+        setBackgroundResource(R.drawable.ic_home_message_up)
+        DoubleStatusDao.saveStatus(viewId, false)
+    }
 }
 
 fun View.favorite(viewId: Int) {
-        pressToZoomOut()
-        if (!DoubleStatusDao.getStatus(viewId)) {
-            DoubleStatusDao.saveStatus(viewId, true)
-            setBackgroundResource(R.drawable.ic_fravorite)
-        } else {
-            DoubleStatusDao.saveStatus(viewId, false)
-            setBackgroundResource(R.drawable.ic_unfravorite)
-        }
+    pressToZoomOut()
+    if (!DoubleStatusDao.getStatus(viewId)) {
+        DoubleStatusDao.saveStatus(viewId, true)
+        setBackgroundResource(R.drawable.ic_fravorite)
+    } else {
+        DoubleStatusDao.saveStatus(viewId, false)
+        setBackgroundResource(R.drawable.ic_unfravorite)
+    }
 }
 
 fun View.isCollected(viewId: Int) {
